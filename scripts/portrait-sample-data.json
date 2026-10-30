@@ -1,0 +1,146 @@
+{
+  "slug": "siper-urun-2-havada-hedef-degistiren-fuze",
+  "sources": [
+    {
+      "name": "Anadolu Ajansı",
+      "title": "SİPER Ürün-2 yeni kabiliyetini başarıyla test etti",
+      "url": "https://www.aa.com.tr/tr/bilim-teknoloji/siper-urun-2-yeni-kabiliyetini-basariyla-test-etti/4100275",
+      "domain": "aa.com.tr",
+      "publishedAt": "2026-10-25T00:00:00Z",
+      "kind": "news",
+      "isPrimary": true
+    },
+    {
+      "name": "NTV",
+      "title": "SİPER Ürün-2 yeni testi geçti. Havada hedef değiştirdi",
+      "url": "https://www.ntv.com.tr/turkiye/siper-urun-2-yeni-testi-gecti-havada-hedef-degistirdi-1747929",
+      "domain": "ntv.com.tr",
+      "publishedAt": "2026-10-25T14:32:00Z",
+      "kind": "news",
+      "isPrimary": false
+    },
+    {
+      "name": "ShiftDelete",
+      "title": "SİPER Blok-2 Havada Hedef Değiştirerek Yeni Hedefini İmha Etti",
+      "url": "https://shiftdelete.net/siper-blok-2-havada-hedef-degistirerek-yeni-hedefini-imha-etti",
+      "domain": "shiftdelete.net",
+      "publishedAt": "2026-10-25T00:00:00Z",
+      "kind": "news",
+      "isPrimary": false
+    },
+    {
+      "name": "Wikipedia (TR)",
+      "title": "Haluk Görgün",
+      "url": "https://tr.wikipedia.org/wiki/Haluk_G%C3%B6rg%C3%BCn",
+      "domain": "tr.wikipedia.org",
+      "publishedAt": null,
+      "kind": "reference",
+      "isPrimary": false
+    }
+  ],
+  "data": {
+    "title": "SİPER Ürün-2: Havada Hedef Değiştiren Uzun Menzilli Savunma Katmanı",
+    "subtitle": "Türkiye'nin uzun menzilli hava savunma sistemi SİPER Ürün-2, atış sonrası havada güncellenen yeni hedefini imha etti.",
+    "category": "Gündem",
+    "subjectType": "kisi",
+    "subjectName": "Haluk Görgün",
+    "coverImageUrl": null,
+    "coverImageCaption": null,
+    "coverImageCredit": "Yapay zekâ ile üretilmiş özgün illüstrasyon",
+    "readingMinutes": 3,
+    "originStoryUrl": "https://kantan.news/siper-urun-2-ucus-esnasinda-hedef-degistirerek-tam-isabet-sagladi",
+    "feedScore": 88,
+    "conflictNote": "Kaynaklar çelişiyor: ShiftDelete, SİPER Blok-2'nin uçuş sırasında hedef değiştirme kabiliyetini “ilk kez” sergilediğini yazıyor. Anadolu Ajansı ve NTV ise Haluk Görgün'ün aynı yeteneğin “bir kez daha” sergilendiği yönündeki açıklamasına yer veriyor. İki ifadeden hangisinin doğru olduğu kaynaklardan doğrulanamadı.",
+    "whyNow": [
+      {
+        "text": "SİPER Ürün-2, yeni kabiliyetini başarılı bir atış testiyle sahada ispatladı.",
+        "sourceIndex": 1
+      },
+      {
+        "text": "Testte füze, belirli bir hedefe ateşlendikten sonra havadayken güncellenen yeni hedefini imha etti.",
+        "sourceIndex": 2
+      },
+      {
+        "text": "Cumhurbaşkanlığı Savunma Sanayii Başkanı Haluk Görgün, gelişmeyi sosyal medya hesabından duyurdu.",
+        "sourceIndex": 1
+      }
+    ],
+    "timeline": [
+      {
+        "date": "2026-10-25",
+        "text": "SİPER Ürün-2, belirli bir hedefe doğru ateşlendi.",
+        "sourceIndex": 1
+      },
+      {
+        "date": "2026-10-25",
+        "text": "Uçuş sırasında hedef bilgisi güncellendi ve füze yeni hedefe yönlendirildi.",
+        "sourceIndex": 3
+      },
+      {
+        "date": "2026-10-25",
+        "text": "Füze, havada güncellenen yeni hedefini imha etti.",
+        "sourceIndex": 2
+      },
+      {
+        "date": "2026-10-25",
+        "text": "Haluk Görgün, testin sonucunu sosyal medya hesabından açıkladı.",
+        "sourceIndex": 1
+      },
+      {
+        "date": "2026-10-25",
+        "text": "Görgün, Çelik Kubbe'nin uzun menzilli katmanının güçlendirildiğini belirtti.",
+        "sourceIndex": 1
+      }
+    ],
+    "keyFacts": [
+      {
+        "text": "SİPER Ürün-2, Türkiye'nin uzun menzilli bölge hava ve füze savunma sistemidir.",
+        "sourceIndex": 1
+      },
+      {
+        "text": "SİPER projesinde yaklaşık 1000 alt yüklenici firma görev alıyor.",
+        "sourceIndex": 1
+      },
+      {
+        "text": "Testte hedef bilgisi uçuş sırasında güncellendi; füze yeni hedefine yönlendirildi.",
+        "sourceIndex": 3
+      },
+      {
+        "text": "Görgün, ASELSAN, ROKETSAN ve TÜBİTAK SAGE ekiplerine teşekkür etti.",
+        "sourceIndex": 1
+      },
+      {
+        "text": "Görgün'e göre sistem, Çelik Kubbe'nin uzun menzilli katmanını güçlendiriyor.",
+        "sourceIndex": 2
+      }
+    ],
+    "quote": {
+      "text": "Gök Vatan'ın savunmasında Çelik Kubbe'nin uzun menzilli katmanını güçlendiriyor, değişken tehditlere karşı reaksiyon kapasitemizi artırıyoruz.",
+      "speaker": "Haluk Görgün, Cumhurbaşkanlığı Savunma Sanayii Başkanı",
+      "date": "2026-10-25",
+      "sourceIndex": 1
+    },
+    "faqs": [
+      {
+        "question": "Testte tam olarak ne yapıldı?",
+        "answer": "Füze belirli bir hedefe doğru ateşlendi; uçuş sırasında hedef bilgisi güncellendi ve füze yeni hedefini imha etti.",
+        "sourceIndex": 1
+      },
+      {
+        "question": "Açıklamayı kim yaptı?",
+        "answer": "Cumhurbaşkanlığı Savunma Sanayii Başkanı Haluk Görgün, sosyal medya hesabından yaptığı açıklamada duyurdu.",
+        "sourceIndex": 1
+      },
+      {
+        "question": "Projede hangi kurumlar görev alıyor?",
+        "answer": "ASELSAN, ROKETSAN ve TÜBİTAK SAGE ekipleri ile yaklaşık 1000 alt yüklenici firma.",
+        "sourceIndex": 1
+      },
+      {
+        "question": "Gelişme hangi savunma katmanıyla ilişkili?",
+        "answer": "Görgün, sistemin Çelik Kubbe'nin uzun menzilli katmanını güçlendirdiğini belirtti.",
+        "sourceIndex": 2
+      }
+    ]
+  }
+}

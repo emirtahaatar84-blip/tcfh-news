@@ -1,0 +1,1208 @@
+{
+  "meta": {
+    "title": "Micro News",
+    "description": "A neutral news feed synthesized and verified by AI across 3+ independent sources.",
+    "keywords": "news, summary, synthesis, ai, rss, verification"
+  },
+  "header": {
+    "admin": "Admin panel",
+    "categories": "Categories"
+  },
+  "categories": {
+    "all": "All Stories",
+    "Gündem": "General",
+    "Teknoloji": "Technology",
+    "Yapay Zekâ": "AI",
+    "Ekonomi": "Economy",
+    "Siyaset": "Politics",
+    "Spor": "Sports",
+    "Bilim": "Science",
+    "Dünya": "World",
+    "Sağlık": "Health",
+    "Kültür": "Culture",
+    "Diğer": "Other"
+  },
+  "feed": {
+    "emptyTitle": "No verified stories yet",
+    "emptyDescription": "A story is only published once it is verified by at least 3 independent sources. It will appear here after the next hourly run.",
+    "emptyFilteredTitle": "No results found",
+    "emptyFilteredDescription": "Try another category or change your search.",
+    "bookmarksEmptyTitle": "No bookmarks yet",
+    "bookmarksEmptyDescription": "Tap the bookmark icon on a story card to keep it here.",
+    "loading": "Loading…",
+    "end": "You have reached the end of the feed",
+    "error": "Could not load the feed.",
+    "retry": "Try again",
+    "radio": "News Radio",
+    "radioHint": "Start the radio to listen to the stories in this feed",
+    "radioNow": "Now reading",
+    "radioEnd": "All stories have been read",
+    "radioError": "Couldn't read this story, skipping",
+    "regionTitle": "From Your Region",
+    "latest": "Latest stories",
+    "loadMore": "Load more",
+    "loadingMore": "Loading the next stories…",
+    "pageLoaded": "{count} new stories loaded.",
+    "keepPosition": "Older cards were released from memory; your reading position is kept."
+  },
+  "card": {
+    "share": "Share",
+    "copied": "Link copied",
+    "shareError": "Could not share the link",
+    "views": "Reads",
+    "bookmark": "Add to bookmarks",
+    "removeBookmark": "Remove bookmark",
+    "dismiss": "Dismiss",
+    "verified": "✓ Verified by {count} sources",
+    "videoBadge": "🎥 Video News",
+    "save": "Save",
+    "saved": "Saved",
+    "readLabel": "Read",
+    "listenLabel": "{minutes} min listen",
+    "actions": "Actions",
+    "singleSource": "Single source",
+    "singleSourceHint": "This story relies on a single source; not independently verified."
+  },
+  "sidebar": {
+    "nav": {
+      "feed": "Feed",
+      "blog": "Blog",
+      "explore": "Explore",
+      "podcast": "Podcast",
+      "assistant": "AI Assistant",
+      "bookmarks": "Bookmarks",
+      "achievements": "Achievements",
+      "profile": "Preferences",
+      "admin": "Admin Panel",
+      "xstudio": "X Studio",
+      "rss": "RSS Sources",
+      "portraits": "Portraits",
+      "news": "News"
+    }
+  },
+  "auth": {
+    "googleLogin": "Sign in with Google",
+    "signOut": "Sign out",
+    "notConfigured": "Google OAuth is not configured yet. Add GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET to the server's .env file.",
+    "or": "or",
+    "email": "E-mail",
+    "password": "Password",
+    "signIn": "Sign in",
+    "invalidCredentials": "Invalid e-mail or password."
+  },
+  "moderation": {
+    "remove": "Remove story",
+    "reasonTitle": "Select a removal reason",
+    "copyright": "Copyright infringement",
+    "hallucination": "False news / hallucination",
+    "removed": "Story removed",
+    "error": "Could not remove the story."
+  },
+  "xstudio": {
+    "title": "X Studio",
+    "subtitle": "Generate X posts from published stories. Copy to clipboard and share manually — no automatic posting.",
+    "backToAdmin": "Back to admin panel",
+    "articles": "Stories",
+    "settings": "Settings",
+    "variants": "Variants",
+    "pool": "Pool",
+    "generate": "Generate (G)",
+    "generating": "Generating…",
+    "style": "Style",
+    "emojiMax": "Max {count} emojis in this style",
+    "tone": "Tone",
+    "length": "Length",
+    "emojiLevel": "Emoji level",
+    "withSource": "Include source link",
+    "withBadge": "Include verification badge",
+    "tones": {
+      "tarafsiz": "Neutral",
+      "sicak": "Warm",
+      "ciddi": "Serious"
+    },
+    "lengths": {
+      "kisa": "Short",
+      "orta": "Medium",
+      "uzun": "Long"
+    },
+    "copy": "Copy",
+    "copied": "Copied to clipboard!",
+    "poolAdd": "Add to pool",
+    "pooled": "Added to pool",
+    "goSource": "Open story",
+    "empty": "No suitable stories today",
+    "emptyHint": "Clear the filters or pick another date.",
+    "error": "Something went wrong.",
+    "retry": "Try again",
+    "duplicateWarning": "A post for this story is already in the pool!",
+    "charCount": "{count}/280",
+    "overLimit": "over limit",
+    "shortcutGenerate": "G · Generate",
+    "shortcutSelect": "1/2/3 · Variant",
+    "shortcutCopy": "C · Copy",
+    "shortcutPool": "P · Pool",
+    "searchPlaceholder": "Search stories…",
+    "allCategories": "All categories",
+    "selectArticleFirst": "Select a story to start",
+    "variantsEmpty": "Press G to generate",
+    "noPool": "Pool is empty",
+    "status": {
+      "draft": "Draft",
+      "copied": "Copied",
+      "published": "Published",
+      "rejected": "Rejected"
+    }
+  },
+  "profile": {
+    "title": "Profile",
+    "loading": "Loading…",
+    "loginPrompt": "Sign in to view your profile, sync your bookmarks across devices and subscribe to the e-mail newsletter.",
+    "newsletter": {
+      "title": "E-mail Newsletter",
+      "description": "I would like to receive e-mail updates about major verified developments.",
+      "savedOn": "Newsletter subscription enabled.",
+      "savedOff": "Newsletter subscription disabled.",
+      "error": "Could not save your preference."
+    },
+    "voice": {
+      "title": "Audio Summary Voice",
+      "description": "Choose the voice you want to hear for audio news summaries. Your choice applies only to you.",
+      "saved": "Voice preference saved.",
+      "error": "Could not save your voice preference.",
+      "sample": "Listen to this voice",
+      "personas": {
+        "default": "Default Voice",
+        "male_1": "Ahmet — Main Host & Technology",
+        "male_2": "Mehmet — Energetic Guest & Analyst",
+        "female_1": "Ayşe — Co-Host & Researcher",
+        "female_2": "Zeynep — Critical / Science Editor"
+      }
+    }
+  },
+  "search": {
+    "label": "Search news",
+    "placeholder": "Search news, topics or sources…",
+    "open": "Search",
+    "recent": "Recent searches",
+    "noResults": "No results found",
+    "hint": "Type at least 2 characters. Searches are stored only on this device.",
+    "clearRecent": "Clear",
+    "results": "Search results",
+    "close": "Close"
+  },
+  "trending": {
+    "title": "You may like",
+    "empty": "No trending data yet."
+  },
+  "subtopics": {
+    "title": "Featured topics"
+  },
+  "news": {
+    "aiBadge": "This content is a simplified synthesis of stories from multiple independent sources, produced with AI.",
+    "readTime": "{minutes} min read",
+    "audioSummary": "Audio Summary",
+    "audioPreparing": "Preparing audio…",
+    "audioError": "Audio summary failed, try again",
+    "play": "Play audio summary",
+    "pause": "Pause",
+    "synthesizedNote": "This story was compiled by neutral AI after analyzing {count} independent sources ({sources}).",
+    "related": "Related News",
+    "videoExternal": "This video is hosted on a third party (YouTube). Clicking will send data to YouTube."
+  },
+  "podcast": {
+    "title": "Podcast",
+    "subtitle": "Listen to conversation-style news bulletins generated by AI from the site's stories.",
+    "empty": "No published episodes yet",
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "custom": "Custom Topic",
+    "minutes": "min",
+    "speakers": "Speakers",
+    "play": "Listen",
+    "pause": "Pause"
+  },
+  "comingSoon": {
+    "title": "Coming soon",
+    "description": "This section is under development. You can return to the news feed."
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "sources": "Content belongs to the original sources.",
+    "contact": "Contact",
+    "links": {
+      "kvkk": "Privacy (KVKK)",
+      "terms": "Terms of Use",
+      "copyright": "Copyright & Takedown",
+      "about": "About",
+      "cookies": "Cookie Policy"
+    },
+    "noCookies": "This site uses no cookies; preferences stay on your device."
+  },
+  "legal": {
+    "kvkk": {
+      "title": "Privacy and Personal Data Protection (KVKK) Notice",
+      "updated": "Last updated: 25 October 2026",
+      "sections": [
+        {
+          "heading": "1. Data Controller",
+          "body": [
+            "This site is an independent news synthesis platform published at bu site. Contact: iletisim@example.com."
+          ]
+        },
+        {
+          "heading": "2. No Personal Data Is Processed",
+          "body": [
+            "There is no account creation, sign-in, membership, password, newsletter subscription or form-based data collection. We do not ask for name, e-mail, phone, address, date of birth or location.",
+            "No cookies are used — not even strictly necessary ones. There are no third-party analytics, ad networks, pixels, heatmaps or A/B testing tools.",
+            "Visitor IP addresses are not read, stored or used for profiling by the application. No IP-based geolocation is performed."
+          ]
+        },
+        {
+          "heading": "3. Preferences Stored Only on Your Device",
+          "body": [
+            "Theme, font size, line height, simple reading mode, bookmarks, read marks, playback position and an optional city choice are kept only in your browser's localStorage.",
+            "This data is never sent to the server, shared with third parties or leaves your device. It is kept until you delete it — via browser settings or the 'Clear all' action on the Bookmarks page.",
+            "The localStorage schema is versioned (storageVersion: 1) and ready for future migrations."
+          ]
+        },
+        {
+          "heading": "4. No International Transfers",
+          "body": [
+            "Since no personal data is processed, there is no international transfer.",
+            "News synthesis and AI summaries run server-side and do not use visitor personal data. AI assistant chats are not stored on the server; they are processed only for the duration of that request."
+          ]
+        },
+        {
+          "heading": "5. Third-Party Links and Embeds",
+          "body": [
+            "The site links to news sources and YouTube videos. Embeds are click-to-load: no request reaches a third party before you click, and a notice is shown beforehand.",
+            "Once you click, the third party's own privacy policy applies."
+          ]
+        },
+        {
+          "heading": "6. Server-Side Technical Logs",
+          "body": [
+            "No visitor-level logging or profiling is performed at the application level.",
+            "Standard technical logs kept by the hosting provider for security and operations are subject to their own policies and are not used by us for marketing or profiling."
+          ]
+        },
+        {
+          "heading": "7. Your Rights Under Article 11 of KVKK",
+          "body": [
+            "You have the right to learn whether your personal data is processed, request information, learn the purpose, request correction or deletion, and claim compensation for unlawful processing.",
+            "Since no personal data is processed, there is no data subject to these requests. You may still contact iletisim@example.com; requests are answered within 30 days."
+          ]
+        }
+      ]
+    },
+    "terms": {
+      "title": "Terms of Use",
+      "updated": "Last updated: October 2026",
+      "sections": [
+        {
+          "heading": "1. Nature of the Service",
+          "body": [
+            "Stories published on this site are AI-synthesized summaries of events verified across at least three independent sources. Content is provided for information only and does not constitute legal, financial or medical advice."
+          ]
+        },
+        {
+          "heading": "2. Rules of Use",
+          "body": [
+            "Using the site for unlawful purposes, stressing the service with automated scraping, or compromising its security is prohibited.",
+            "Synthesized content may not be reproduced commercially without attribution."
+          ]
+        },
+        {
+          "heading": "3. Limitation of Liability",
+          "body": [
+            "Despite the verification process, synthesized content may contain errors. For critical information you are encouraged to check the primary sources directly. Questions: iletisim@example.com."
+          ]
+        }
+      ]
+    },
+    "copyright": {
+      "title": "Copyright & Takedown Notice",
+      "updated": "Last updated: 25 October 2026",
+      "sections": [
+        {
+          "heading": "1. Content and Attribution Policy",
+          "body": [
+            "Stories are original syntheses based on the factual event reported in public RSS feeds. Source article text is not copied.",
+            "Each story lists source names, source links and retrieval times. Linking to sources does not remove copyright; rights remain with their owners."
+          ]
+        },
+        {
+          "heading": "2. Takedown Requests",
+          "body": [
+            "If you believe content infringes your copyright, e-mail iletisim@example.com with: (a) the exact URL on this site, (b) proof of ownership, (c) your contact details.",
+            "There is NO takedown FORM on the site; to avoid collecting personal data, only e-mail is used.",
+            "Requests are reviewed within 72 hours; valid requests result in removal."
+          ]
+        },
+        {
+          "heading": "3. AI-Generated Content",
+          "body": [
+            "Synthesized text is generated by AI and may contain errors. It is not binding and does not constitute legal, financial or medical advice."
+          ]
+        }
+      ]
+    },
+    "about": {
+      "title": "About Us",
+      "updated": "Last updated: October 21, 2026",
+      "sections": [
+        {
+          "heading": "About the Platform",
+          "body": [
+            "bu site is an independent news synthesis platform that continuously monitors domestic and international news sources. Our goal is to consolidate scattered information about the same event into a single, clear and original report.",
+            "The platform offers up-to-date news feeds, audio summaries and AI-assisted podcast episodes across categories including world news, technology, science, sports and economy."
+          ]
+        },
+        {
+          "heading": "How It Works",
+          "body": [
+            "Our system scans nearly 30 domestic and international news sources within minutes. Sources covering the same event are automatically merged; the story is rewritten in an original and neutral tone with AI assistance.",
+            "Every published story passes a separate AI-supported quality review both before and after publication. Content found inadequate or inaccurate is removed from the feed."
+          ]
+        },
+        {
+          "heading": "Our Editorial Principles",
+          "body": [
+            "Originality: No story is copied from any source; all content is synthesized in our own words.",
+            "Neutrality: Stories only convey commonly verified information, without taking sides.",
+            "Copyright care: The copyrights of source publishers are respected; takedown requests can be sent via our contact address."
+          ]
+        },
+        {
+          "heading": "Contact",
+          "body": [
+            "For feedback, corrections and content removal requests: iletisim@example.com"
+          ]
+        }
+      ]
+    },
+    "cookies": {
+      "title": "Cookie Policy",
+      "updated": "Last updated: 25 October 2026",
+      "sections": [
+        {
+          "heading": "1. We Use No Cookies",
+          "body": [
+            "This site uses no cookies at all: no strictly necessary, preference, analytics, advertising or third-party cookies.",
+            "If you open DevTools → Application → Cookies, the list stays empty."
+          ]
+        },
+        {
+          "heading": "2. Device-Stored Preferences (localStorage)",
+          "body": [
+            "eth.v1.prefs — theme, font size, line height, simple reading mode, read marks and optional city.",
+            "eth.v1.bookmarks — saved stories (id, title, URL, category, saved date).",
+            "eth.v1.read — ids of stories marked as read.",
+            "eth.v1.playback — the episode and second you stopped at.",
+            "eth.v1.searches — recent search terms kept on this device only."
+          ]
+        },
+        {
+          "heading": "3. How to Delete",
+          "body": [
+            "Clear site data from your browser settings. The Bookmarks page also offers 'Clear all'.",
+            "In a private window, this data is removed automatically when the window closes."
+          ]
+        },
+        {
+          "heading": "4. Analytics and Measurement",
+          "body": [
+            "No Google Analytics, Meta Pixel, Hotjar or similar measurement tool is used.",
+            "If cookie-free, aggregate-only measurement is adopted in the future, this page and the interface will be updated explicitly."
+          ]
+        }
+      ]
+    }
+  },
+  "language": {
+    "tr": "Türkçe",
+    "en": "English",
+    "switch": "Change language"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page may have moved or may never have existed.",
+    "back": "Back to feed"
+  },
+  "errors": {
+    "title": "Something went wrong",
+    "description": "An unexpected error occurred. Please try again.",
+    "retry": "Try again"
+  },
+  "admin": {
+    "title": "Admin Dashboard",
+    "subtitle": "Manage sources, branding and the AI connection from here.",
+    "secured": "Owner only",
+    "loginTitle": "Admin Sign-in",
+    "loginPrompt": "This area is only accessible to the site owner's account. Sign in with your Google account; everyone else keeps using the news feed.",
+    "stats": {
+      "news": "Stories",
+      "sources": "Sources",
+      "activeSources": "Active"
+    },
+    "tabs": {
+      "general": "General",
+      "rss": "RSS Sources",
+      "llm": "LLM Settings",
+      "actions": "Actions"
+    },
+    "xstudioLink": "X Studio — create X posts from stories",
+    "general": {
+      "title": "General Settings",
+      "description": "The site name appears in the header and browser tab.",
+      "siteName": "Site name",
+      "siteNamePlaceholder": "e.g. bu site",
+      "save": "Save",
+      "saving": "Saving…",
+      "saved": "Settings saved.",
+      "error": "Could not save settings."
+    },
+    "rss": {
+      "title": "RSS Sources",
+      "description": "Active sources are staged into the raw buffer on each 10-minute run. A story is only published when verified by at least 3 different sources.",
+      "addTitle": "Add a new source",
+      "name": "Source name",
+      "namePlaceholder": "e.g. NTV (domain name is used when empty)",
+      "url": "RSS URL",
+      "urlPlaceholder": "https://example.com/rss",
+      "category": "Category",
+      "categoryHint": "Category is no longer prompted: each item is classified automatically from its title, summary and entity lexicon. This value is only the source default.",
+      "add": "Add source",
+      "adding": "Adding…",
+      "added": "Source added.",
+      "empty": "No RSS sources added yet.",
+      "active": "Active",
+      "inactive": "Inactive",
+      "toggle": "Toggle source",
+      "delete": "Delete source",
+      "deleteConfirm": "Are you sure you want to delete \"{name}\"?",
+      "error": "Operation failed.",
+      "duplicate": "This RSS URL is already added.",
+      "invalidUrl": "Enter a valid http(s) RSS URL."
+    },
+    "llm": {
+      "title": "LLM Settings",
+      "description": "You can use any OpenAI-compatible provider. Synthesized reports are produced through this connection.",
+      "providerUrl": "Provider URL",
+      "providerUrlPlaceholder": "https://api.deepseek.com/v1",
+      "providerUrlHint": "e.g. https://api.deepseek.com/v1 — do not include /v1/models; full endpoints are also accepted.",
+      "apiKey": "API key",
+      "apiKeyPlaceholder": "Enter a new key",
+      "apiKeyHint": "Leave empty to keep the current key.",
+      "apiKeyPresent": "An API key is stored.",
+      "clearApiKey": "Clear the stored API key",
+      "modelName": "Model name",
+      "modelNamePlaceholder": "e.g. deepseek-v4-flash",
+      "promptTemplate": "Prompt template",
+      "promptHint": "Available variables: {articles}, {sourceCount}, {historical}",
+      "save": "Save",
+      "saving": "Saving…",
+      "saved": "LLM settings saved.",
+      "error": "Could not save LLM settings."
+    },
+    "fetch": {
+      "title": "Verify & Synthesize Stories",
+      "description": "Scans active RSS sources into the raw buffer, synthesizes events from the last 60 minutes that were verified by 3+ sources, and purges raw items older than 2 hours. The job runs in the background; results appear automatically.",
+      "button": "Start the run",
+      "running": "Scanning sources…",
+      "success": "Run completed.",
+      "error": "Could not start the run.",
+      "noSources": "Add at least one active RSS source first.",
+      "stats": {
+        "sources": "Sources",
+        "staged": "Staged",
+        "clusters": "Clusters",
+        "verified": "3+ Sources",
+        "published": "Published",
+        "rejected": "Rejected",
+        "failed": "Failed"
+      },
+      "recentErrors": "Recent errors"
+    },
+    "videoNews": {
+      "tab": "Video News",
+      "title": "News from a YouTube Video",
+      "description": "Submit a YouTube link; the transcript is extracted and turned into an original story with AI. Before publishing you must confirm the content by playing the video.",
+      "urlPlaceholder": "https://www.youtube.com/watch?v=…",
+      "submit": "Process Video",
+      "processing": "Processing…",
+      "ready": "Awaiting Approval",
+      "failed": "Failed",
+      "published": "Published",
+      "playToUnlock": "Confirm by watching the video",
+      "publish": "Publish",
+      "publishLocked": "You must play the video first",
+      "delete": "Delete",
+      "retry": "Retry",
+      "refresh": "Refresh",
+      "empty": "No video news yet",
+      "emptyHint": "Paste a YouTube link above and process it.",
+      "viewInFeed": "View in feed",
+      "toastPublished": "Published",
+      "toastDeleted": "Record deleted",
+      "invalidUrl": "Enter a valid YouTube link (youtube.com or youtu.be).",
+      "confirmDelete": "Are you sure you want to delete this video news record?",
+      "videoBadge": "🎥 Video News",
+      "details": "Details",
+      "preview": "Generated Story",
+      "readTime": "{minutes} min read",
+      "error": "Operation failed."
+    },
+    "podcast": {
+      "tab": "Podcast Studio",
+      "title": "AI Podcast Studio",
+      "description": "Generate a single-host news bulletin podcast episode from site news using AI. Edit the text in one place, generate the audio, listen, then publish.",
+      "create": "Create Episode",
+      "creating": "Creating…",
+      "modes": {
+        "hourly": "⏱️ Hourly Bulletin",
+        "daily": "🗞️ Daily Bulletin",
+        "weekly": "📅 Weekly Bulletin",
+        "custom": "💬 Custom Topic"
+      },
+      "modeHints": {
+        "daily": "Last 24 hours",
+        "weekly": "Last 7 days",
+        "custom": "Write your own topic"
+      },
+      "category": "Category",
+      "allCategories": "All",
+      "topic": "Topic",
+      "topicPlaceholder": "E.g. Prepare a cybersecurity-focused bulletin on the recent data breaches",
+      "topicRequired": "A topic is required in Custom Topic mode.",
+      "statuses": {
+        "processing": "Writing script…",
+        "draft": "Draft",
+        "audioProcessing": "Generating audio…",
+        "ready": "Awaiting Approval",
+        "published": "Published",
+        "failed": "Failed"
+      },
+      "refresh": "Refresh",
+      "delete": "Delete",
+      "confirmDelete": "Are you sure you want to delete this podcast episode?",
+      "empty": "No podcast episodes yet",
+      "emptyHint": "Create your first episode with the form above.",
+      "save": "Save",
+      "generateAudio": "Generate Audio",
+      "audioRegenerate": "Regenerate Audio",
+      "listenFirst": "You must listen to the podcast first",
+      "publish": "Publish",
+      "viewPublic": "View on the podcast page",
+      "toastPublished": "Published",
+      "toastSaved": "Saved — the audio must be regenerated",
+      "toastDeleted": "Episode deleted",
+      "unsavedWarning": "You have unsaved changes — press Save first.",
+      "failedScriptNote": "The script could not be generated. You need to delete this episode and create it again.",
+      "minutes": "min",
+      "errorLabel": "Operation failed.",
+      "voiceSelect": "Character Voice",
+      "scriptLabel": "Episode Text",
+      "scriptHint": "The entire bulletin is narrated in one take — the voice stays consistent throughout.",
+      "scriptPlaceholder": "Write or edit the bulletin text here…"
+    },
+    "moderation": {
+      "tab": "Moderation",
+      "bestNews": "Best Stories",
+      "qualityScore": "Quality score",
+      "points": "/10",
+      "toPodcast": "Turn into Potkes",
+      "selectAll": "Select all",
+      "selectAtLeast": "Select at least 2 stories",
+      "emptySuggestions": "No stories with audit scores yet",
+      "emptySuggestionsHint": "Once the hourly audit runs, the best stories will be listed here",
+      "runAudit": "Run Audit Now",
+      "lastAudit": "Last audit",
+      "lastAuditSummary": "{audited} stories audited · {kept} kept · {removed} removed",
+      "refresh": "Refresh",
+      "removedNews": "Removed Stories",
+      "restore": "Restore",
+      "restored": "Story restored to the feed",
+      "emptyRemoved": "No removed stories",
+      "removedByGemma": "AI Audit",
+      "removedByOwner": "You",
+      "podcastToast": "Podcast draft created",
+      "auditStarted": "Audit started",
+      "goToPodcast": "Go to Podcast Studio",
+      "error": "Operation failed."
+    }
+  },
+  "pwa": {
+    "installTitle": "Add the app to your home screen",
+    "installBody": "Fast access with a single tap",
+    "install": "Install",
+    "later": "Later",
+    "iosHint": "Choose 'Add to Home Screen' from the Share menu",
+    "offline": "You are offline",
+    "offlineBody": "The feed will load automatically once you're back online.",
+    "retry": "Try Again",
+    "notifications": "Notifications",
+    "notificationsHint": "Get instant notifications by category",
+    "enableNotifications": "Enable Notifications",
+    "disableNotifications": "Disable Notifications",
+    "allCategories": "All",
+    "saveCategories": "Save",
+    "saved": "Saved",
+    "permissionDenied": "Notification permission denied — enable it in your browser settings",
+    "notSupported": "Your browser does not support notifications"
+  },
+  "common": {
+    "backToFeed": "Back to feed",
+    "backToTop": "Back to top"
+  },
+  "accessibility": {
+    "skipToContent": "Skip to content"
+  },
+  "theme": {
+    "group": "Theme",
+    "system": "System theme",
+    "light": "Light theme",
+    "dark": "Dark theme"
+  },
+  "filters": {
+    "title": "Filter",
+    "open": "Open filters",
+    "close": "Close",
+    "category": "Category",
+    "dateRange": "Date",
+    "source": "Source",
+    "readingTime": "Reading time",
+    "today": "Today",
+    "week": "This week",
+    "month": "This month",
+    "all": "All",
+    "short": "Short (<3 min)",
+    "medium": "Medium (3-6 min)",
+    "long": "Long (7+ min)",
+    "apply": "Apply",
+    "reset": "Reset",
+    "resultCount": "{count} results",
+    "clearAll": "Clear filters",
+    "activeFilters": "Active filters",
+    "noSources": "No sources found."
+  },
+  "reading": {
+    "title": "Reading settings",
+    "fontSmall": "Decrease font size",
+    "fontLarge": "Increase font size",
+    "lineTight": "Tight",
+    "lineNormal": "Normal",
+    "lineWide": "Wide",
+    "readingMode": "Simple reading",
+    "readingModeOn": "Simple reading on",
+    "readingModeOff": "Simple reading off",
+    "deviceOnly": "Preferences are stored only on this device."
+  },
+  "sources": {
+    "title": "Sources",
+    "trustMulti": "Multiple sources",
+    "trustSingle": "Single source",
+    "trustHint": "Stories compiled from multiple independent sources show higher trust.",
+    "sourceTime": "Source time",
+    "noLink": "No link",
+    "foreignNotice": "Clicking links will send data to a third-party site. Those sites follow their own privacy policies."
+  },
+  "breadcrumb": {
+    "home": "Home"
+  },
+  "ai": {
+    "title": "AI tools",
+    "summarize": "Summarize with AI",
+    "compare": "Compare sources",
+    "loading": "Preparing…",
+    "oneSentence": "In one sentence",
+    "bullets": "Highlights",
+    "common": "Common ground",
+    "differences": "Differences",
+    "source": "Source",
+    "headline": "Headline",
+    "time": "Time",
+    "emphasis": "Emphasis",
+    "confidence": "Confidence",
+    "commonTag": "Common",
+    "differentTag": "Different",
+    "error": "Could not get an AI response. Please try again.",
+    "unavailable": "The AI service is not configured right now.",
+    "notEnoughSources": "At least two sources are needed to compare.",
+    "aiWarning": "This content is generated by AI and may contain errors. It is not binding.",
+    "close": "Close",
+    "openSource": "Open source in a new tab"
+  },
+  "briefing": {
+    "title": "Daily briefing",
+    "subtitle": "5 items from the last 24 hours",
+    "loading": "Preparing the briefing…",
+    "unavailable": "The briefing could not be prepared right now.",
+    "aiWarning": "This content is generated by AI and may contain errors.",
+    "anonymous": "Built only from aggregate data, without personalization."
+  },
+  "assistant": {
+    "title": "AI Assistant",
+    "subtitle": "An assistant grounded in published stories, collecting no personal data.",
+    "placeholder": "Ask a question…",
+    "send": "Send",
+    "thinking": "Preparing an answer…",
+    "empty": "I answer using stories published on this site. When there is no coverage, I say so.",
+    "suggestions": [
+      "What are today's top stories?",
+      "Latest developments in technology",
+      "Summarize economy news"
+    ],
+    "noStoreNotice": "Chats are not saved",
+    "clear": "Clear chat",
+    "aiWarning": "This content is generated by AI and may contain errors. It is not binding.",
+    "error": "Could not get an answer. Please try again.",
+    "unavailable": "The AI service is not configured right now.",
+    "rateLimited": "Too many requests. Please wait a moment."
+  },
+  "infoNotice": {
+    "deviceOnly": "Your preferences are stored only on this device."
+  },
+  "library": {
+    "title": "Bookmarks",
+    "subtitle": "Saved stories stay on this device only; no account needed.",
+    "empty": "No bookmarks yet",
+    "emptyHint": "Tap the bookmark icon on any story card to keep it here.",
+    "search": "Search bookmarks",
+    "sortDate": "By date",
+    "sortCategory": "By category",
+    "newest": "Newest first",
+    "oldest": "Oldest first",
+    "selectAll": "Select all",
+    "deleteSelected": "Delete selected",
+    "clearAll": "Clear all",
+    "confirmTitle": "Delete all bookmarks?",
+    "confirmBody": "This cannot be undone. Bookmarks are removed from this device only.",
+    "confirmYes": "Yes, clear",
+    "confirmNo": "Cancel",
+    "exportJson": "Download JSON",
+    "exportCsv": "Download CSV",
+    "importJson": "Import JSON",
+    "imported": "{added} bookmarks added, {skipped} duplicates skipped.",
+    "importFailed": "Could not read the file. Choose a valid JSON file.",
+    "removed": "removed",
+    "deviceOnly": "This device only",
+    "unavailable": "Your browser blocks device storage; bookmarks are unavailable.",
+    "readMarks": "Read marks",
+    "readMarksHint": "Stories you read for more than 10 seconds appear dimmed in the feed."
+  },
+  "player": {
+    "nowPlaying": "Now playing",
+    "play": "Play",
+    "pause": "Pause",
+    "back15": "Back 15 seconds",
+    "forward30": "Forward 30 seconds",
+    "speed": "Playback speed",
+    "sleep": "Sleep",
+    "sleepOff": "Off",
+    "sleepEndOfTrack": "Stop at end of track",
+    "sleepRemaining": "Time left",
+    "queue": "Queue",
+    "queueEmpty": "Queue is empty",
+    "close": "Close player",
+    "collapse": "Collapse",
+    "expand": "Expand",
+    "error": "Audio could not load",
+    "resumeTitle": "Resume where you left off",
+    "resumeBody": "Continue listening from where you stopped.",
+    "resume": "Resume",
+    "resumeDismiss": "Dismiss suggestion",
+    "removeFromQueue": "Remove from queue"
+  },
+  "region": {
+    "title": "News from your city",
+    "prompt": "Pick a city to see recent stories here. Your location is not detected.",
+    "choose": "Choose city",
+    "change": "Change city",
+    "clear": "Remove",
+    "deviceOnly": "Your choice is stored only on this device.",
+    "empty": "No stories for this city yet.",
+    "loading": "Loading…"
+  },
+  "preferences": {
+    "title": "Device preferences",
+    "subtitle": "No account, no sign-in. Every setting here is stored only on this device.",
+    "theme": "Theme",
+    "themeSystem": "System",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "fontSize": "Font size",
+    "fontSmall": "Small",
+    "fontMedium": "Medium",
+    "fontLarge": "Large",
+    "lineHeight": "Line height",
+    "lineTight": "Tight",
+    "lineNormal": "Normal",
+    "lineWide": "Wide",
+    "readingMode": "Simple reading mode",
+    "readingModeHint": "Hides side panels and suggestion boxes on story pages.",
+    "readMarks": "Read marks",
+    "readMarksHint": "Stories you read for more than 10 seconds appear dimmed in the feed.",
+    "library": "My bookmarks",
+    "libraryHint": "List, search and export stories you saved.",
+    "clearRead": "Clear read marks",
+    "clearAll": "Delete all device data",
+    "clearAllHint": "Theme, bookmarks, read marks, search history and playback position are removed.",
+    "confirmTitle": "Delete all device data?",
+    "confirmBody": "This cannot be undone. Nothing is stored on the server; only preferences on this device are removed.",
+    "confirmYes": "Yes, delete",
+    "confirmNo": "Cancel",
+    "deviceOnly": "Stored only on this device",
+    "unavailable": "Your browser blocks device storage; preferences cannot be saved.",
+    "done": "Done",
+    "autoRead": "Automatic read mark",
+    "autoReadHint": "A card visible for 10 seconds is marked as read. You can turn this off.",
+    "density": "Density",
+    "densityGroup": "Spacing density",
+    "densityCompact": "Compact",
+    "densityBalanced": "Balanced",
+    "densityComfortable": "Comfortable",
+    "densityHint": "Changes spacing only; text size stays the same.",
+    "densityCompactHint": "Densest layout for desktop lists.",
+    "densityBalancedHint": "Default desktop/tablet balance.",
+    "densityComfortableHint": "Roomier spacing for mobile reading.",
+    "densityAuto": "Auto",
+    "densityResetAuto": "Back to auto",
+    "fontSizeDecrease": "Decrease text size",
+    "fontSizeIncrease": "Increase text size",
+    "fontSizeLevel": "Step {level} / {total}",
+    "densityAutoHint": "By viewport: Comfortable on mobile, Balanced on desktop."
+  },
+  "explore": {
+    "subtitle": "Browse categories and discover what is happening.",
+    "categories": "Categories",
+    "stories": "stories",
+    "latest": "Latest"
+  },
+  "portraits": {
+    "title": "Portraits",
+    "subtitle": "Public figures, institutions and events, documented with multiple independent sources.",
+    "methodologyShort": "Portraits are compiled with AI assistance from public sources; every claim is shown with its source. May contain errors; not binding.",
+    "card": {
+      "badge": "Portrait",
+      "verified": "verified by {count} sources",
+      "readingTime": "{minutes} min read",
+      "attributed": "Source: {source}",
+      "originalStory": "Original story (kantan.news)",
+      "person": "Person",
+      "organization": "Organization",
+      "event": "Event",
+      "listeningTime": "{minutes} min listen",
+      "readLabel": "Read"
+    },
+    "filters": {
+      "search": "Search portraits",
+      "category": "Category",
+      "type": "Subject",
+      "range": "Date",
+      "sort": "Sort",
+      "all": "All",
+      "person": "Person",
+      "organization": "Organization",
+      "event": "Event",
+      "week": "This week",
+      "month": "This month",
+      "newest": "Newest first",
+      "mostRead": "Most read",
+      "clear": "Clear filters",
+      "resultCount": "{count} portraits",
+      "empty": "No portraits found",
+      "emptyHint": "Try a different category or date range."
+    },
+    "detail": {
+      "published": "Published",
+      "updated": "Updated",
+      "views": "Views (aggregate)",
+      "oneSentence": "In one sentence",
+      "whyNow": "Why it matters now",
+      "timeline": "Timeline",
+      "keyFacts": "Key facts",
+      "quote": "Quote",
+      "faq": "Frequently asked",
+      "sources": "Sources",
+      "methodology": "How this portrait was prepared",
+      "methodologyBody": "This file was compiled from {count} public sources; access and verification date {date}. Every item is marked with a source number. Source text is not copied but rewritten in our own words.",
+      "conflict": "Sources disagree",
+      "relatedNews": "Related news",
+      "otherPortraits": "More portraits in this category",
+      "aiWarning": "This content was compiled with AI assistance from the public sources listed above. It may contain errors and is not binding.",
+      "source": "Source",
+      "accessed": "Accessed",
+      "credit": "Photo",
+      "openSource": "open source in a new tab",
+      "backToList": "All portraits",
+      "kinds": {
+        "official": "Official",
+        "news": "News",
+        "academic": "Academic",
+        "data": "Data",
+        "reference": "Reference"
+      }
+    },
+    "homeStrip": {
+      "title": "Latest portraits",
+      "subtitle": "Sourced, verified files",
+      "all": "All portraits"
+    },
+    "tabLabel": "Portraits",
+    "admin": {
+      "title": "Portrait Generation",
+      "subtitle": "Watches the kantan.news feed, scores stories and produces sourced portraits for qualifying topics.",
+      "run": "Run pipeline",
+      "dryRun": "Score only",
+      "running": "Running…",
+      "refresh": "Refresh",
+      "runs": "Runs",
+      "candidates": "Candidates",
+      "portraits": "Portraits",
+      "score": "Score",
+      "reason": "Reason",
+      "status": "Status",
+      "publish": "Publish",
+      "review": "Move to review",
+      "remove": "Remove",
+      "restore": "Restore",
+      "open": "Open",
+      "noData": "No records.",
+      "feedStrategy": "Feed strategy",
+      "dryResults": "Scoring results",
+      "lastRuns": "Recent runs",
+      "sourcesCount": "Sources",
+      "error": "Error",
+      "note": "Note",
+      "stats": "Status breakdown"
+    },
+    "feedTitle": "Portraits",
+    "feedSubtitle": "Public figures, institutions and events, documented with at least three independent sources.",
+    "feedNewsLink": "News",
+    "feed": {
+      "empty": "No portraits found",
+      "emptyHint": "Try a different category or date range.",
+      "loading": "Loading…",
+      "end": "All portraits shown",
+      "retry": "Try again",
+      "error": "Portraits could not be loaded."
+    },
+    "coverCredit": "Cover: original AI-generated illustration",
+    "lastPortrait": "Latest portrait: {date}",
+    "scheduleNotice": "New portraits are published every day at 08:30 and 19:00 (TRT)."
+  },
+  "nav": {
+    "news": "News"
+  },
+  "content": {
+    "portrait": "Portrait",
+    "news": "News",
+    "subjectPerson": "Person",
+    "subjectOrganization": "Organization",
+    "subjectEvent": "Event",
+    "verified": "verified by {count} sources",
+    "readingTime": "{minutes} min read",
+    "listeningTime": "{minutes} min listen",
+    "updated": "Updated",
+    "oneSentence": "In one sentence",
+    "whyNow": "Why it matters now",
+    "timeline": "Timeline",
+    "keyFacts": "Key facts",
+    "details": "Details",
+    "quote": "Quote",
+    "faq": "Frequently asked",
+    "sources": "Sources",
+    "methodology": "How this content was prepared",
+    "methodologyBody": "This file was compiled from {count} public sources; access and verification date {date}. Every item is marked with a source number. Source text is not copied but rewritten in our own words.",
+    "conflict": "Sources disagree",
+    "related": "Related content",
+    "aiWarning": "This content was compiled with AI assistance from the public sources listed above. It may contain errors and is not binding.",
+    "source": "Source",
+    "accessed": "Accessed",
+    "coverCredit": "Image",
+    "openSource": "open source in a new tab",
+    "backToFeed": "Back to feed",
+    "listenSummary": "Listen to the summary",
+    "listenFull": "Listen to the full text",
+    "listenPlaying": "Playing…",
+    "listenPaused": "Resume",
+    "speechUnsupported": "Your browser does not support read-aloud. Try a current browser.",
+    "speechNoVoice": "No Turkish voice found on your device. Add a Turkish speech voice in system settings.",
+    "speechDeviceOnly": "Read-aloud runs on your device; your voice and text requests are never sent to any server.",
+    "resumeTitle": "Resume where you left off",
+    "resumeBody": "Continue from the sentence you stopped at.",
+    "dismiss": "Dismiss"
+  },
+  "media": {
+    "speechTitle": "Read aloud",
+    "audioTitle": "Player",
+    "play": "Play",
+    "pause": "Pause",
+    "back15": "Back 15 seconds",
+    "forward30": "Forward 30 seconds",
+    "speed": "Playback speed",
+    "voice": "Voice",
+    "noVoice": "No Turkish voice found.",
+    "sleep": "Sleep",
+    "sleepOff": "Off",
+    "sleepEnd": "Stop at end",
+    "transcript": "Text",
+    "collapse": "Collapse",
+    "expand": "Expand",
+    "close": "Close",
+    "confirmTitle": "Switch reading?",
+    "confirmBody": "Another item is currently being read. Switching will stop the current reading.",
+    "confirmYes": "Read new item",
+    "confirmNo": "Cancel",
+    "resumeTitle": "Resume where you left off",
+    "resumeBody": "Continue listening from where you stopped.",
+    "resume": "Resume",
+    "dismiss": "Dismiss",
+    "deviceOnly": "Read-aloud runs on your device; no data is sent to any server.",
+    "unsupported": "Your browser does not support read-aloud.",
+    "queue": "Queue",
+    "queueEmpty": "Queue is empty",
+    "remove": "Remove from queue",
+    "remaining": "Remaining"
+  },
+  "home": {
+    "todaySummary": "Today's briefing",
+    "nowImportant": "Important now",
+    "latestPortraits": "Latest portraits",
+    "latestNews": "Latest news",
+    "loadMore": "Load more",
+    "loading": "Loading…",
+    "allPortraits": "All portraits",
+    "allNews": "All news",
+    "empty": "No content yet.",
+    "summaryCount": "{count} items"
+  },
+  "categoriesPage": {
+    "title": "Categories",
+    "subtitle": "Browse all news and portraits by category.",
+    "count": "{count} items",
+    "empty": "No content in this category yet."
+  },
+  "searchPage": {
+    "title": "Search",
+    "subtitle": "Search titles, summaries and sources across news and portraits.",
+    "placeholder": "What are you looking for?",
+    "results": "{count} results",
+    "noResults": "No results found",
+    "noResultsHint": "Check the spelling or try a different category.",
+    "tryCategories": "Suggested categories",
+    "clear": "Clear search",
+    "filters": "Filters",
+    "loading": "Searching…"
+  },
+  "navMain": {
+    "feed": "Feed",
+    "categories": "Categories",
+    "portraits": "Portraits",
+    "news": "News",
+    "podcast": "Podcast",
+    "blog": "Blog",
+    "search": "Search",
+    "saved": "Saved",
+    "savedShort": "Saved"
+  },
+  "citations": {
+    "related": "Related story",
+    "goTo": "Go to story",
+    "close": "Close",
+    "verified": "Verified by {count} sources",
+    "readingTime": "{minutes} min read",
+    "listeningTime": "{minutes} min listen",
+    "published": "Published",
+    "updated": "Updated"
+  },
+  "shell": {
+    "searchPlaceholder": "Search stories, topics or sources…",
+    "all": "All",
+    "saved": "Saved",
+    "debate": "Debate",
+    "language": "Language",
+    "transparency": "Transparency",
+    "transparencyBody": "This feed is compiled only from publicly available sources. The page contains no third-party tracking and sets no cookies.",
+    "summaryStrip": "Today’s brief",
+    "summaryStripHint": "5 items · tap to expand",
+    "nextPage": "Next page",
+    "loadingNext": "Loading the next stories…",
+    "loaded": "{count} new stories loaded.",
+    "noJsHint": "JavaScript is off: use the link to move between pages.",
+    "feedEnd": "That is all for now. The feed grows as new stories arrive.",
+    "debateLevel": "Level",
+    "debateAll": "All",
+    "debateLise": "High school",
+    "debateUniversite": "University",
+    "debateArchive": "Archive",
+    "debateFormat": "Format",
+    "debateReading": "{minutes} min read",
+    "debateListening": "{minutes} min listen",
+    "debateVerified": "Verified by {count} sources",
+    "debateMotion": "This house",
+    "debateGovernment": "Government",
+    "debateOpposition": "Opposition",
+    "debateBurdens": "Burden of proof",
+    "debateClash": "Key clashes",
+    "debateWhyNow": "Why it matters",
+    "debateSides": "Sides",
+    "debateFlow": "Debate format",
+    "debateEvidence": "Evidence pool",
+    "debateRebuttal": "Rebuttals",
+    "debateFaq": "FAQ",
+    "debateGlossary": "Glossary",
+    "debateSupports": "Supports",
+    "debateSources": "Sources",
+    "debateConflict": "Sources disagree",
+    "debateStart": "Start",
+    "debatePause": "Pause",
+    "debateResume": "Resume",
+    "debateReset": "Reset",
+    "debateNext": "Next stage",
+    "debatePrev": "Previous stage",
+    "debateDone": "Completed",
+    "debateTimeUp": "Time is up",
+    "debateRequired": "Required fields",
+    "debateClaim": "Claim",
+    "debateWarrant": "Warrant",
+    "debateEvidenceField": "Evidence (sourced)",
+    "debateImpact": "Impact",
+    "debateSpeaker": "Who speaks",
+    "debateTask": "What to do",
+    "debateOutput": "Required output",
+    "debateTimer": "Stage timer",
+    "debateNoSubmission": "There is no form here; no user arguments are collected.",
+    "debateCardCta": "Open file",
+    "debatePrevCard": "Previous debate",
+    "debateNextCard": "Next debate",
+    "debateCarousel": "Debates",
+    "debateEmpty": "No debates match this filter.",
+    "debateArchiveHint": "Filter by level, category and order.",
+    "debatePublished": "Published",
+    "debateUpdated": "Updated",
+    "debateSourceCount": "sources",
+    "debateLevelNote": "Level note"
+  },
+  "sections": {
+    "title": "Sections",
+    "news": "News",
+    "newsHint": "Full news feed",
+    "portraits": "Portraits",
+    "portraitsHint": "People, institutions and events",
+    "podcast": "Podcast",
+    "podcastHint": "News bulletins and Potkes",
+    "blog": "Blog",
+    "blogHint": "Editorial writing",
+    "assistant": "AI Assistant",
+    "assistantHint": "Chat with the news",
+    "bookmarks": "Bookmarks",
+    "bookmarksHint": "Saved items",
+    "achievements": "Achievements",
+    "achievementsHint": "Reading streak and badges",
+    "profile": "Profile",
+    "profileHint": "Preferences and accessibility",
+    "all": "All"
+  }
+}

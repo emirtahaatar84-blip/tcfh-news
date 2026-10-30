@@ -1,0 +1,1208 @@
+{
+  "meta": {
+    "title": "Mikro Haber",
+    "description": "3 bağımsız kaynakla doğrulanmış, yapay zekâ ile sentezlenmiş tarafsız haber akışı.",
+    "keywords": "haber, özet, sentez, yapay zekâ, rss, doğrulama, gündem"
+  },
+  "header": {
+    "admin": "Yönetim paneli",
+    "categories": "Kategoriler"
+  },
+  "categories": {
+    "all": "Tüm Haberler",
+    "Gündem": "Gündem",
+    "Teknoloji": "Teknoloji",
+    "Yapay Zekâ": "Yapay Zekâ",
+    "Ekonomi": "Ekonomi",
+    "Siyaset": "Siyaset",
+    "Spor": "Spor",
+    "Bilim": "Bilim",
+    "Dünya": "Dünya",
+    "Sağlık": "Sağlık",
+    "Kültür": "Kültür",
+    "Diğer": "Diğer"
+  },
+  "feed": {
+    "emptyTitle": "Henüz doğrulanmış haber yok",
+    "emptyDescription": "Bir haber yayına girmesi için en az 3 bağımsız kaynaktan doğrulanması gerekir. Sonraki taramada burada görünecek.",
+    "emptyFilteredTitle": "Sonuç bulunamadı",
+    "emptyFilteredDescription": "Başka bir kategoriye göz atabilir veya aramanızı değiştirebilirsiniz.",
+    "bookmarksEmptyTitle": "Henüz yer imi yok",
+    "bookmarksEmptyDescription": "Haber kartlarındaki yer imi simgesine dokunarak haberleri burada saklayabilirsiniz.",
+    "loading": "Yükleniyor…",
+    "end": "Akışın sonuna geldiniz",
+    "error": "Haberler yüklenemedi.",
+    "retry": "Tekrar dene",
+    "radio": "Haber Radyosu",
+    "radioHint": "Akıştaki haberleri dinlemek için radyoyu başlat",
+    "radioNow": "Şimdi okunuyor",
+    "radioEnd": "Bütün haberler okundu",
+    "radioError": "Haber okunamadı, atlanıyor",
+    "regionTitle": "Bölgenizden Haberler",
+    "latest": "Son haberler",
+    "loadMore": "Daha fazla yükle",
+    "loadingMore": "Sonraki haberler yükleniyor…",
+    "pageLoaded": "{count} yeni içerik yüklendi.",
+    "keepPosition": "Eski kartlar bellek için kaldırıldı; okuma konumunuz korundu."
+  },
+  "card": {
+    "share": "Paylaş",
+    "copied": "Bağlantı kopyalandı",
+    "shareError": "Bağlantı paylaşılamadı",
+    "views": "Okunma",
+    "bookmark": "Yer imlerine ekle",
+    "removeBookmark": "Yer iminden çıkar",
+    "dismiss": "Kapat",
+    "verified": "✓ {count} Kaynaktan Doğrulandı",
+    "videoBadge": "🎥 Video Haberi",
+    "save": "Kaydet",
+    "saved": "Kaydedildi",
+    "readLabel": "Okundu",
+    "listenLabel": "{minutes} dk dinleme",
+    "actions": "İşlemler",
+    "singleSource": "Tek kaynak",
+    "singleSourceHint": "Bu haber tek kaynağa dayanıyor; bağımsız kaynakla doğrulanmadı."
+  },
+  "sidebar": {
+    "nav": {
+      "feed": "Akış",
+      "blog": "Blog",
+      "explore": "Keşfet",
+      "podcast": "Podcast",
+      "assistant": "AI Asistan",
+      "bookmarks": "Yer İmleri",
+      "achievements": "Başarılar",
+      "profile": "Tercihler",
+      "admin": "Yönetim Paneli",
+      "xstudio": "X Stüdyo",
+      "rss": "RSS Kaynakları",
+      "portraits": "Portreler",
+      "news": "Haberler"
+    }
+  },
+  "auth": {
+    "googleLogin": "Google ile Giriş Yap",
+    "signOut": "Çıkış Yap",
+    "notConfigured": "Google OAuth henüz yapılandırılmadı. Sunucudaki .env dosyasına GOOGLE_CLIENT_ID ve GOOGLE_CLIENT_SECRET ekleyin.",
+    "or": "veya",
+    "email": "E-posta",
+    "password": "Şifre",
+    "signIn": "Giriş Yap",
+    "invalidCredentials": "E-posta veya şifre hatalı."
+  },
+  "moderation": {
+    "remove": "Haberi Kaldır",
+    "reasonTitle": "Kaldırma sebebini seçin",
+    "copyright": "Telif ihlali",
+    "hallucination": "Yanlış haber / halüsinasyon",
+    "removed": "Haber kaldırıldı",
+    "error": "Haber kaldırılamadı."
+  },
+  "xstudio": {
+    "title": "X Stüdyo",
+    "subtitle": "Yayınlanmış haberlerden X postu üret. Panoya kopyala, manuel paylaş — otomatik gönderim yoktur.",
+    "backToAdmin": "Yönetim paneline dön",
+    "articles": "Haberler",
+    "settings": "Ayarlar",
+    "variants": "Varyantlar",
+    "pool": "Havuz",
+    "generate": "Üret (G)",
+    "generating": "Üretiliyor…",
+    "style": "Stil",
+    "emojiMax": "Bu stilde en fazla {count} emoji",
+    "tone": "Ton",
+    "length": "Uzunluk",
+    "emojiLevel": "Emoji seviyesi",
+    "withSource": "Kaynak linki ekle",
+    "withBadge": "Doğrulama rozeti ekle",
+    "tones": {
+      "tarafsiz": "Tarafsız",
+      "sicak": "Sıcak",
+      "ciddi": "Ciddi"
+    },
+    "lengths": {
+      "kisa": "Kısa",
+      "orta": "Orta",
+      "uzun": "Uzun"
+    },
+    "copy": "Kopyala",
+    "copied": "Panoya kopyalandı!",
+    "poolAdd": "Havuza At",
+    "pooled": "Havuza eklendi",
+    "goSource": "Habere Git",
+    "empty": "Bugün için uygun haber yok",
+    "emptyHint": "Filtreleri temizleyin veya farklı bir tarih seçin.",
+    "error": "Bir hata oluştu.",
+    "retry": "Tekrar dene",
+    "duplicateWarning": "Bu habere daha önce havuzdan post atılmış!",
+    "charCount": "{count}/280",
+    "overLimit": "sınır aşıldı",
+    "shortcutGenerate": "G · Üret",
+    "shortcutSelect": "1/2/3 · Varyant",
+    "shortcutCopy": "C · Kopyala",
+    "shortcutPool": "P · Havuza",
+    "searchPlaceholder": "Haber ara…",
+    "allCategories": "Tüm kategoriler",
+    "selectArticleFirst": "Başlamak için bir haber seçin",
+    "variantsEmpty": "Üretmek için G'ye basın",
+    "noPool": "Havuz boş",
+    "status": {
+      "draft": "Taslak",
+      "copied": "Kopyalandı",
+      "published": "Paylaşıldı",
+      "rejected": "Reddedildi"
+    }
+  },
+  "profile": {
+    "title": "Profil",
+    "loading": "Yükleniyor…",
+    "loginPrompt": "Profilinizi görmek, yer imlerinizi cihazlar arası taşımak ve e-posta bültenine abone olmak için giriş yapın.",
+    "newsletter": {
+      "title": "E-posta Bülteni",
+      "description": "Doğrulanmış önemli gelişmelerden e-posta ile haberdar olmak istiyorum.",
+      "savedOn": "Bülten aboneliğiniz açıldı.",
+      "savedOff": "Bülten aboneliğiniz kapatıldı.",
+      "error": "Tercih kaydedilemedi."
+    },
+    "voice": {
+      "title": "Sesli Özet Sesi",
+      "description": "Haberlerin sesli özetlerini hangi sesle dinlemek istediğinizi seçin. Seçiminiz yalnızca sizin için uygulanır.",
+      "saved": "Ses tercihiniz kaydedildi.",
+      "error": "Ses tercihi kaydedilemedi.",
+      "sample": "Sesi dinle",
+      "personas": {
+        "default": "Varsayılan Ses",
+        "male_1": "Ahmet — Ana Sunucu & Teknoloji",
+        "male_2": "Mehmet — Enerjik Konuk & Analist",
+        "female_1": "Ayşe — Co-Host & Araştırmacı",
+        "female_2": "Zeynep — Eleştirel / Bilim Editörü"
+      }
+    }
+  },
+  "search": {
+    "label": "Haber ara",
+    "placeholder": "Haber, konu veya kaynak ara…",
+    "open": "Arama",
+    "recent": "Son aramalar",
+    "noResults": "Sonuç bulunamadı",
+    "hint": "En az 2 karakter yazın. Aramalar yalnızca bu cihazda saklanır.",
+    "clearRecent": "Temizle",
+    "results": "Arama sonuçları",
+    "close": "Kapat"
+  },
+  "trending": {
+    "title": "İlginizi Çekebilir",
+    "empty": "Trend verisi henüz yok."
+  },
+  "subtopics": {
+    "title": "Öne çıkan konular"
+  },
+  "news": {
+    "aiBadge": "Bu içerik, birden fazla bağımsız kaynaktaki haberler yapay zekâ ile sentezlenerek sadeleştirilmiştir.",
+    "readTime": "{minutes} dk okuma",
+    "audioSummary": "Sesli Özet",
+    "audioPreparing": "Ses hazırlanıyor…",
+    "audioError": "Sesli özet üretilemedi, tekrar dene",
+    "play": "Sesli özeti oynat",
+    "pause": "Duraklat",
+    "synthesizedNote": "Bu haber {count} bağımsız kaynak ({sources}) analiz edilerek tarafsız yapay zeka tarafından derlenmiştir.",
+    "related": "İlgili Haberler",
+    "videoExternal": "Video üçüncü taraf sitede (YouTube). Tıkladığınızda YouTube'a veri iletilecektir."
+  },
+  "podcast": {
+    "title": "Podcast",
+    "subtitle": "Yapay zekânın site haberlerinden ürettiği konuşma tarzı haber bültenlerini dinleyin.",
+    "empty": "Henüz yayınlanmış bölüm yok",
+    "daily": "Günlük",
+    "weekly": "Haftalık",
+    "custom": "Özel Konu",
+    "minutes": "dk",
+    "speakers": "Konuşmacılar",
+    "play": "Dinle",
+    "pause": "Duraklat"
+  },
+  "comingSoon": {
+    "title": "Yakında",
+    "description": "Bu bölüm şu anda geliştiriliyor. Haber akışına dönebilirsiniz."
+  },
+  "footer": {
+    "rights": "Tüm hakları saklıdır.",
+    "sources": "İçerikler kaynak sitelere aittir.",
+    "contact": "İletişim",
+    "links": {
+      "kvkk": "KVKK",
+      "terms": "Kullanım Şartları",
+      "copyright": "Telif & Uyar-Kaldır",
+      "about": "Hakkımızda",
+      "cookies": "Çerez Politikası"
+    },
+    "noCookies": "Bu site çerez kullanmaz; tercihler yalnızca cihazınızda saklanır."
+  },
+  "legal": {
+    "kvkk": {
+      "title": "Gizlilik ve Kişisel Verilerin Korunması (KVKK) Aydınlatma Metni",
+      "updated": "Son güncelleme: 25 Ekim 2026",
+      "sections": [
+        {
+          "heading": "1. Veri Sorumlusu",
+          "body": [
+            "Bu site bu site adresinde yayımlanan bağımsız bir haber sentez platformudur. Veri sorumlusu ile iletişim: iletisim@example.com."
+          ]
+        },
+        {
+          "heading": "2. İşlenen Kişisel Veri Bulunmamaktadır",
+          "body": [
+            "Sitede hesap oluşturma, giriş, üyelik, şifre, bülten aboneliği ve form ile veri toplama YOKTUR. Ad, soyad, e-posta, telefon, adres, doğum tarihi ve konum bilgisi istenmez.",
+            "Hiçbir çerez (zorunlu çerez dahi) kullanılmaz. Üçüncü taraf analitik, reklam ağı, piksel, ısı haritası ve A/B test aracı bulunmaz.",
+            "Ziyaretçi IP adresleri uygulama tarafından okunmaz, saklanmaz ve profilleme amacıyla kullanılmaz. IP tabanlı konum tespiti yapılmaz."
+          ]
+        },
+        {
+          "heading": "3. Yalnızca Cihazınızda Saklanan Tercihler",
+          "body": [
+            "Tema, yazı boyutu, satır aralığı, sade okuma modu, yer imleri, okundu işaretleri, dinleme konumu ve isteğe bağlı il seçimi yalnızca tarayıcınızın localStorage alanında tutulur.",
+            "Bu veriler sunucuya gönderilmez, üçüncü taraflarla paylaşılmaz ve sizin cihazınızdan çıkmaz. Saklama süresi siz silene kadardır; tarayıcı ayarlarından veya Yer İmleri sayfasındaki 'Tümünü temizle' ile silebilirsiniz.",
+            "localStorage şeması sürümlüdür (storageVersion: 1) ve gelecekteki şema değişikliklerine hazırdır."
+          ]
+        },
+        {
+          "heading": "4. Yurt Dışına Aktarım",
+          "body": [
+            "Kişisel veri işlenmediği için yurt dışına aktarım yapılmamaktadır.",
+            "Haber üretimi ve AI özetleri sunucu tarafında çalışır; bu işlemlerde ziyaretçiye ait kişisel veri kullanılmaz. Kullanıcıların AI asistan sohbetleri sunucuda saklanmaz; yalnızca yanıt üretmek için o istek sırasında işlenir."
+          ]
+        },
+        {
+          "heading": "5. Üçüncü Taraf Bağlantılar ve Gömülü İçerik",
+          "body": [
+            "Haber kaynaklarına ve YouTube videolarına bağlantılar bulunur. Gömülü içerikler 'tıkla-yükle' tekniğiyle çalışır: siz tıklamadan üçüncü tarafa hiçbir istek gitmez ve öncesinde bilgilendirme gösterilir.",
+            "Tıkladığınızda ilgili üçüncü taraf sitenin kendi gizlilik politikası geçerli olur."
+          ]
+        },
+        {
+          "heading": "6. Sunucu Tarafı Teknik Kayıtlar",
+          "body": [
+            "Uygulama düzeyinde ziyaretçi bazlı loglama ve profilleme yapılmaz.",
+            "Barındırma sağlayıcısının (VPS/sunucu) güvenlik ve işletim amacıyla tuttuğu standart teknik kayıtlar kendi politikalarına tabidir; bu kayıtlar tarafımızca pazarlama veya profilleme amacıyla kullanılmaz."
+          ]
+        },
+        {
+          "heading": "7. KVKK Madde 11 Kapsamındaki Haklarınız",
+          "body": [
+            "Kişisel verinizin işlenip işlenmediğini öğrenme, işlenmişse bilgi talep etme, işlenme amacını öğrenme, eksik/yanlış işlenmişse düzeltilmesini isteme, silinmesini/yok edilmesini isteme ve kanuna aykırı işleme nedeniyle zararın giderilmesini talep etme haklarına sahipsiniz.",
+            "Sitede kişisel veri işlenmediği için bu hakların kullanımına konu veri bulunmamaktadır. Yine de başvurunuzu iletisim@example.com adresine iletebilirsiniz; talepler en geç 30 gün içinde yanıtlanır."
+          ]
+        }
+      ]
+    },
+    "terms": {
+      "title": "Kullanım Şartları",
+      "updated": "Son güncelleme: Ekim 2026",
+      "sections": [
+        {
+          "heading": "1. Hizmetin Niteliği",
+          "body": [
+            "Sitede yayımlanan haberler, en az üç bağımsız kaynaktan doğrulanan olayların yapay zekâ ile sentezlenmiş özetleridir. İçerikler yalnızca bilgilendirme amaçlıdır; hukuki, finansal veya tıbbi tavsiye niteliği taşımaz."
+          ]
+        },
+        {
+          "heading": "2. Kullanım Kuralları",
+          "body": [
+            "Siteyi yasal amaçlar dışında kullanmak, otomatik toplama (scraping) yöntemleriyle servisi zorlamak veya güvenliğini tehlikeye atmak yasaktır.",
+            "Sentezlenen içerikler kaynak gösterilmeden ticari amaçla çoğaltılamaz."
+          ]
+        },
+        {
+          "heading": "3. Sorumluluk Sınırlaması",
+          "body": [
+            "Doğrulama sürecine rağmen sentez içeriklerde hatalar oluşabilir. Kriti̇k bilgiler için olayın tarafı olan kaynakları doğrudan kontrol etmeniz önerilir. Sorularınız için: iletisim@example.com."
+          ]
+        }
+      ]
+    },
+    "copyright": {
+      "title": "Telif & Uyar-Kaldır Bildirimi",
+      "updated": "Son güncelleme: 25 Ekim 2026",
+      "sections": [
+        {
+          "heading": "1. İçerik ve Kaynak Gösterme İlkesi",
+          "body": [
+            "Sitedeki haberler, kamuya açık RSS kaynaklarındaki olay bilgisi referans alınarak özgün ifadelerle yeniden yazılmış sentezlerdir. Kaynak makalelerin metni kopyalanmaz.",
+            "Her haberin altında kaynak adları, kaynak bağlantıları ve alınma saatleri listelenir. Kaynaklara bağlantı vermek, telif sahiplerinin haklarını ortadan kaldırmaz; haklar ilgili sahiplerine aittir."
+          ]
+        },
+        {
+          "heading": "2. Uyar-Kaldır Talebi",
+          "body": [
+            "Telif hakkına sahip olduğunuz bir içeriğin izinsiz kullanıldığını düşünüyorsanız iletisim@example.com adresine şunları gönderin: (a) içeriğin sitedeki tam bağlantısı, (b) hak sahipliğinizi gösteren bilgi, (c) iletişim bilginiz.",
+            "Sitede kaldırma talebi için FORM BULUNMAZ; kişisel veri toplamamak amacıyla yalnızca e-posta kullanılır.",
+            "Talepler en geç 72 saat içinde incelenir; haklı bulunan içerikler yayından kaldırılır."
+          ]
+        },
+        {
+          "heading": "3. Yapay Zekâ İçeriği",
+          "body": [
+            "Sentez metinler yapay zekâ ile üretilir ve hata içerebilir. Bağlayıcı değildir; hukuki, finansal veya tıbbi tavsiye niteliği taşımaz."
+          ]
+        }
+      ]
+    },
+    "about": {
+      "title": "Hakkımızda",
+      "updated": "Son güncelleme: 21 Ekim 2026",
+      "sections": [
+        {
+          "heading": "Platform Hakkında",
+          "body": [
+            "bu site, yerli ve yabancı haber kaynaklarını sürekli izleyen bağımsız bir haber sentez platformudur. Amacımız, aynı olaya ilişkin dağınık bilgileri tek, anlaşılır ve özgün bir haberde birleştirmektir.",
+            "Platform; gündem, teknoloji, bilim, spor, ekonomi ve daha birçok kategoride güncel haber akışı, sesli özetler ve yapay zeka destekli podcast bölümleri sunar."
+          ]
+        },
+        {
+          "heading": "Nasıl Çalışır?",
+          "body": [
+            "Sistemimiz 30'a yakın yerli ve yabancı haber kaynağını dakikalar içinde tarar. Aynı olayı haberleştiren kaynaklar otomatik olarak birleştirilir; olay, yapay zeka desteğiyle özgün ve tarafsız bir dille yeniden yazılır.",
+            "Yayınlanan her haber, yayına alınmadan önce ve sonrasında yapay zeka destekli ayrı bir kalite denetiminden geçer. Yetersiz veya hatalı bulunan içerikler yayından kaldırılır."
+          ]
+        },
+        {
+          "heading": "Yayın İlkelerimiz",
+          "body": [
+            "Özgünlük: Hiçbir haber kaynağından kopyalanmaz; tüm içerikler kendi cümlelerimizle sentezlenir.",
+            "Tarafsızlık: Haberler taraf tutmaksızın yalnızca ortak doğrulanmış bilgileri aktarır.",
+            "Telif hassasiyeti: Kaynak yayınların telif haklarına saygı gösterilir; içerik kaldırma talepleri iletişim adresinden iletilebilir."
+          ]
+        },
+        {
+          "heading": "İletişim",
+          "body": [
+            "Görüş, düzeltme ve içerik kaldırma talepleriniz için: iletisim@example.com"
+          ]
+        }
+      ]
+    },
+    "cookies": {
+      "title": "Çerez Politikası",
+      "updated": "Son güncelleme: 25 Ekim 2026",
+      "sections": [
+        {
+          "heading": "1. Çerez Kullanmıyoruz",
+          "body": [
+            "Bu sitede hiçbir çerez kullanılmamaktadır. Zorunlu çerez, tercih çerezi, analitik çerezi, reklam çerezi veya üçüncü taraf çerezi yoktur.",
+            "DevTools → Application → Cookies bölümünü açtığınızda bu alan boş kalır."
+          ]
+        },
+        {
+          "heading": "2. Cihazda Saklanan Tercihler (localStorage)",
+          "body": [
+            "eth.v1.prefs — tema, yazı boyutu, satır aralığı, sade okuma modu, okundu işaretleri ve isteğe bağlı il seçimi.",
+            "eth.v1.bookmarks — kaydettiğiniz haberler (kimlik, başlık, adres, kategori, kaydedilme tarihi).",
+            "eth.v1.read — okundu olarak işaretlenen haber kimlikleri.",
+            "eth.v1.playback — dinlemeye bıraktığınız bölüm ve saniye.",
+            "eth.v1.searches — yalnızca cihazda tutulan son arama terimleri."
+          ]
+        },
+        {
+          "heading": "3. Nasıl Silinir?",
+          "body": [
+            "Tarayıcı ayarlarından site verilerini temizleyebilirsiniz. Sitedeki Yer İmleri sayfasında 'Tümünü temizle' ve 'Yalnızca bu cihazda' bölümündeki seçenekler de verileri siler.",
+            "Gizli/özel pencerede gezinirseniz pencere kapanınca bu veriler otomatik silinir."
+          ]
+        },
+        {
+          "heading": "4. Analitik ve Ölçümleme",
+          "body": [
+            "Google Analytics, Meta Pixel, Hotjar veya benzeri hiçbir ölçümleme aracı kullanılmamaktadır.",
+            "İleride yalnızca çerezsiz ve kişisel veri işlemeyen toplu ölçüm tercih edilirse bu sayfa güncellenecek ve arayüzde açıkça belirtilecektir."
+          ]
+        }
+      ]
+    }
+  },
+  "language": {
+    "tr": "Türkçe",
+    "en": "English",
+    "switch": "Dili değiştir"
+  },
+  "notFound": {
+    "title": "Sayfa bulunamadı",
+    "description": "Aradığınız sayfa taşınmış veya hiç var olmamış olabilir.",
+    "back": "Akışa dön"
+  },
+  "errors": {
+    "title": "Bir şeyler ters gitti",
+    "description": "Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin.",
+    "retry": "Tekrar dene"
+  },
+  "admin": {
+    "title": "Yönetim Paneli",
+    "subtitle": "Kaynakları, marka ayarlarını ve yapay zekâ bağlantısını buradan yönetin.",
+    "secured": "Sadece site sahibi",
+    "loginTitle": "Yönetici Girişi",
+    "loginPrompt": "Bu alan yalnızca site sahibinin (owner) hesabına açıktır. Google hesabınızla giriş yapın; diğer kullanıcılar haber akışını kullanmaya devam eder.",
+    "stats": {
+      "news": "Haber",
+      "sources": "Kaynak",
+      "activeSources": "Aktif"
+    },
+    "tabs": {
+      "general": "Genel",
+      "rss": "RSS Kaynakları",
+      "llm": "LLM Ayarları",
+      "actions": "İşlemler"
+    },
+    "xstudioLink": "X Stüdyo — haberlerden X postu üret",
+    "general": {
+      "title": "Genel Ayarlar",
+      "description": "Sitenin adı başlıkta ve tarayıcı sekmesinde görünür.",
+      "siteName": "Site adı",
+      "siteNamePlaceholder": "Örn. bu site",
+      "save": "Kaydet",
+      "saving": "Kaydediliyor…",
+      "saved": "Ayarlar kaydedildi.",
+      "error": "Ayarlar kaydedilemedi."
+    },
+    "rss": {
+      "title": "RSS Kaynakları",
+      "description": "Aktif kaynaklar 10 dakikalık taramalarda ham havuza eklenir. Bir haberin yayına girmesi için en az 3 farklı kaynaktan doğrulanması gerekir.",
+      "addTitle": "Yeni kaynak ekle",
+      "name": "Kaynak adı",
+      "namePlaceholder": "Örn. NTV (boş bırakılırsa alan adı kullanılır)",
+      "url": "RSS adresi",
+      "urlPlaceholder": "https://ornek.com/rss",
+      "category": "Kategori",
+      "categoryHint": "Kategori artık sorulmuyor: her içerik başlık, özet ve varlık sözlüğüyle otomatik sınıflandırılır. Bu seçim yalnızca kaynağın varsayılan kategorisi olarak kullanılır.",
+      "add": "Kaynak ekle",
+      "adding": "Ekleniyor…",
+      "added": "Kaynak eklendi.",
+      "empty": "Henüz RSS kaynağı eklenmedi.",
+      "active": "Aktif",
+      "inactive": "Pasif",
+      "toggle": "Kaynağı aç veya kapat",
+      "delete": "Kaynağı sil",
+      "deleteConfirm": "\"{name}\" kaynağını silmek istediğinize emin misiniz?",
+      "error": "İşlem tamamlanamadı.",
+      "duplicate": "Bu RSS adresi zaten ekli.",
+      "invalidUrl": "Geçerli bir http(s) RSS adresi girin."
+    },
+    "llm": {
+      "title": "LLM Ayarları",
+      "description": "OpenAI uyumlu herhangi bir sağlayıcıyı kullanabilirsiniz. Sentez raporları bu bağlantı üzerinden üretilir.",
+      "providerUrl": "Sağlayıcı URL'si",
+      "providerUrlPlaceholder": "https://api.deepseek.com/v1",
+      "providerUrlHint": "Örn. https://api.deepseek.com/v1 — /v1/models yazmayın; tam uç nokta da kabul edilir.",
+      "apiKey": "API anahtarı",
+      "apiKeyPlaceholder": "Yeni anahtar girin",
+      "apiKeyHint": "Boş bırakırsanız mevcut anahtar korunur.",
+      "apiKeyPresent": "Bir API anahtarı kayıtlı.",
+      "clearApiKey": "Kayıtlı API anahtarını temizle",
+      "modelName": "Model adı",
+      "modelNamePlaceholder": "Örn. deepseek-v4-flash",
+      "promptTemplate": "İstem şablonu",
+      "promptHint": "Kullanılabilir değişkenler: {articles}, {sourceCount}, {historical} (geçmiş bağlam — dava/soruşturma/vefat haberlerinde otomatik dolar)",
+      "save": "Kaydet",
+      "saving": "Kaydediliyor…",
+      "saved": "LLM ayarları kaydedildi.",
+      "error": "LLM ayarları kaydedilemedi."
+    },
+    "fetch": {
+      "title": "Haberleri Doğrula ve Sentezle",
+      "description": "Aktif RSS kaynaklarını tarayıp ham havuza ekler, son 60 dakikada en az 3 kaynaktan doğrulanan olayları yapay zekâ ile sentezler, 2 saatten eski ham kayıtları temizler. İşlem arka planda çalışır; sonuçlar otomatik görünür.",
+      "button": "Taramayı başlat",
+      "running": "Kaynaklar taranıyor…",
+      "success": "Tarama tamamlandı.",
+      "error": "Tarama başlatılamadı.",
+      "noSources": "Önce en az bir aktif RSS kaynağı ekleyin.",
+      "stats": {
+        "sources": "Kaynak",
+        "staged": "Havuza Eklenen",
+        "clusters": "Küme",
+        "verified": "3+ Kaynak",
+        "published": "Yayınlanan",
+        "rejected": "Reddedilen",
+        "failed": "Hatalı"
+      },
+      "recentErrors": "Son hatalar"
+    },
+    "videoNews": {
+      "tab": "Video Haber",
+      "title": "YouTube Video'dan Haber",
+      "description": "Bir YouTube linki gönderin; transkript çıkarılıp yapay zekâ ile özgün habere dönüştürülür. Yayınlamadan önce videoyu oynatarak içeriği onaylamanız gerekir.",
+      "urlPlaceholder": "https://www.youtube.com/watch?v=…",
+      "submit": "Videoyu İşle",
+      "processing": "İşleniyor…",
+      "ready": "Onay Bekliyor",
+      "failed": "Başarısız",
+      "published": "Yayınlandı",
+      "playToUnlock": "Videoyu izleyerek onayla",
+      "publish": "Yayınla",
+      "publishLocked": "Önce videoyu oynatmalısınız",
+      "delete": "Sil",
+      "retry": "Tekrar Dene",
+      "refresh": "Yenile",
+      "empty": "Henüz video haber yok",
+      "emptyHint": "Yukarıya bir YouTube linki yapıştırıp işleyin.",
+      "viewInFeed": "Akışta görüntüle",
+      "toastPublished": "Yayınlandı",
+      "toastDeleted": "Kayıt silindi",
+      "invalidUrl": "Geçerli bir YouTube linki girin (youtube.com veya youtu.be).",
+      "confirmDelete": "Bu video haber kaydını silmek istediğinize emin misiniz?",
+      "videoBadge": "🎥 Video Haberi",
+      "details": "Detay",
+      "preview": "Üretilen Haber",
+      "readTime": "{minutes} dk okuma",
+      "error": "İşlem tamamlanamadı."
+    },
+    "podcast": {
+      "tab": "Podcast Stüdyosu",
+      "title": "YZ Podcast Stüdyosu",
+      "description": "Sitedeki haberlerden yapay zekâ ile tek sunuculu haber bülteni podcast bölümü üretin. Metni tek alanda düzenleyin, sesi oluşturun, dinledikten sonra yayınlayın.",
+      "create": "Bölüm Oluştur",
+      "creating": "Oluşturuluyor…",
+      "modes": {
+        "hourly": "⏱️ Saatlik Bülten",
+        "daily": "🗞️ Günlük Bülten",
+        "weekly": "📅 Haftalık Bülten",
+        "custom": "💬 Özel Konu"
+      },
+      "modeHints": {
+        "daily": "Son 24 saat",
+        "weekly": "Son 7 gün",
+        "custom": "Kendi konunuzu yazın"
+      },
+      "category": "Kategori",
+      "allCategories": "Tümü",
+      "topic": "Konu",
+      "topicPlaceholder": "Örn. Son veri ihlaleleri üzerine siber güvenlik odaklı bir bülten hazırla",
+      "topicRequired": "Özel Konu modunda konu zorunludur.",
+      "statuses": {
+        "processing": "Senaryo yazılıyor…",
+        "draft": "Taslak",
+        "audioProcessing": "Ses üretiliyor…",
+        "ready": "Onay Bekliyor",
+        "published": "Yayınlandı",
+        "failed": "Başarısız"
+      },
+      "refresh": "Yenile",
+      "delete": "Sil",
+      "confirmDelete": "Bu podcast bölümünü silmek istediğinize emin misiniz?",
+      "empty": "Henüz podcast bölümü yok",
+      "emptyHint": "Yukarıdaki formdan ilk bölümünüzü oluşturun.",
+      "save": "Kaydet",
+      "generateAudio": "Sesi Üret",
+      "audioRegenerate": "Sesi Yeniden Üret",
+      "listenFirst": "Önce podcast'i dinlemelisiniz",
+      "publish": "Yayınla",
+      "viewPublic": "Podcast sayfasında görüntüle",
+      "toastPublished": "Yayınlandı",
+      "toastSaved": "Kaydedildi — ses yeniden üretilmeli",
+      "toastDeleted": "Bölüm silindi",
+      "unsavedWarning": "Kaydedilmemiş değişiklikler var — önce Kaydet'e basın.",
+      "failedScriptNote": "Senaryo üretilemedi. Bu bölümü silip yeniden oluşturmanız gerekir.",
+      "minutes": "dk",
+      "errorLabel": "İşlem tamamlanamadı.",
+      "voiceSelect": "Karakter Sesi",
+      "scriptLabel": "Bölüm Metni",
+      "scriptHint": "Tüm bülten tek seferde seslendirilir — ses akışı boyunca tutarlı kalır.",
+      "scriptPlaceholder": "Bülten metnini buraya yazın veya düzenleyin…"
+    },
+    "moderation": {
+      "tab": "Denetim",
+      "bestNews": "En İyi Haberler",
+      "qualityScore": "Kalite puanı",
+      "points": "/10",
+      "toPodcast": "Potkes'e Çevir",
+      "selectAll": "Tümünü Seç",
+      "selectAtLeast": "En az 2 haber seçin",
+      "emptySuggestions": "Henüz denetim puanı olan haber yok",
+      "emptySuggestionsHint": "Saatlik denetim çalışınca burada en iyi haberler listelenir",
+      "runAudit": "Denetimi Şimdi Çalıştır",
+      "lastAudit": "Son denetim",
+      "lastAuditSummary": "{audited} haber denetlendi · {kept} kaldı · {removed} kaldırıldı",
+      "refresh": "Yenile",
+      "removedNews": "Kaldırılan Haberler",
+      "restore": "Geri Yükle",
+      "restored": "Haber yayına döndü",
+      "emptyRemoved": "Kaldırılan haber yok",
+      "removedByGemma": "YZ Denetim",
+      "removedByOwner": "Siz",
+      "podcastToast": "Podcast taslağı oluşturuldu",
+      "auditStarted": "Denetim başladı",
+      "goToPodcast": "Podcast Stüdyosu'na git",
+      "error": "İşlem tamamlanamadı."
+    }
+  },
+  "pwa": {
+    "installTitle": "Uygulamayı ana ekrana ekle",
+    "installBody": "Tek dokunuşla hızlı erişin",
+    "install": "Kur",
+    "later": "Daha Sonra",
+    "iosHint": "Paylaş menüsünden 'Ana Ekrana Ekle'yi seçin",
+    "offline": "İnternet bağlantınız yok",
+    "offlineBody": "Bağlantı geri geldiğinde akış otomatik yüklenecek.",
+    "retry": "Tekrar Dene",
+    "notifications": "Bildirimler",
+    "notificationsHint": "Kategori bazlı anlık bildirimler alın",
+    "enableNotifications": "Bildirimleri Aç",
+    "disableNotifications": "Bildirimleri Kapat",
+    "allCategories": "Tümü",
+    "saveCategories": "Kaydet",
+    "saved": "Kaydedildi",
+    "permissionDenied": "Bildirim izni reddedildi — tarayıcı ayarlarından açın",
+    "notSupported": "Tarayıcınız bildirimleri desteklemiyor"
+  },
+  "common": {
+    "backToFeed": "Akışa dön",
+    "backToTop": "Yukarı çık"
+  },
+  "accessibility": {
+    "skipToContent": "İçeriğe geç"
+  },
+  "theme": {
+    "group": "Tema",
+    "system": "Sistem teması",
+    "light": "Aydınlık tema",
+    "dark": "Karanlık tema"
+  },
+  "filters": {
+    "title": "Filtrele",
+    "open": "Filtreleri aç",
+    "close": "Kapat",
+    "category": "Kategori",
+    "dateRange": "Tarih",
+    "source": "Kaynak",
+    "readingTime": "Okuma süresi",
+    "today": "Bugün",
+    "week": "Bu hafta",
+    "month": "Bu ay",
+    "all": "Tümü",
+    "short": "Kısa (<3 dk)",
+    "medium": "Orta (3-6 dk)",
+    "long": "Uzun (7 dk+)",
+    "apply": "Uygula",
+    "reset": "Sıfırla",
+    "resultCount": "{count} sonuç",
+    "clearAll": "Filtreleri temizle",
+    "activeFilters": "Aktif filtreler",
+    "noSources": "Kaynak bulunamadı."
+  },
+  "reading": {
+    "title": "Okuma ayarları",
+    "fontSmall": "Yazıyı küçült",
+    "fontLarge": "Yazıyı büyüt",
+    "lineTight": "Sık",
+    "lineNormal": "Normal",
+    "lineWide": "Geniş",
+    "readingMode": "Sade okuma",
+    "readingModeOn": "Sade okuma açık",
+    "readingModeOff": "Sade okuma kapalı",
+    "deviceOnly": "Tercihler yalnızca bu cihazda saklanır."
+  },
+  "sources": {
+    "title": "Kaynaklar",
+    "trustMulti": "Çoklu kaynak",
+    "trustSingle": "Tek kaynak",
+    "trustHint": "Birden fazla bağımsız kaynaktan derlenen haberler daha yüksek güven gösterir.",
+    "sourceTime": "Kaynak saati",
+    "noLink": "Bağlantı yok",
+    "foreignNotice": "Bağlantılara tıkladığınızda üçüncü taraf siteye veri iletilecektir. Bu siteler kendi gizlilik politikalarına tabidir."
+  },
+  "breadcrumb": {
+    "home": "Ana Sayfa"
+  },
+  "ai": {
+    "title": "AI araçları",
+    "summarize": "AI ile özetle",
+    "compare": "Kaynak karşılaştır",
+    "loading": "Hazırlanıyor…",
+    "oneSentence": "Tek cümlede",
+    "bullets": "Öne çıkanlar",
+    "common": "Ortak nokta",
+    "differences": "Ayrışan noktalar",
+    "source": "Kaynak",
+    "headline": "Başlık",
+    "time": "Saat",
+    "emphasis": "Öne çıkan",
+    "confidence": "Güven",
+    "commonTag": "Ortak",
+    "differentTag": "Ayrışan",
+    "error": "AI yanıtı alınamadı. Lütfen tekrar deneyin.",
+    "unavailable": "AI servisi şu anda yapılandırılmamış.",
+    "notEnoughSources": "Karşılaştırma için en az iki kaynak gerekiyor.",
+    "aiWarning": "Bu içerik yapay zeka ile üretilmiştir, hata içerebilir. Bağlayıcı değildir.",
+    "close": "Kapat",
+    "openSource": "Kaynağı yeni sekmede aç"
+  },
+  "briefing": {
+    "title": "Günün brifingi",
+    "subtitle": "Son 24 saatten 5 madde",
+    "loading": "Brifing hazırlanıyor…",
+    "unavailable": "Brifing şu anda hazırlanamadı.",
+    "aiWarning": "Bu içerik yapay zeka ile üretilmiştir, hata içerebilir.",
+    "anonymous": "Yalnızca toplu veriden, kişiselleştirme olmadan."
+  },
+  "assistant": {
+    "title": "AI Asistan",
+    "subtitle": "Sitede yayınlanan haberlere dayalı, kişisel veri toplamayan asistan.",
+    "placeholder": "Bir soru yazın…",
+    "send": "Gönder",
+    "thinking": "Yanıt hazırlanıyor…",
+    "empty": "Sitede yayınlanan haberlere göre yanıt veririm. Kapsam dışı sorularda içerik olmadığını söylerim.",
+    "suggestions": [
+      "Bugünün öne çıkan haberleri neler?",
+      "Teknoloji alanında son gelişmeler",
+      "Ekonomi haberlerini özetle"
+    ],
+    "noStoreNotice": "Sohbetler kaydedilmez",
+    "clear": "Sohbeti temizle",
+    "aiWarning": "Bu içerik yapay zeka ile üretilmiştir, hata içerebilir. Bağlayıcı değildir.",
+    "error": "Yanıt alınamadı. Lütfen tekrar deneyin.",
+    "unavailable": "AI servisi şu anda yapılandırılmamış.",
+    "rateLimited": "Çok fazla istek gönderildi. Lütfen biraz bekleyin."
+  },
+  "infoNotice": {
+    "deviceOnly": "Tercihleriniz yalnızca bu cihazda saklanır."
+  },
+  "library": {
+    "title": "Yer İmleri",
+    "subtitle": "Kaydettiğiniz haberler yalnızca bu cihazda tutulur; hesap gerekmez.",
+    "empty": "Henüz yer imi yok",
+    "emptyHint": "Haber kartlarındaki yer imi simgesine dokunarak haberleri burada saklayabilirsiniz.",
+    "search": "Yer imlerinde ara",
+    "sortDate": "Tarihe göre",
+    "sortCategory": "Kategoriye göre",
+    "newest": "Yeniden eskiye",
+    "oldest": "Eskiden yeniye",
+    "selectAll": "Tümünü seç",
+    "deleteSelected": "Seçilenleri sil",
+    "clearAll": "Tümünü temizle",
+    "confirmTitle": "Tüm yer imleri silinsin mi?",
+    "confirmBody": "Bu işlem geri alınamaz. Yer imleri yalnızca bu cihazdan silinir.",
+    "confirmYes": "Evet, temizle",
+    "confirmNo": "Vazgeç",
+    "exportJson": "JSON indir",
+    "exportCsv": "CSV indir",
+    "importJson": "JSON içe aktar",
+    "imported": "{added} yer imi eklendi, {skipped} çift kayıt atlandı.",
+    "importFailed": "Dosya okunamadı. Geçerli bir JSON dosyası seçin.",
+    "removed": "kaldırıldı",
+    "deviceOnly": "Yalnızca bu cihazda",
+    "unavailable": "Tarayıcı cihaz içi depolamaya izin vermiyor; yer imleri kullanılamıyor.",
+    "readMarks": "Okundu işaretleri",
+    "readMarksHint": "10 saniyeden uzun okuduğunuz haberler akışta solgun görünür."
+  },
+  "player": {
+    "nowPlaying": "Şimdi oynatılıyor",
+    "play": "Oynat",
+    "pause": "Duraklat",
+    "back15": "15 saniye geri",
+    "forward30": "30 saniye ileri",
+    "speed": "Oynatma hızı",
+    "sleep": "Uyku",
+    "sleepOff": "Kapalı",
+    "sleepEndOfTrack": "Bölüm sonunda dur",
+    "sleepRemaining": "Kalan süre",
+    "queue": "Sıra",
+    "queueEmpty": "Sıra boş",
+    "close": "Oynatıcıyı kapat",
+    "collapse": "Küçült",
+    "expand": "Büyüt",
+    "error": "Ses yüklenemedi",
+    "resumeTitle": "Kaldığın yerden devam et",
+    "resumeBody": "Dinlemeye bıraktığın yerden sürdürebilirsin.",
+    "resume": "Devam et",
+    "resumeDismiss": "Öneriyi kapat",
+    "removeFromQueue": "Sıradan çıkar"
+  },
+  "region": {
+    "title": "İlinizden haberler",
+    "prompt": "İl seçerseniz son haberleri burada gösteririz. Konumunuz tespit edilmez.",
+    "choose": "İl seç",
+    "change": "İli değiştir",
+    "clear": "Kaldır",
+    "deviceOnly": "Seçiminiz yalnızca bu cihazda saklanır.",
+    "empty": "Bu il için henüz haber yok.",
+    "loading": "Yükleniyor…"
+  },
+  "preferences": {
+    "title": "Cihaz tercihleri",
+    "subtitle": "Hesap yok, giriş yok. Bu sayfadaki her ayar yalnızca bu cihazda saklanır.",
+    "theme": "Tema",
+    "themeSystem": "Sistem",
+    "themeLight": "Aydınlık",
+    "themeDark": "Karanlık",
+    "fontSize": "Yazı boyutu",
+    "fontSmall": "Küçük",
+    "fontMedium": "Orta",
+    "fontLarge": "Büyük",
+    "lineHeight": "Satır aralığı",
+    "lineTight": "Sık",
+    "lineNormal": "Normal",
+    "lineWide": "Geniş",
+    "readingMode": "Sade okuma modu",
+    "readingModeHint": "Haber sayfasında yan panelleri ve öneri kutularını gizler.",
+    "readMarks": "Okundu işaretleri",
+    "readMarksHint": "10 saniyeden uzun okuduğunuz haberler akışta solgun görünür.",
+    "library": "Yer imlerim",
+    "libraryHint": "Kaydettiğiniz haberleri listeleyin, arayın, dışa aktarın.",
+    "clearRead": "Okundu işaretlerini temizle",
+    "clearAll": "Tüm cihaz verilerini sil",
+    "clearAllHint": "Tema, yer imleri, okundu işaretleri, arama geçmişi ve dinleme konumu silinir.",
+    "confirmTitle": "Tüm cihaz verileri silinsin mi?",
+    "confirmBody": "Bu işlem geri alınamaz. Sunucuda saklanan bir veri yoktur; yalnızca bu cihazdaki tercihler silinir.",
+    "confirmYes": "Evet, sil",
+    "confirmNo": "Vazgeç",
+    "deviceOnly": "Yalnızca bu cihazda saklanır",
+    "unavailable": "Tarayıcı cihaz içi depolamaya izin vermiyor; tercihler kaydedilemez.",
+    "done": "Tamamlandı",
+    "autoRead": "Otomatik okundu işareti",
+    "autoReadHint": "Bir kart 10 saniye görünür kalırsa okundu olarak işaretlenir. Kapatabilirsiniz.",
+    "density": "Yoğunluk",
+    "densityGroup": "Aralık yoğunluğu",
+    "densityCompact": "Sıkı",
+    "densityBalanced": "Dengeli",
+    "densityComfortable": "Geniş",
+    "densityHint": "Yalnızca boşlukları değiştirir; yazı boyutu aynı kalır.",
+    "densityCompactHint": "Masaüstü listeleri için en yoğun görünüm.",
+    "densityBalancedHint": "Varsayılan masaüstü/tablet dengesi.",
+    "densityComfortableHint": "Mobilde okunaklı, ferah aralıklar.",
+    "densityAuto": "Otomatik",
+    "densityResetAuto": "Otomatiğe dön",
+    "fontSizeDecrease": "Yazıyı küçült",
+    "fontSizeIncrease": "Yazıyı büyüt",
+    "fontSizeLevel": "Kademe {level} / {total}",
+    "densityAutoHint": "Ekran genişliğine göre: mobil Geniş, masaüstü Dengeli."
+  },
+  "explore": {
+    "subtitle": "Kategorilere göz atın, gündemi keşfedin.",
+    "categories": "Kategoriler",
+    "stories": "haber",
+    "latest": "Son eklenenler"
+  },
+  "portraits": {
+    "title": "Portreler",
+    "subtitle": "Kamuya mal olmuş kişiler, kurumlar ve olaylar; birden fazla bağımsız kaynaktan doğrulanmış dosyalarla.",
+    "methodologyShort": "Portreler yapay zekâ desteğiyle, kamuya açık kaynaklardan derlenir; her iddia kaynağıyla birlikte gösterilir. Hata içerebilir, bağlayıcı değildir.",
+    "card": {
+      "badge": "Portre",
+      "verified": "{count} kaynaktan doğrulandı",
+      "readingTime": "{minutes} dk okuma",
+      "attributed": "Kaynak: {source}",
+      "originalStory": "Orijinal hikâye (kantan.news)",
+      "person": "Kişi",
+      "organization": "Kurum",
+      "event": "Olay",
+      "listeningTime": "{minutes} dk dinleme",
+      "readLabel": "Okundu"
+    },
+    "filters": {
+      "search": "Portrelerde ara",
+      "category": "Kategori",
+      "type": "Konu",
+      "range": "Tarih",
+      "sort": "Sıralama",
+      "all": "Tümü",
+      "person": "Kişi",
+      "organization": "Kurum",
+      "event": "Olay",
+      "week": "Bu hafta",
+      "month": "Bu ay",
+      "newest": "Yeni → eski",
+      "mostRead": "En çok okunan",
+      "clear": "Filtreleri temizle",
+      "resultCount": "{count} portre",
+      "empty": "Portre bulunamadı",
+      "emptyHint": "Farklı bir kategori veya tarih aralığı deneyin."
+    },
+    "detail": {
+      "published": "Yayın",
+      "updated": "Güncelleme",
+      "views": "Okunma (toplu)",
+      "oneSentence": "Tek cümlede",
+      "whyNow": "Neden gündemde",
+      "timeline": "Kronoloji",
+      "keyFacts": "Bilinmesi gerekenler",
+      "quote": "Alıntı",
+      "faq": "Sık sorulanlar",
+      "sources": "Kaynaklar",
+      "methodology": "Bu portre nasıl hazırlandı",
+      "methodologyBody": "Bu dosya {count} kamuya açık kaynaktan derlendi; kaynakların erişim ve doğrulama tarihi {date}. Her madde kaynak numarasıyla işaretlenmiştir. Kaynak metni kopyalanmaz, kendi cümlelerimizle yeniden yazılır.",
+      "conflict": "Kaynaklar çelişiyor",
+      "relatedNews": "İlgili haberler",
+      "otherPortraits": "Aynı kategorideki diğer portreler",
+      "aiWarning": "Bu içerik yapay zeka desteğiyle, listelenen kamuya açık kaynaklardan derlenmiştir. Hata içerebilir; bağlayıcı değildir.",
+      "source": "Kaynak",
+      "accessed": "Erişim",
+      "credit": "Fotoğraf",
+      "openSource": "kaynağı yeni sekmede aç",
+      "backToList": "Tüm portreler",
+      "kinds": {
+        "official": "Resmî",
+        "news": "Haber",
+        "academic": "Akademik",
+        "data": "Veri",
+        "reference": "Başvuru"
+      }
+    },
+    "homeStrip": {
+      "title": "Son portreler",
+      "subtitle": "Kaynaklı, doğrulanmış dosyalar",
+      "all": "Tüm portreler"
+    },
+    "tabLabel": "Portreler",
+    "admin": {
+      "title": "Portre Üretimi",
+      "subtitle": "kantan.news akışını izleyip puanlar; eşiği geçen konularda kaynaklı portre üretir.",
+      "run": "Hattı çalıştır",
+      "dryRun": "Sadece puanla",
+      "running": "Çalışıyor…",
+      "refresh": "Yenile",
+      "runs": "Çalıştırmalar",
+      "candidates": "Adaylar",
+      "portraits": "Portreler",
+      "score": "Puan",
+      "reason": "Gerekçe",
+      "status": "Durum",
+      "publish": "Yayınla",
+      "review": "İncelemeye al",
+      "remove": "Kaldır",
+      "restore": "Geri getir",
+      "open": "Aç",
+      "noData": "Kayıt yok.",
+      "feedStrategy": "Feed stratejisi",
+      "dryResults": "Puanlama sonuçları",
+      "lastRuns": "Son çalıştırmalar",
+      "sourcesCount": "Kaynak",
+      "error": "Hata",
+      "note": "Not",
+      "stats": "Durum dağılımı"
+    },
+    "feedTitle": "Portreler",
+    "feedSubtitle": "Kamuya mal olmuş kişiler, kurumlar ve olaylar; en az üç bağımsız kaynaktan doğrulanmış dosyalarla.",
+    "feedNewsLink": "Haberler",
+    "feed": {
+      "empty": "Portre bulunamadı",
+      "emptyHint": "Farklı bir kategori veya tarih aralığı deneyin.",
+      "loading": "Yükleniyor…",
+      "end": "Tüm portreler gösterildi",
+      "retry": "Tekrar dene",
+      "error": "Portreler yüklenemedi."
+    },
+    "coverCredit": "Kapak: yapay zekâ ile üretilmiş özgün illüstrasyon",
+    "lastPortrait": "Son portre: {date}",
+    "scheduleNotice": "Yeni portreler her gün 08:30 ve 19:00'da yayınlanır."
+  },
+  "nav": {
+    "news": "Haberler"
+  },
+  "content": {
+    "portrait": "Portre",
+    "news": "Haber",
+    "subjectPerson": "Kişi",
+    "subjectOrganization": "Kurum",
+    "subjectEvent": "Olay",
+    "verified": "{count} kaynaktan doğrulandı",
+    "readingTime": "{minutes} dk okuma",
+    "listeningTime": "{minutes} dk dinleme",
+    "updated": "Güncelleme",
+    "oneSentence": "Tek cümlede",
+    "whyNow": "Neden gündemde",
+    "timeline": "Kronoloji",
+    "keyFacts": "Bilinmesi gerekenler",
+    "details": "Ayrıntılar",
+    "quote": "Alıntı",
+    "faq": "Sık sorulanlar",
+    "sources": "Kaynaklar",
+    "methodology": "Bu içerik nasıl hazırlandı",
+    "methodologyBody": "Bu dosya {count} kamuya açık kaynaktan derlendi; erişim ve doğrulama tarihi {date}. Her madde kaynak numarasıyla işaretlenmiştir. Kaynak metni kopyalanmaz, kendi cümlelerimizle yeniden yazılır.",
+    "conflict": "Kaynaklar çelişiyor",
+    "related": "İlgili içerikler",
+    "aiWarning": "Bu içerik yapay zeka desteğiyle, listelenen kamuya açık kaynaklardan derlenmiştir. Hata içerebilir; bağlayıcı değildir.",
+    "source": "Kaynak",
+    "accessed": "Erişim",
+    "coverCredit": "Görsel",
+    "openSource": "kaynağı yeni sekmede aç",
+    "backToFeed": "Akışa dön",
+    "listenSummary": "Sesli özeti dinle",
+    "listenFull": "Tüm metni dinle",
+    "listenPlaying": "Dinleniyor…",
+    "listenPaused": "Devam et",
+    "speechUnsupported": "Tarayıcınız sesli okumayı desteklemiyor. Güncel bir tarayıcı deneyin.",
+    "speechNoVoice": "Cihazınızda Türkçe ses bulunamadı. Sistem ayarlarından Türkçe konuşma sesi ekleyin.",
+    "speechDeviceOnly": "Sesli okuma cihazınızda yapılır; sesiniz veya metin talepleriniz hiçbir sunucuya gönderilmez.",
+    "resumeTitle": "Kaldığın yerden devam et",
+    "resumeBody": "Dinlemeye bıraktığın cümleden sürdürebilirsin.",
+    "dismiss": "Kapat"
+  },
+  "media": {
+    "speechTitle": "Sesli okuma",
+    "audioTitle": "Oynatıcı",
+    "play": "Oynat",
+    "pause": "Duraklat",
+    "back15": "15 saniye geri",
+    "forward30": "30 saniye ileri",
+    "speed": "Oynatma hızı",
+    "voice": "Ses",
+    "noVoice": "Türkçe ses bulunamadı.",
+    "sleep": "Uyku",
+    "sleepOff": "Kapalı",
+    "sleepEnd": "Bölüm sonunda dur",
+    "transcript": "Metin",
+    "collapse": "Küçült",
+    "expand": "Büyüt",
+    "close": "Kapat",
+    "confirmTitle": "Okuma değiştirilsin mi?",
+    "confirmBody": "Şu anda başka bir içerik okunuyor. Yeni içeriğe geçmek için mevcut okuma durdurulacak.",
+    "confirmYes": "Yeni içeriği oku",
+    "confirmNo": "Vazgeç",
+    "resumeTitle": "Kaldığın yerden devam et",
+    "resumeBody": "Dinlemeye bıraktığın yerden sürdürebilirsin.",
+    "resume": "Devam et",
+    "dismiss": "Kapat",
+    "deviceOnly": "Sesli okuma cihazınızda yapılır; hiçbir veri sunucuya gönderilmez.",
+    "unsupported": "Tarayıcınız sesli okumayı desteklemiyor.",
+    "queue": "Sıra",
+    "queueEmpty": "Sıra boş",
+    "remove": "Sıradan çıkar",
+    "remaining": "Kalan"
+  },
+  "home": {
+    "todaySummary": "Günün özeti",
+    "nowImportant": "Şu an önemli",
+    "latestPortraits": "Son portreler",
+    "latestNews": "Son haberler",
+    "loadMore": "Daha fazla yükle",
+    "loading": "Yükleniyor…",
+    "allPortraits": "Tüm portreler",
+    "allNews": "Tüm haberler",
+    "empty": "Henüz içerik yok.",
+    "summaryCount": "{count} madde"
+  },
+  "categoriesPage": {
+    "title": "Kategoriler",
+    "subtitle": "Tüm haber ve portreleri kategoriye göre gezin.",
+    "count": "{count} içerik",
+    "empty": "Bu kategoride henüz içerik yok."
+  },
+  "searchPage": {
+    "title": "Ara",
+    "subtitle": "Haber ve portrelerde başlık, özet ve kaynak içinde arama.",
+    "placeholder": "Ne arıyorsunuz?",
+    "results": "{count} sonuç",
+    "noResults": "Sonuç bulunamadı",
+    "noResultsHint": "Yazımı kontrol edin veya farklı bir kategori deneyin.",
+    "tryCategories": "Önerilen kategoriler",
+    "clear": "Aramayı temizle",
+    "filters": "Filtreler",
+    "loading": "Aranıyor…"
+  },
+  "navMain": {
+    "feed": "Akış",
+    "categories": "Kategoriler",
+    "portraits": "Portreler",
+    "news": "Haberler",
+    "podcast": "Podcast",
+    "blog": "Blog",
+    "search": "Ara",
+    "saved": "Kaydedilenler",
+    "savedShort": "Kaydet"
+  },
+  "citations": {
+    "related": "İlgili haber",
+    "goTo": "Habere git",
+    "close": "Kapat",
+    "verified": "{count} kaynaktan doğrulandı",
+    "readingTime": "{minutes} dk okuma",
+    "listeningTime": "{minutes} dk dinleme",
+    "published": "Yayın",
+    "updated": "Güncelleme"
+  },
+  "shell": {
+    "searchPlaceholder": "Haber, konu veya kaynak ara…",
+    "all": "Tümü",
+    "saved": "Kaydedilenler",
+    "debate": "Münazara",
+    "language": "Dil",
+    "transparency": "Şeffaflık",
+    "transparencyBody": "Bu akış yalnızca kamuya açık kaynaklardan derlenir. Sayfa üçüncü taraf izleme kodu içermez ve çerez kullanmaz.",
+    "summaryStrip": "Günün özeti",
+    "summaryStripHint": "5 madde · dokunarak aç/kapat",
+    "nextPage": "Sonraki sayfa",
+    "loadingNext": "Sonraki haberler yükleniyor…",
+    "loaded": "{count} yeni içerik yüklendi.",
+    "noJsHint": "JavaScript kapalı: sayfalar arasında bağlantıyla ilerleyebilirsiniz.",
+    "feedEnd": "Şimdilik bu kadar. Yeni içerikler geldikçe akış kendiliğinden uzar.",
+    "debateLevel": "Seviye",
+    "debateAll": "Tümü",
+    "debateLise": "Lise",
+    "debateUniversite": "Üniversite",
+    "debateArchive": "Arşiv",
+    "debateFormat": "Format",
+    "debateReading": "{minutes} dk okuma",
+    "debateListening": "{minutes} dk dinleme",
+    "debateVerified": "{count} kaynaktan doğrulandı",
+    "debateMotion": "Bu meclis",
+    "debateGovernment": "Hükümet",
+    "debateOpposition": "Muhalefet",
+    "debateBurdens": "İspat yükü",
+    "debateClash": "Kilit çatışma noktaları",
+    "debateWhyNow": "Neden gündemde",
+    "debateSides": "Taraflar",
+    "debateFlow": "Münazara akışı",
+    "debateEvidence": "Kanıt havuzu",
+    "debateRebuttal": "Karşı argümanı çürütme",
+    "debateFaq": "Sık sorulanlar",
+    "debateGlossary": "Terimler",
+    "debateSupports": "Desteklediği argüman",
+    "debateSources": "Kaynaklar",
+    "debateConflict": "Kaynaklar çelişiyor",
+    "debateStart": "Başlat",
+    "debatePause": "Duraklat",
+    "debateResume": "Devam et",
+    "debateReset": "Sıfırla",
+    "debateNext": "Sonraki aşama",
+    "debatePrev": "Önceki aşama",
+    "debateDone": "Tamamlandı",
+    "debateTimeUp": "Süre doldu",
+    "debateRequired": "Zorunlu alanlar",
+    "debateClaim": "İddia",
+    "debateWarrant": "Gerekçe",
+    "debateEvidenceField": "Kanıt (kaynaklı)",
+    "debateImpact": "Etki",
+    "debateSpeaker": "Kim konuşuyor",
+    "debateTask": "Ne yapmalı",
+    "debateOutput": "İstenen çıktı",
+    "debateTimer": "Aşama süresi",
+    "debateNoSubmission": "Bu dosyada form yoktur; kullanıcı argümanı toplanmaz.",
+    "debateCardCta": "Dosyayı aç",
+    "debatePrevCard": "Önceki münazara",
+    "debateNextCard": "Sonraki münazara",
+    "debateCarousel": "Münazaralar",
+    "debateEmpty": "Bu filtrede münazara yok.",
+    "debateArchiveHint": "Seviye, kategori ve sıralamaya göre filtreleyin.",
+    "debatePublished": "Yayın",
+    "debateUpdated": "Güncelleme",
+    "debateSourceCount": "kaynak",
+    "debateLevelNote": "Seviye notu"
+  },
+  "sections": {
+    "title": "Bölümler",
+    "news": "Haberler",
+    "newsHint": "Tüm haber akışı",
+    "portraits": "Portreler",
+    "portraitsHint": "Kişi, kurum ve olay dosyaları",
+    "podcast": "Podcast",
+    "podcastHint": "Haber bültenleri ve Potkes",
+    "blog": "Blog",
+    "blogHint": "Editoryal yazılar",
+    "assistant": "AI Asistan",
+    "assistantHint": "Haberle konuş",
+    "bookmarks": "Yer İmleri",
+    "bookmarksHint": "Kaydettiklerin",
+    "achievements": "Başarılar",
+    "achievementsHint": "Okuma serisi ve rozetler",
+    "profile": "Profil",
+    "profileHint": "Tercihler ve erişilebilirlik",
+    "all": "Tümü"
+  }
+}

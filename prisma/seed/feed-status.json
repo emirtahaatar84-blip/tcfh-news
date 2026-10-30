@@ -1,0 +1,228 @@
+{
+  "checkedAt": "2026-10-26T15:08:30.434Z",
+  "total": 10,
+  "ok": 5,
+  "failed": 5,
+  "results": [
+    {
+      "name": "The Conversation",
+      "url": "https://theconversation.com/global/articles.atom",
+      "status": "ok",
+      "httpStatus": 200,
+      "contentType": "application/atom+xml; charset=utf-8",
+      "bytes": 634053,
+      "itemCount": 49,
+      "newestItemAt": "2026-10-26T03:55:20.000Z",
+      "ageDays": 0,
+      "durationMs": 537,
+      "note": "Doğrulandı",
+      "sample": [
+        {
+          "title": "Lula wins a ‘miracle’ election in Brazil. Now comes the hard part: putting the country back on the right track",
+          "link": "https://theconversation.com/lula-wins-a-miracle-election-in-brazil-now-comes-the-hard-part-putting-the-country-back-on-the-right-track-295157",
+          "date": "2026-10-26T03:55:20Z",
+          "category": ""
+        },
+        {
+          "title": "Unlocking the secrets of the ‘Dragon Man’ skull – and what it reveals about human evolution",
+          "link": "https://theconversation.com/unlocking-the-secrets-of-the-dragon-man-skull-and-what-it-reveals-about-human-evolution-291321",
+          "date": "2026-10-23T09:03:28Z",
+          "category": ""
+        }
+      ],
+      "mapping": {
+        "title": "title",
+        "link": "__link_href__",
+        "date": "pubDate|published|updated",
+        "summary": "description|summary|content",
+        "category": "category"
+      }
+    },
+    {
+      "name": "Brookings",
+      "url": "https://www.brookings.edu/feed/",
+      "status": "failed",
+      "reason": "Geçerli XML/Atom değil",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 175994,
+      "itemCount": 0,
+      "durationMs": 543
+    },
+    {
+      "name": "DW English",
+      "url": "https://rss.dw.com/rdf/rss-en-all",
+      "status": "ok",
+      "httpStatus": 200,
+      "contentType": "text/xml; charset=UTF-8",
+      "bytes": 121591,
+      "itemCount": 129,
+      "newestItemAt": "2026-10-26T14:58:00.000Z",
+      "ageDays": 0,
+      "durationMs": 502,
+      "note": "Doğrulandı",
+      "sample": [
+        {
+          "title": "Why Ukraine may be involved in Mali's conflict",
+          "link": "https://www.dw.com/en/why-ukraine-may-be-involved-in-mali-s-conflict/a-79743423?maca=en-rss-en-all-1573-rdf",
+          "date": "2026-10-26T14:58:00Z",
+          "category": "World"
+        },
+        {
+          "title": "France: Macron vows 'strong measures' to combat protests",
+          "link": "https://www.dw.com/en/france-macron-vows-strong-measures-to-combat-protests/a-79764224?maca=en-rss-en-all-1573-rdf",
+          "date": "2026-10-26T13:52:00Z",
+          "category": "News"
+        }
+      ],
+      "mapping": {
+        "title": "title",
+        "link": "__link_href__",
+        "date": "pubDate|published|updated",
+        "summary": "description|summary|content",
+        "category": "category"
+      }
+    },
+    {
+      "name": "Debating Matters",
+      "url": "https://www.debatingmatters.com/feed/",
+      "status": "failed",
+      "reason": "Son güncelleme 129 gün önce",
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "bytes": 12280,
+      "itemCount": 0,
+      "durationMs": 1804
+    },
+    {
+      "name": "Intelligence Squared",
+      "url": "https://www.intelligencesquared.com/feed/",
+      "status": "failed",
+      "reason": "Yalnızca 0 öğe (en az 5 gerekli)",
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "bytes": 851,
+      "itemCount": 0,
+      "durationMs": 1212
+    },
+    {
+      "name": "Carnegie Council",
+      "url": "https://www.carnegiecouncil.org/rss/articles",
+      "status": "failed",
+      "reason": "HTTP 404",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 80338,
+      "itemCount": 0,
+      "durationMs": 670
+    },
+    {
+      "name": "Pew Research",
+      "url": "https://www.pewresearch.org/feed/",
+      "status": "ok",
+      "httpStatus": 200,
+      "contentType": "application/rss+xml; charset=UTF-8",
+      "bytes": 91462,
+      "itemCount": 100,
+      "newestItemAt": "2026-10-26T14:23:08.000Z",
+      "ageDays": 0,
+      "durationMs": 386,
+      "note": "Doğrulandı",
+      "sample": [
+        {
+          "title": "Future of World Religions",
+          "link": "https://www.pewresearch.org/collections/future-of-world-religions/",
+          "date": "Mon, 26 Oct 2026 14:23:08 +0000",
+          "category": ""
+        },
+        {
+          "title": "Why Is Election Day on a Tuesday in the U.S., and How Many Other Countries Have Weekday Elections?",
+          "link": "https://www.pewresearch.org/short-reads/2026/10/26/why-is-election-day-on-a-tuesday-in-the-us-and-how-many-other-countries-have-weekday-elections/",
+          "date": "Mon, 26 Oct 2026 13:52:20 +0000",
+          "category": "Government"
+        }
+      ],
+      "mapping": {
+        "title": "title",
+        "link": "__link_href__",
+        "date": "pubDate|published|updated",
+        "summary": "description|summary|content",
+        "category": "category"
+      }
+    },
+    {
+      "name": "BBC Türkçe",
+      "url": "https://feeds.bbci.co.uk/turkce/rss.xml",
+      "status": "ok",
+      "httpStatus": 200,
+      "contentType": "text/xml; charset=utf-8",
+      "bytes": 14655,
+      "itemCount": 16,
+      "newestItemAt": "2026-10-26T14:09:46.000Z",
+      "ageDays": 0,
+      "durationMs": 306,
+      "note": "Doğrulandı",
+      "sample": [
+        {
+          "title": "Mısır meclisi Suudi Arabistan'a destek için asker gönderme talebini onayladı",
+          "link": "https://www.bbc.com/turkce/articles/cmkgk32knr2xo?at_medium=RSS&at_campaign=rss",
+          "date": "Mon, 26 Oct 2026 14:09:46 GMT",
+          "category": ""
+        },
+        {
+          "title": "İsrail seçimlerine hangi tartışmalar damga vuruyor, seçmen ne diyor?",
+          "link": "https://www.bbc.com/turkce/articles/cmly0zyp0p5lo?at_medium=RSS&at_campaign=rss",
+          "date": "Mon, 26 Oct 2026 13:17:29 GMT",
+          "category": ""
+        }
+      ],
+      "mapping": {
+        "title": "title",
+        "link": "__link_href__",
+        "date": "pubDate|published|updated",
+        "summary": "description|summary|content",
+        "category": "category"
+      }
+    },
+    {
+      "name": "Anadolu Ajansı",
+      "url": "https://www.aa.com.tr/tr/rss/default?cat=guncel",
+      "status": "ok",
+      "httpStatus": 200,
+      "contentType": "application/xml",
+      "bytes": 20562,
+      "itemCount": 28,
+      "newestItemAt": "2026-10-26T14:45:18.000Z",
+      "ageDays": 0,
+      "durationMs": 1553,
+      "note": "Doğrulandı",
+      "sample": [
+        {
+          "title": "Meteorolojiden İstanbul'un da aralarında bulunduğu 11 il için sarı ve turuncu kodlu uyarı",
+          "link": "https://www.aa.com.tr/tr/gundem/meteorolojiden-istanbulun-da-aralarinda-bulundugu-11-il-icin-sari-ve-turuncu-kodlu-uyari/4101440",
+          "date": "Mon, 26 Oct 2026 17:45:18 +0300",
+          "category": ""
+        },
+        {
+          "title": "Türkiye-AB Karma Parlamento Komisyonu 82. Toplantısı yapıldı",
+          "link": "https://www.aa.com.tr/tr/dunya/turkiye-ab-karma-parlamento-komisyonu-82-toplantisi-yapildi/4101437",
+          "date": "Mon, 26 Oct 2026 17:44:36 +0300",
+          "category": ""
+        }
+      ],
+      "mapping": {
+        "title": "title",
+        "link": "__link_href__",
+        "date": "pubDate|published|updated",
+        "summary": "description|summary|content",
+        "category": "category"
+      }
+    },
+    {
+      "name": "TÜBİTAK",
+      "url": "https://www.tubitak.gov.tr/tr/rss",
+      "status": "failed",
+      "reason": "HTTP 404",
+      "contentType": "text/html; charset=UTF-8",
+      "bytes": 60614,
+      "itemCount": 0,
+      "durationMs": 548
+    }
+  ]
+}

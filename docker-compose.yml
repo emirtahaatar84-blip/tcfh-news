@@ -1,0 +1,81 @@
+services:
+  news:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: tcfh-news:latest
+    container_name: tcfh-news
+    restart: unless-stopped
+    init: true
+    ports:
+      # Doğrudan IP:3000 erişimi için 0.0.0.0.
+      # Nginx / aaPanel reverse proxy arkasındaysanız .env içinde
+      # BIND_HOST="127.0.0.1" yapın.
+      - "${BIND_HOST:-0.0.0.0}:${APP_PORT:-3000}:3000"
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: "file:/app/prisma/data/news.db?connection_limit=1"
+      ADMIN_USER: "${ADMIN_USER:-admin}"
+      ADMIN_PASSWORD: "${ADMIN_PASSWORD:?ADMIN_PASSWORD must be set in .env}"
+      DEFAULT_LOCALE: "${DEFAULT_LOCALE:-tr}"
+      SITE_URL: "${SITE_URL:-https://news.emirtahaatar.com.tr}"
+      ENABLE_INTERNAL_CRON: "${ENABLE_INTERNAL_CRON:-true}"
+      CRON_SECRET_KEY: "${CRON_SECRET_KEY:-}"
+      # ── Google OAuth (Auth.js / NextAuth v5) ────────────────────────────
+      # Boş bırakılırsa site anonim çalışır; giriş düğmesi devre dışı kalır.
+      GOOGLE_CLIENT_ID: "${GOOGLE_CLIENT_ID:-}"
+      GOOGLE_CLIENT_SECRET: "${GOOGLE_CLIENT_SECRET:-}"
+      AUTH_SECRET: "${AUTH_SECRET:-}"
+      AUTH_URL: "${AUTH_URL:-https://emirtahaatar.com.tr}"
+      # ── Portre hattı (İŞ 1) ─────────────────────────────────────────────
+      # Sabit saatler lib/hq/config.ts → SCHEDULE (08:30 / 19:00 / 00:15 TSİ).
+      # Gölge mod: AUTO_PUBLISH=true + SHADOW_START tarihi ile kademeli açılış.
+      PORTRAIT_FEED_URL: "${PORTRAIT_FEED_URL:-https://kantan.news/feed}"
+      PORTRAIT_SITEMAP_URL: "${PORTRAIT_SITEMAP_URL:-https://kantan.news/sitemap-news-tr.xml}"
+      PORTRAIT_WINDOW_HOURS: "${PORTRAIT_WINDOW_HOURS:-48}"
+      PORTRAIT_PER_DAY: "${PORTRAIT_PER_DAY:-2}"
+      PORTRAIT_MAX_PER_RUN: "${PORTRAIT_MAX_PER_RUN:-2}"
+      PORTRAIT_AUTO_PUBLISH: "${PORTRAIT_AUTO_PUBLISH:-false}"
+      PORTRAIT_SHADOW_START: "${PORTRAIT_SHADOW_START:-}"
+      PORTRAIT_SHADOW_DAYS: "${PORTRAIT_SHADOW_DAYS:-14}"
+      PORTRAIT_USE_GDELT: "${PORTRAIT_USE_GDELT:-true}"
+      ENABLE_PORTRAIT_CRON: "${ENABLE_PORTRAIT_CRON:-true}"
+      ENABLE_CITATION_AUDIT: "${ENABLE_CITATION_AUDIT:-true}"
+      # ── Web Push (PWA bildirimleri) ──────────────────────────────────────
+      # Anahtar üretimi: npx web-push generate-vapid-keys
+      VAPID_PUBLIC_KEY: "${VAPID_PUBLIC_KEY:-}"
+      VAPID_PRIVATE_KEY: "${VAPID_PRIVATE_KEY:-}"
+      VAPID_SUBJECT: "${VAPID_SUBJECT:-mailto:admin@example.com}"
+      # ── Sesli Özet (TTS) ─────────────────────────────────────────────────
+      # Model, sağlayıcının /v1/audio/speech ucundaki TTS motorudur.
+      TTS_MODEL: "${TTS_MODEL:-voxcpm2}"
+      # ── Telifsiz AI Görsel (lib/imagegen) ─────────────────────────────────
+      # Pollinations ana sağlayıcıdır (anahtar gerekmez); Cloudflare Workers
+      # AI yedeği bu kimliklerle çalışır.
+      CF_AI_ACCOUNT_ID: "${CF_AI_ACCOUNT_ID:-}"
+      CF_AI_TOKEN: "${CF_AI_TOKEN:-}"
+    volumes:
+      # Persistent SQLite database. Survives rebuilds and container restarts.
+      - news_data:/app/prisma/data
+      # Telifsiz AI haber görselleri (JPEG) — kalıcı depolama.
+      - news_media:/app/media
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    stop_grace_period: 20s
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  news_data:
+    name: tcfh_news_data
+  news_media:
+    name: tcfh_news_media

@@ -1,0 +1,101 @@
+[
+  {
+    "viewport": "360",
+    "density": "comfortable",
+    "fontSize": "md",
+    "pageGutter": "16px",
+    "headerHeight": "57px",
+    "cardPadY": "24px",
+    "cardPadX": "20px",
+    "cardGap": "2rem",
+    "sectionGap": "4rem",
+    "h3": "17px",
+    "body": "15px",
+    "overflowX": false
+  },
+  {
+    "viewport": "390",
+    "density": "comfortable",
+    "fontSize": "md",
+    "pageGutter": "20px",
+    "headerHeight": "57px",
+    "cardPadY": "24px",
+    "cardPadX": "20px",
+    "cardGap": "2rem",
+    "sectionGap": "4rem",
+    "h3": "17px",
+    "body": "15px",
+    "overflowX": false
+  },
+  {
+    "viewport": "768",
+    "density": "balanced",
+    "fontSize": "md",
+    "pageGutter": "24px",
+    "headerHeight": "57px",
+    "cardPadY": "16px",
+    "cardPadX": "16px",
+    "cardGap": "1.5rem",
+    "sectionGap": "3rem",
+    "h3": "17px",
+    "body": "15px",
+    "overflowX": false
+  },
+  {
+    "viewport": "1180",
+    "density": "balanced",
+    "fontSize": "md",
+    "pageGutter": "48px",
+    "headerHeight": "57px",
+    "cardPadY": "16px",
+    "cardPadX": "16px",
+    "cardGap": "1.5rem",
+    "sectionGap": "3rem",
+    "h3": "18px",
+    "body": "15px",
+    "overflowX": false
+  },
+  {
+    "viewport": "1440",
+    "density": "balanced",
+    "fontSize": "md",
+    "pageGutter": "48px",
+    "headerHeight": "57px",
+    "cardPadY": "16px",
+    "cardPadX": "16px",
+    "cardGap": "1.5rem",
+    "sectionGap": "3rem",
+    "h3": "18px",
+    "body": "15px",
+    "overflowX": false
+  },
+  {
+    "viewport": "360-max-text-compact",
+    "density": "compact",
+    "h3": "19.72px",
+    "cardPadY": "12px",
+    "cardGap": "1rem",
+    "overflowX": false,
+    "clipped": false
+  },
+  {
+    "densitySwap": {
+      "before": "19.72px",
+      "after": "19.72px",
+      "gaps": [
+        {
+          "mode": "compact",
+          "gap": "1rem"
+        },
+        {
+          "mode": "balanced",
+          "gap": "1.5rem"
+        },
+        {
+          "mode": "comfortable",
+          "gap": "2rem"
+        }
+      ]
+    }
+  }
+]

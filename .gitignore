@@ -1,0 +1,41 @@
+# Bağımlılıklar
+node_modules/
+.pnp/
+.pnp.js
+
+# Build çıktıları
+.next/
+out/
+build/
+dist/
+
+# Ortam değişkenleri — ASLA commit edilmez
+.env
+.env.local
+.env.*.local
+.env.production
+
+# Veritabanı
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+prisma/data/
+!prisma/data/.gitkeep
+
+# Medya (üretilen görseller/sesler)
+media/portraits/*.jpg
+media/news/*.jpg
+media/**/*.mp3
+!media/**/.gitkeep
+
+# Test / araç çıktıları
+coverage/
+artifacts/visual/*.png
+tsconfig.tsbuildinfo
+
+# Editör / OS
+.DS_Store
+.idea/
+.vscode/
+*.log

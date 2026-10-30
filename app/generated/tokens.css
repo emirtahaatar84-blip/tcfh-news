@@ -1,0 +1,262 @@
+/* OTOMATİK ÜRETİLDİ — elle düzenlemeyin.
+ * Kaynak: lib/design/tokens.ts
+ * Üretim: node scripts/generate-tokens.mjs
+ */
+
+:root {
+  --type-scale: 1;
+  --space-0: 0rem;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+
+  --size-header: 3.5rem;
+  --size-bottom-nav: 3.5rem;
+  --size-touch: 2.75rem;
+  --size-target-gap: 0.5rem;
+  --bottom-nav-gap: 1.5rem;
+  --bottom-clearance: calc(var(--size-bottom-nav) + var(--bottom-nav-gap) + env(safe-area-inset-bottom, 0px));
+  --page-gutter-narrow: 1rem;
+  --page-gutter: 1.5rem;
+  --page-gutter-tablet: 1.5rem;
+  --page-gutter-wide: 3rem;
+  --page-pad: 1rem;
+  --space-after-header: 2rem;
+
+  /* Hareket ve odak (token) */
+  --motion-fast: 150ms;
+  --motion-ease: cubic-bezier(0.2, 0, 0.2, 1);
+  --focus-ring: #3b82f6;
+  --focus-ring-width: 0.125rem;
+
+  --type-h1-size: calc(1.75rem * var(--type-scale));
+  --type-h1-lh: 1.25;
+  --type-h1-weight: 600;
+  --fs-h1: var(--type-h1-size);
+  --lh-h1: var(--type-h1-lh);
+  --fw-h1: var(--type-h1-weight);
+  --type-h2-size: calc(1.25rem * var(--type-scale));
+  --type-h2-lh: 1.3;
+  --type-h2-weight: 600;
+  --fs-h2: var(--type-h2-size);
+  --lh-h2: var(--type-h2-lh);
+  --fw-h2: var(--type-h2-weight);
+  --type-h3-size: calc(1.0625rem * var(--type-scale));
+  --type-h3-lh: 1.35;
+  --type-h3-weight: 600;
+  --fs-h3: var(--type-h3-size);
+  --lh-h3: var(--type-h3-lh);
+  --fw-h3: var(--type-h3-weight);
+  --type-body-size: max(1rem, calc(1.0625rem * var(--type-scale)));
+  --type-body-lh: 1.55;
+  --type-body-weight: 400;
+  --fs-body: var(--type-body-size);
+  --lh-body: var(--type-body-lh);
+  --fw-body: var(--type-body-weight);
+  --type-lead-size: calc(0.9375rem * var(--type-scale));
+  --type-lead-lh: 1.5;
+  --type-lead-weight: 400;
+  --fs-lead: var(--type-lead-size);
+  --lh-lead: var(--type-lead-lh);
+  --fw-lead: var(--type-lead-weight);
+  --type-meta-size: calc(0.8125rem * var(--type-scale));
+  --type-meta-lh: 1.4;
+  --type-meta-weight: 400;
+  --fs-meta: var(--type-meta-size);
+  --lh-meta: var(--type-meta-lh);
+  --fw-meta: var(--type-meta-weight);
+  --type-label-size: calc(0.75rem * var(--type-scale));
+  --type-label-lh: 1.3;
+  --type-label-weight: 600;
+  --fs-label: var(--type-label-size);
+  --lh-label: var(--type-label-lh);
+  --fw-label: var(--type-label-weight);
+  --type-label-tracking: 0.02em;
+  --ls-label: 0.02em;
+
+  --text-step-sm: 1rem;
+  --text-step-md: 1.0625rem;
+  --text-step-lg: 1.1875rem;
+
+  --measure: 68ch;
+  --layout-max: 90rem;
+  --rail-left: 14.75rem;
+  --rail-right: 20rem;
+  --rail-tablet: 18.75rem;
+}
+
+/* JS yoksa: mobilde Geniş, >= 768 px Dengeli. */
+html:not([data-density]) {
+  --sp-card-y: 1.5rem;
+  --sp-card-x: 1.5rem;
+  --sp-card-gap: 2rem;
+  --sp-section-gap: 4rem;
+  --sp-title-body: 1rem;
+  --sp-title-spot: 0.5rem;
+  --sp-spot-meta: 0.75rem;
+  --sp-inline: 0.5rem;
+  --sp-top-gap: 3rem;
+  --sp-block-gap: 4rem;
+  --sp-column-gap: 3rem;
+  --sp-block-breath: 1rem;
+  --sp-bottom-nav-gap: 1.5rem;
+  --space-card-pad-y: 1.5rem;
+  --space-card-pad-x: 1.5rem;
+  --space-card-gap: 2rem;
+  --space-section-gap: 4rem;
+  --space-title-body: 1rem;
+  --space-title-spot: 0.5rem;
+  --space-spot-meta: 0.75rem;
+  --space-inline: 0.5rem;
+  --space-rail-gap: 3rem;
+  --space-section-head: 1rem;
+  --sp-top-gap: 3rem;
+  --sp-block-gap: 4rem;
+  --space-block-gap: 4rem;
+}
+
+@media (min-width: 390px) {
+  :root {
+    --page-pad: var(--page-gutter);
+  }
+}
+
+
+@media (min-width: 768px) {
+  html:not([data-density]) {
+  --sp-card-y: 1rem;
+  --sp-card-x: 1rem;
+  --sp-card-gap: 1.5rem;
+  --sp-section-gap: 3rem;
+  --sp-title-body: 0.75rem;
+  --sp-title-spot: 0.5rem;
+  --sp-spot-meta: 0.75rem;
+  --sp-inline: 0.5rem;
+  --sp-top-gap: 2rem;
+  --sp-block-gap: 3rem;
+  --sp-column-gap: 2rem;
+  --sp-block-breath: 0.75rem;
+  --sp-bottom-nav-gap: 1.5rem;
+  --space-card-pad-y: 1rem;
+  --space-card-pad-x: 1rem;
+  --space-card-gap: 1.5rem;
+  --space-section-gap: 3rem;
+  --space-title-body: 0.75rem;
+  --space-title-spot: 0.5rem;
+  --space-spot-meta: 0.75rem;
+  --space-inline: 0.5rem;
+  --space-rail-gap: 2rem;
+  --space-section-head: 0.75rem;
+  --sp-top-gap: 2rem;
+  --sp-block-gap: 3rem;
+  --space-block-gap: 3rem;
+  }
+}
+
+html[data-density="compact"] {
+  --sp-card-y: 0.75rem;
+  --sp-card-x: 0.75rem;
+  --sp-card-gap: 1rem;
+  --sp-section-gap: 2rem;
+  --sp-title-body: 0.5rem;
+  --sp-title-spot: 0.5rem;
+  --sp-spot-meta: 0.75rem;
+  --sp-inline: 0.5rem;
+  --sp-top-gap: 1.5rem;
+  --sp-block-gap: 2rem;
+  --sp-column-gap: 1.5rem;
+  --sp-block-breath: 0.5rem;
+  --sp-bottom-nav-gap: 1.5rem;
+  --space-card-pad-y: 0.75rem;
+  --space-card-pad-x: 0.75rem;
+  --space-card-gap: 1rem;
+  --space-section-gap: 2rem;
+  --space-title-body: 0.5rem;
+  --space-title-spot: 0.5rem;
+  --space-spot-meta: 0.75rem;
+  --space-inline: 0.5rem;
+  --space-rail-gap: 1.5rem;
+  --space-section-head: 0.5rem;
+  --sp-top-gap: 1.5rem;
+  --sp-block-gap: 2rem;
+  --space-block-gap: 2rem;
+}
+
+html[data-density="balanced"] {
+  --sp-card-y: 1rem;
+  --sp-card-x: 1rem;
+  --sp-card-gap: 1.5rem;
+  --sp-section-gap: 3rem;
+  --sp-title-body: 0.75rem;
+  --sp-title-spot: 0.5rem;
+  --sp-spot-meta: 0.75rem;
+  --sp-inline: 0.5rem;
+  --sp-top-gap: 2rem;
+  --sp-block-gap: 3rem;
+  --sp-column-gap: 2rem;
+  --sp-block-breath: 0.75rem;
+  --sp-bottom-nav-gap: 1.5rem;
+  --space-card-pad-y: 1rem;
+  --space-card-pad-x: 1rem;
+  --space-card-gap: 1.5rem;
+  --space-section-gap: 3rem;
+  --space-title-body: 0.75rem;
+  --space-title-spot: 0.5rem;
+  --space-spot-meta: 0.75rem;
+  --space-inline: 0.5rem;
+  --space-rail-gap: 2rem;
+  --space-section-head: 0.75rem;
+  --sp-top-gap: 2rem;
+  --sp-block-gap: 3rem;
+  --space-block-gap: 3rem;
+}
+
+html[data-density="comfortable"] {
+  --sp-card-y: 1.5rem;
+  --sp-card-x: 1.5rem;
+  --sp-card-gap: 2rem;
+  --sp-section-gap: 4rem;
+  --sp-title-body: 1rem;
+  --sp-title-spot: 0.5rem;
+  --sp-spot-meta: 0.75rem;
+  --sp-inline: 0.5rem;
+  --sp-top-gap: 3rem;
+  --sp-block-gap: 4rem;
+  --sp-column-gap: 3rem;
+  --sp-block-breath: 1rem;
+  --sp-bottom-nav-gap: 1.5rem;
+  --space-card-pad-y: 1.5rem;
+  --space-card-pad-x: 1.5rem;
+  --space-card-gap: 2rem;
+  --space-section-gap: 4rem;
+  --space-title-body: 1rem;
+  --space-title-spot: 0.5rem;
+  --space-spot-meta: 0.75rem;
+  --space-inline: 0.5rem;
+  --space-rail-gap: 3rem;
+  --space-section-head: 1rem;
+  --sp-top-gap: 3rem;
+  --sp-block-gap: 4rem;
+  --space-block-gap: 4rem;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --type-h1-size: calc(2.125rem * var(--type-scale));
+    --type-h2-size: calc(1.375rem * var(--type-scale));
+    --type-h3-size: calc(1.125rem * var(--type-scale));
+  }
+}
+
+@media (min-width: 1180px) {
+  :root {
+    --page-pad: var(--page-gutter-wide);
+  }
+}

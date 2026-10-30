@@ -1,0 +1,62 @@
+{
+  "name": "tcfh-news",
+  "version": "1.0.0",
+  "license": "AGPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emirtahaatar84-blip/tcfh-news.git"
+  },
+  "private": true,
+  "description": "AI-powered Turkish news aggregator: RSS clustering, LLM synthesis, sourced portraits, debates and podcast. Multi-provider AI (OpenAI, Anthropic, Gemini, DeepSeek, OpenRouter, Groq, Mistral, Ollama).",
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "prisma generate && next build",
+    "start": "next start",
+    "typecheck": "next typegen && tsc --noEmit",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:deploy": "prisma migrate deploy",
+    "db:studio": "prisma studio",
+    "test": "vitest run",
+    "portrait:sample": "node scripts/portrait-sample.mjs",
+    "portrait:fix-covers": "node scripts/fix-portrait-covers.mjs",
+    "backfill:slugs": "node scripts/backfill-slugs.mjs",
+    "debate:feeds": "node scripts/validate-debate-feeds.mjs",
+    "debate:seed": "node scripts/seed-debates.mjs",
+    "tokens:build": "node scripts/generate-tokens.mjs",
+    "tokens:check": "node scripts/check-tokens.mjs",
+    "spacing:audit": "node scripts/audit-spacing.mjs",
+    "predev": "node scripts/generate-tokens.mjs",
+    "prebuild": "node scripts/generate-tokens.mjs",
+    "spacing:normalize": "node scripts/normalize-spacing.mjs",
+    "visual:check": "node scripts/visual-check.mjs"
+  },
+  "dependencies": {
+    "@auth/prisma-adapter": "^2.11.3",
+    "@prisma/client": "5.22.0",
+    "@types/bcryptjs": "^2.4.6",
+    "bcryptjs": "^3.0.3",
+    "next": "16.4.2",
+    "next-auth": "^5.0.0-beta.32",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "rss-parser": "3.13.0",
+    "web-push": "^3.6.7",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "20.19.43",
+    "@types/web-push": "^3.6.4",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "autoprefixer": "10.4.21",
+    "postcss": "8.5.31",
+    "prisma": "5.22.0",
+    "tailwindcss": "3.4.19",
+    "typescript": "5.9.3",
+    "vitest": "^2.1.0"
+  }
+}

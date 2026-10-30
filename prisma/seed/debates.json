@@ -1,0 +1,410 @@
+[
+  {
+    "slug": "liselerde-yapay-zeka-odev-kullanimi",
+    "title": "Liselerde yapay zekâ ödevlerde serbest bırakılmalı mı?",
+    "level": "lise",
+    "category": "Yapay Zekâ",
+    "motionText": "Bu meclis, liselerde öğrencilerin ödevlerinde üretken yapay zekâ araçlarını serbestçe kullanmasını destekler.",
+    "motionType": "politika",
+    "motionScope": "tr",
+    "difficulty": 2,
+    "controversy": 4,
+    "infoNeed": 4,
+    "recencyDays": 3,
+    "readingMinutes": 8,
+    "musScore": 88,
+    "musBreakdown": {
+      "components": {
+        "controversy": 80,
+        "evidence": 80,
+        "recency": 100,
+        "scope": 100,
+        "levelFit": 80,
+        "originality": 100
+      },
+      "weights": {
+        "controversy": 0.3,
+        "evidence": 0.2,
+        "recency": 0.2,
+        "scope": 0.15,
+        "levelFit": 0.1,
+        "originality": 0.05
+      },
+      "levelFilterScore": 87
+    },
+    "musReason": "Tartışılabilirlik 4/5, 4/5 kanıt bulunabilirliği, 3 günlük, Türkiye'yi doğrudan etkiliyor, seviye uyumu 4/5, son 30 günde benzeri yok → 88 (otomatik taslak).",
+    "levelNote": "Lise formatı: 24 dakika, 6 aşama. Jüri gerekçeli kararı dahildir.",
+    "whyNow": [
+      {
+        "text": "UNESCO, üretken yapay zekânın eğitimde kullanımı için ülkelere ortak bir çerçeve öneriyor; ödevlerde kullanımın sınırı hâlâ çoğu ülkede belirsiz.",
+        "sourceIndex": 1
+      },
+      {
+        "text": "Rehberlik, aracın yasaklanması yerine şeffaf kurallarla düzenlenmesini ve öğretmenin süreci görmesini öneriyor.",
+        "sourceIndex": 2
+      },
+      {
+        "text": "Yayıncılık ve edebiyat alanında yapay zekâyla üretilen metinlerin kimin emeği sayılacağı tartışması, okullardaki ödev tartışmasının yetişkinlerdeki karşılığını gösteriyor.",
+        "sourceIndex": 3
+      }
+    ],
+    "governmentThesis": [
+      {
+        "text": "Yasak, aracı gizli kullanıma iter; şeffaf kullanım öğretmene öğrencinin gerçek katkısını görme imkânı verir.",
+        "sourceIndex": 1
+      },
+      {
+        "text": "Yapay zekâ bir araçtır; hesap makinesi gibi kuralla dâhil edildiğinde öğrenme sürecini bozmadan kullanılabilir.",
+        "sourceIndex": 2
+      },
+      {
+        "text": "Serbest ve kurallı kullanım, kaynak değerlendirme ve dijital okuryazarlık becerisini erken yaşta geliştirir.",
+        "sourceIndex": 1
+      }
+    ],
+    "oppositionThesis": [
+      {
+        "text": "Ödev, öğrencinin ne bildiğini ölçer; aracın serbestliği bu ölçümün geçerliliğini ortadan kaldırır.",
+        "sourceIndex": 3
+      },
+      {
+        "text": "Erişim eşitsizliği, ücretli araçlara ulaşan öğrenciyle ulaşmayan arasında yeni bir uçurum yaratır.",
+        "sourceIndex": 1
+      },
+      {
+        "text": "Kendi cümlesini kurma ve akıl yürütme becerisi, hazır metinle atlandığında kalıcı olarak zayıflar.",
+        "sourceIndex": 3
+      }
+    ],
+    "keyClash": [
+      {
+        "title": "Değerlendirme güvenilirliği",
+        "government": "Şeffaf kullanımda öğretmen süreci değerlendirebilir; ürün tek ölçüt değildir.",
+        "opposition": "Süreç takibi kalabalık sınıflarda uygulanamaz; ödev yine ürün üzerinden notlanır.",
+        "rebuttal": "Süreç kanıtı için üç dakikalık sözlü savunma eklenirse ürün tek başına ölçüt olmaktan çıkar."
+      },
+      {
+        "title": "Fırsat eşitliği",
+        "government": "Yasak eşitlik sağlamaz; eşitliği okulun sağladığı erişim ve kurallar sağlar.",
+        "opposition": "Serbest kullanım, ücretli araçlara erişimi olanı ödüllendirir.",
+        "rebuttal": "Okul içinde ortak araç erişimi tanınırsa ücretli araç avantajı büyük ölçüde dengelenir."
+      },
+      {
+        "title": "Beceri kaybı",
+        "government": "Araç, yazma ve düşünme becerisinin yerine değil, taslak ve geri bildirim aşamasında kullanılabilir.",
+        "opposition": "Kolay yol her zaman seçilir; taslak aşaması kısa sürede metnin tamamına yayılır.",
+        "rebuttal": "Aşamalı ödev tasarımı ve sınıf içi yazma süresi, kolay yolun tüm süreci ele geçirmesini engeller."
+      },
+      {
+        "title": "Akademik dürüstlük",
+        "government": "Kural ve atıf zorunluluğu, gizli kullanımdan daha denetlenebilir bir ortam yaratır.",
+        "opposition": "Kural ihlalini tespit etmek giderek zorlaşıyor; serbestlik denetimi fiilen imkânsız kılar.",
+        "rebuttal": "Denetim, kullanımın yasaklanmasına değil beyan edilmesine bağlanırsa tespit yükü azalır."
+      }
+    ],
+    "burdens": {
+      "government": [
+        "Kurallı kullanımın öğrenmeyi ölçmeyi imkânsız kılmadığını göstermek",
+        "Erişim eşitsizliğinin yasakla değil okul içi erişimle çözülebileceğini kanıtlamak",
+        "Dijital okuryazarlık kazanımının ölçülebilir olduğunu ortaya koymak"
+      ],
+      "opposition": [
+        "Serbest kullanımın değerlendirme geçerliliğini bozduğunu kanıtlamak",
+        "Yasağın uygulanabilir olduğunu ve gizli kullanımı azalttığını göstermek",
+        "Beceri kaybının telafi edilemez olduğunu örneklerle ortaya koymak"
+      ]
+    },
+    "glossary": [
+      {
+        "term": "Motion",
+        "definition": "Münazaranın tartıştığı tek cümlelik önerme."
+      },
+      {
+        "term": "Hükümet",
+        "definition": "Motion'ı savunan taraf."
+      },
+      {
+        "term": "Muhalefet",
+        "definition": "Motion'a karşı çıkan taraf."
+      },
+      {
+        "term": "İspat yükü",
+        "definition": "Bir tarafın iddiasını kanıtlamak için taşıdığı yükümlülük."
+      },
+      {
+        "term": "Kilit çatışma",
+        "definition": "Tarafların doğrudan karşı karşıya geldiği ve sonucu belirleyen tartışma noktası."
+      },
+      {
+        "term": "Üretken yapay zekâ",
+        "definition": "Metin, görsel veya ses üretebilen, büyük veriyle eğitilmiş model."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Bu münazara hangi seviye için hazırlandı?",
+        "answer": "Lise seviyesi için hazırlandı; 24 dakikalık 6 aşamalı format ve jüri kararı kullanılır."
+      },
+      {
+        "question": "Hükümet ve muhalefet ne demek?",
+        "answer": "Hükümet konuyu savunan, muhalefet ise karşı çıkan taraftır; gerçek bir hükümetle ilgisi yoktur."
+      },
+      {
+        "question": "Kanıt olmadan argüman geçerli sayılır mı?",
+        "answer": "Hayır. Her aşamada iddia, gerekçe, kaynaklı kanıt ve etki alanlarının birlikte doldurulması gerekir."
+      },
+      {
+        "question": "Yapay zekâ kullanımı tamamen yasaklanmalı mı?",
+        "answer": "Bu dosya tek bir politikayı savunmaz; iki tarafın argümanlarını ve çatışma noktalarını sunar."
+      }
+    ],
+    "conflictNote": null,
+    "sources": [
+      {
+        "name": "UNESCO",
+        "title": "Guidance for generative AI in education and research",
+        "url": "https://www.unesco.org/en/articles/guidance-generative-ai-education-and-research",
+        "publishedAt": "2023-09-07",
+        "supports": "Eğitimde üretken yapay zekâ için ortak çerçeve ve şeffaflık önerisi",
+        "isPrimary": true
+      },
+      {
+        "name": "UNESCO",
+        "title": "Recommendation on the Ethics of Artificial Intelligence",
+        "url": "https://www.unesco.org/en/artificial-intelligence/recommendation-ethics",
+        "publishedAt": "2021-11-23",
+        "supports": "Yasak yerine etik ilkeler ve insan gözetimi yaklaşımı",
+        "isPrimary": false
+      },
+      {
+        "name": "DW",
+        "title": "Author or artificial intelligence? Literature in crisis",
+        "url": "https://www.dw.com/en/author-or-artificial-intelligence-literature-in-crisis/a-79618610",
+        "publishedAt": "2026-10-20",
+        "supports": "Yapay zekâyla üretilen metinlerde emek ve özgünlük tartışması",
+        "isPrimary": false
+      },
+      {
+        "name": "European Commission",
+        "title": "AI Act — regulatory framework",
+        "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
+        "publishedAt": "2024-08-01",
+        "supports": "Risk temelli düzenleme yaklaşımı ve şeffaflık yükümlülükleri",
+        "isPrimary": false
+      }
+    ]
+  },
+  {
+    "slug": "sosyal-medyada-yas-dogrulama-zorunlulugu",
+    "title": "Sosyal medyada yaş doğrulaması zorunlu olmalı mı?",
+    "level": "universite",
+    "category": "Teknoloji",
+    "motionText": "Bu meclis, sosyal medya platformlarında erişim için devlet tarafından denetlenen yaş doğrulamasının zorunlu hâle getirilmesini destekler.",
+    "motionType": "politika",
+    "motionScope": "tr",
+    "difficulty": 4,
+    "controversy": 4,
+    "infoNeed": 5,
+    "recencyDays": 12,
+    "readingMinutes": 10,
+    "musScore": 86,
+    "musBreakdown": {
+      "components": {
+        "controversy": 80,
+        "evidence": 100,
+        "recency": 60,
+        "scope": 100,
+        "levelFit": 100,
+        "originality": 100
+      },
+      "weights": {
+        "controversy": 0.3,
+        "evidence": 0.2,
+        "recency": 0.2,
+        "scope": 0.15,
+        "levelFit": 0.1,
+        "originality": 0.05
+      },
+      "levelFilterScore": 88
+    },
+    "musReason": "Tartışılabilirlik 4/5, 5/5 kanıt bulunabilirliği, 12 günlük, Türkiye'yi doğrudan etkiliyor, seviye uyumu 5/5, son 30 günde benzeri yok → 86 (otomatik taslak).",
+    "levelNote": "Üniversite formatı: 32 dakika, 7 aşama. Jüri kararı yoktur; kazanan ispat yükü üzerinden değerlendirilir.",
+    "whyNow": [
+      {
+        "text": "Birleşik Krallık'ın Çevrimiçi Güvenlik Yasası, platformlara çocukların zararlı içerikten korunması için etkili yaş güvencesi yükümlülüğü getiriyor.",
+        "sourceIndex": 1
+      },
+      {
+        "text": "Pew araştırmasına göre gençlerin büyük bölümü sosyal medyayı günlük olarak kullanıyor; yaş sınırı pratikte kolayca aşılabiliyor.",
+        "sourceIndex": 2
+      },
+      {
+        "text": "DW'nin aktardığı kampanyada öğrenciler, çevrimiçi içerikte okul üniformasının cinselleştirilmesine karşı platformlardan önlem talep ediyor.",
+        "sourceIndex": 3
+      },
+      {
+        "text": "Avrupa Birliği'nin Yapay Zekâ Tüzüğü, yüksek riskli kullanımlar için kimlik ve yaş doğrulama sistemlerine yükümlülükler getiriyor.",
+        "sourceIndex": 4
+      }
+    ],
+    "governmentThesis": [
+      {
+        "text": "Yaş doğrulaması, çocukların zararlı içerikten korunmasında ölçülebilir ve denetlenebilir bir eşik oluşturur.",
+        "sourceIndex": 1
+      },
+      {
+        "text": "Platformların kendi kendini denetlemesi yeterli olmadı; bağımsız denetim, yükümlülüğü uygulanabilir kılar.",
+        "sourceIndex": 1
+      },
+      {
+        "text": "Yaş doğrulaması, reklam ve algoritmik öneri sistemlerinin çocuklara erişimini sınırlayarak zararı kaynağında azaltır.",
+        "sourceIndex": 2
+      }
+    ],
+    "oppositionThesis": [
+      {
+        "text": "Merkezî yaş doğrulaması, tüm kullanıcılar için kimlik ve biyometrik veri toplama riskini büyütür.",
+        "sourceIndex": 4
+      },
+      {
+        "text": "Yaş sınırı, ebeveyn denetimini ve dijital okuryazarlığı ikame etmez; yasak çocukları daha az denetlenen mecralara iter.",
+        "sourceIndex": 2
+      },
+      {
+        "text": "Devlet denetimli kimlik altyapısı, ifade özgürlüğü ve anonim katılım üzerinde caydırıcı bir etki yaratır.",
+        "sourceIndex": 1
+      }
+    ],
+    "keyClash": [
+      {
+        "title": "Veri minimizasyonu",
+        "government": "Yaş doğrulaması, kimlik saklamadan yalnızca yaş aralığı kanıtıyla yapılabilir.",
+        "opposition": "Uygulamada platformlar kimlik ve yüz verisi saklıyor; teknik güvence hukuki güvence değildir.",
+        "rebuttal": "Üçüncü taraf, sıfır-bilgi kanıtı üreten ve kimliği saklamayan bir altyapı zorunlu kılınırsa veri minimizasyonu denetlenebilir."
+      },
+      {
+        "title": "Etkinlik",
+        "government": "Yaş sınırı, çocukların zararlı içeriğe erişimini ölçülebilir biçimde azaltır.",
+        "opposition": "Yaş sınırı, VPN ve sahte hesaplarla aşılır; yalnızca uyumlu kullanıcıyı cezalandırır.",
+        "rebuttal": "Uygulama oranı düşük olsa bile toplu erişimi azaltan bir eşik, hiç eşik olmamasından daha fazla zararı önler."
+      },
+      {
+        "title": "Mahremiyet",
+        "government": "Yaş doğrulaması, çocukların mahremiyetini korumak için yetişkinlerden sınırlı bir kanıt ister.",
+        "opposition": "Çocukları korumak için tüm nüfusun kimlik doğrulamasından geçmesi orantısız bir müdahaledir.",
+        "rebuttal": "Orantılılık, doğrulamanın kapsamı ve saklama süresiyle sınırlanabilir; amaçla araç arasındaki denge kanunla kurulabilir."
+      },
+      {
+        "title": "İfade özgürlüğü",
+        "government": "Yaş doğrulaması anonim okumayı engellemez; yalnızca hesap açmayı düzenler.",
+        "opposition": "Kimlik bağlantılı hesaplar, azınlık ve muhalif sesler üzerinde caydırıcı etki yapar.",
+        "rebuttal": "Okuma anonim kalır, yalnızca etkileşimli hesap açılışı doğrulanırsa caydırıcılık önemli ölçüde azalır."
+      },
+      {
+        "title": "Uygulama maliyeti",
+        "government": "Ölçek ekonomisi sayesinde doğrulama maliyeti platform başına düşük kalır.",
+        "opposition": "Küçük platformlar için uyum maliyeti pazara girişi engeller; sonuç tekelleşmedir.",
+        "rebuttal": "Küçük platformlar için ortak ve ücretsiz bir doğrulama altyapısı sağlanırsa giriş engeli azalır."
+      }
+    ],
+    "burdens": {
+      "government": [
+        "Merkezî doğrulamanın veri minimizasyonuyla uygulanabilir olduğunu göstermek",
+        "Yaş sınırının zararı ölçülebilir biçimde azalttığını kanıtlamak",
+        "Anonim okumanın korunduğunu ve caydırıcılığın sınırlı kaldığını ortaya koymak"
+      ],
+      "opposition": [
+        "Kimlik doğrulamasının kaçınılmaz olarak aşırı veri topladığını kanıtlamak",
+        "Yaş sınırının etkisiz olduğunu ve zararı başka mecralara kaydırdığını göstermek",
+        "Orantısızlığın temel haklar üzerindeki etkisini somutlaştırmak"
+      ]
+    },
+    "glossary": [
+      {
+        "term": "Yaş doğrulama",
+        "definition": "Bir kullanıcının belirli bir yaşın altında veya üstünde olduğunu kanıtlama süreci."
+      },
+      {
+        "term": "Yaş güvencesi",
+        "definition": "Platformun, kullanıcının yaşını makul güvenilirlikle tesis etme yükümlülüğü."
+      },
+      {
+        "term": "Sıfır-bilgi kanıtı",
+        "definition": "Bir bilginin kendisini açıklamadan yalnızca doğruluğunu kanıtlayan kriptografik yöntem."
+      },
+      {
+        "term": "Veri minimizasyonu",
+        "definition": "Amaca yetecek kadar veri toplama ilkesi."
+      },
+      {
+        "term": "Orantılılık",
+        "definition": "Müdahalenin ulaşılmak istenen amaçla ölçülü olması."
+      },
+      {
+        "term": "İspat yükü",
+        "definition": "Bir tarafın iddiasını kanıtlamak için taşıdığı yükümlülük."
+      },
+      {
+        "term": "Hükümet",
+        "definition": "Bu formatta motion'ı savunan taraf; gerçek hükümetle ilgisi yoktur."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Üniversite formatı lise formatından nasıl ayrılır?",
+        "answer": "Üniversite formatı 32 dakika ve 7 aşamadır; jüri kararı yoktur, kazanan ispat yükü üzerinden değerlendirilir."
+      },
+      {
+        "question": "Yaş doğrulaması kimlik saklamak zorunda mı?",
+        "answer": "Zorunlu değildir; sıfır-bilgi kanıtı gibi yöntemlerle yalnızca yaş aralığı kanıtlanabilir. Tartışma, bu güvencenin hukuken zorunlu kılınıp kılınmayacağı üzerinedir."
+      },
+      {
+        "question": "Bu dosya bir tarafı mı savunuyor?",
+        "answer": "Hayır. İki tarafın argümanları, ispat yükleri ve çürütmeleri birlikte sunulur."
+      },
+      {
+        "question": "Kaynaklar neden İngilizce?",
+        "answer": "Konunun birincil düzenleme ve araştırma metinleri İngilizce yayımlandığı için kaynaklar özgün dilinde verilmiştir."
+      },
+      {
+        "question": "Sesli okuma sunucuya veri gönderiyor mu?",
+        "answer": "Hayır. Seslendirme tarayıcının yerleşik konuşma motorunda yapılır; dış TTS servisi veya telemetri yoktur."
+      }
+    ],
+    "conflictNote": "Kaynaklar, yaş doğrulamasının çocukları korumada ne kadar etkili olduğu konusunda çelişiyor: düzenleyici metinler yükümlülüğü etkili bir koruma olarak sunarken, araştırmalar yaş sınırlarının kolayca aşılabildiğini gösteriyor. Bu dosya iki görüşü de ayrı ayrı aktarır.",
+    "sources": [
+      {
+        "name": "UK Government",
+        "title": "Online Safety Act: collection",
+        "url": "https://www.gov.uk/government/collections/online-safety-act",
+        "publishedAt": "2023-10-26",
+        "supports": "Platformlara çocuk güvenliği ve yaş güvencesi yükümlülüğü",
+        "isPrimary": true
+      },
+      {
+        "name": "Pew Research Center",
+        "title": "Teens, Social Media and Technology 2024",
+        "url": "https://www.pewresearch.org/internet/2024/12/12/teens-social-media-and-technology-2024/",
+        "publishedAt": "2024-12-12",
+        "supports": "Gençlerin sosyal medya kullanım yoğunluğu",
+        "isPrimary": true
+      },
+      {
+        "name": "DW",
+        "title": "UK students call for school uniforms to be banned in pornography",
+        "url": "https://www.dw.com/en/uk-students-call-for-school-uniforms-to-be-banned-in-pornography/a-79554324",
+        "publishedAt": "2026-10-18",
+        "supports": "Çevrimiçi zarara karşı öğrenci talepleri",
+        "isPrimary": false
+      },
+      {
+        "name": "European Commission",
+        "title": "AI Act — regulatory framework",
+        "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
+        "publishedAt": "2024-08-01",
+        "supports": "Yüksek riskli sistemlerde kimlik ve yaş doğrulama yükümlülükleri",
+        "isPrimary": false
+      }
+    ]
+  }
+]

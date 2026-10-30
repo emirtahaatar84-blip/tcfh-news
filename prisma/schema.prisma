@@ -1,0 +1,596 @@
+// Prisma schema for the Micro-News Synthesis Engine.
+// SQLite is used through a persistent Docker volume mounted at /app/prisma/data.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ─── NextAuth (Auth.js v5) models ─────────────────────────────────────────────
+
+model User {
+  id                String    @id @default(cuid())
+  name              String?
+  email             String?   @unique
+  emailVerified     DateTime?
+  image             String?
+  passwordHash      String?
+  role              String    @default("user") // owner | admin | editor | moderator | user
+  newsletterConsent Boolean   @default(false)
+  selectedVoice     String    @default("default")
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  accounts          Account[]
+  sessions          Session[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ─── Domain models ────────────────────────────────────────────────────────────
+
+/// Temporary staging buffer for raw incoming RSS items. Purged after 2 hours.
+model RawFeedItem {
+  id          String    @id @default(cuid())
+  hash        String    @unique
+  title       String
+  content     String
+  sourceName  String
+  sourceUrl   String
+  imageUrl    String?
+  fetchedAt   DateTime  @default(now())
+  processedAt DateTime?
+
+  @@index([fetchedAt])
+  @@index([processedAt])
+}
+
+/// Active RSS feeds scanned every hour.
+model RSSSource {
+  id        Int      @id @default(autoincrement())
+  name      String
+  url       String   @unique
+  category  String   @default("Gündem")
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  @@index([isActive])
+}
+
+/// A published, synthesized story. Every cluster (even a single-source
+/// one) becomes a story; quality is enforced by the pre-publish reviewer
+/// and the hourly gemma audit instead of a source-count threshold.
+model NewsItem {
+  id              String    @id @default(cuid())
+  /// URL slug'ı: /haber/<slug> (Türkçe karaktersiz, en fazla 6 kelime).
+  slug            String?   @unique
+  title           String
+  summary         String
+  detailedContent String?
+  category        String    @default("Diğer")
+  city            String? // haberin konusu geçen il (geo önerileri için)
+  sourcesCount    Int       @default(1)
+  sourcesList     String    @default("[]")
+  // Kaynak meta verisi: [{ name, url, fetchedAt }] (JSON).
+  sourcesMeta     String    @default("[]")
+  /// Otomatik sınıflandırma etiketleri (JSON): ["@teknoloji","@nvidia"].
+  tags            String    @default("[]")
+  /// Sınıflandırıcının kategori skorları (JSON, denetim için).
+  categoryScores  String?
+  classifiedAt    DateTime?
+  imageUrl        String?
+  /// Görsel alt metni + kaynak atfı (telifsiz AI illüstrasyonu).
+  imageCredit     String?
+  isVideo         Boolean   @default(false)
+  youtubeId       String?
+  viewCount       Int       @default(0)
+  // Okuma süresi (dk) — filtreleme için türetilmiş sütun.
+  readingMinutes  Int       @default(1)
+  createdAt       DateTime  @default(now())
+  // Yumuşak moderasyon: null = yayında. Dolu = kaldırılmış (public
+  // sorgular removedAt: null filtresiyle görünmez kılar).
+  removedAt       DateTime?
+  removalReason   String?
+  removedBy       String? // "gemma-audit" | "owner"
+  // Saatlik kalite denetimi (gemma-4-31b) sonuçları.
+  qualityScore    Int?
+  auditedAt       DateTime?
+
+  xDrafts XDraft[]
+
+  @@index([createdAt])
+  @@index([category, createdAt])
+  @@index([removedAt])
+  @@index([auditedAt])
+}
+
+// ─── X Stüdyo (X/Twitter post üretim atölyesi) ────────────────────────────────
+
+/// Post stili: system prompt + emoji kuralları.
+model XStyle {
+  id           String   @id @default(cuid())
+  name         String
+  slug         String   @unique
+  systemPrompt String
+  emojiLevel   Int      @default(2)
+  maxEmoji     Int      @default(2)
+  createdAt    DateTime @default(now())
+
+  drafts XDraft[]
+}
+
+/// Havuza atılan (kaydedilen) post taslakları.
+model XDraft {
+  id          String    @id @default(cuid())
+  articleId   String
+  styleId     String
+  variants    String    @default("[]") // JSON: string[] — seçilen varyant metni
+  hashtags    String    @default("[]") // JSON: string[]
+  charCount   Int       @default(0)
+  status      String    @default("draft") // draft | copied | published | rejected
+  copiedAt    DateTime?
+  publishedAt DateTime?
+  externalUrl String?
+  createdBy   String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  article NewsItem @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  style   XStyle   @relation(fields: [styleId], references: [id])
+
+  @@index([articleId])
+  @@index([status, createdAt])
+}
+
+/// Önerilen hashtag havuzu — LLM yalnızca buradan seçim yapabilir.
+model HashTagPool {
+  id         String    @id @default(cuid())
+  tag        String
+  categoryId String?
+  weight     Int       @default(1)
+  lastUsedAt DateTime?
+
+  @@unique([tag])
+  @@index([categoryId, weight])
+}
+
+/// Cached TTS audio (base64) keyed by content — "news:{id}:{voice}" for
+/// story summaries and "preview:{voice}" for persona samples. Kept in a
+/// separate table so feed queries never load the payload.
+model TtsCache {
+  id        String   @id @default(cuid())
+  cacheKey  String   @unique
+  mimeType  String   @default("audio/mpeg")
+  data      String
+  createdAt DateTime @default(now())
+}
+
+model SystemSettings {
+  id             Int      @id @default(1)
+  siteName       String   @default("Micro-News")
+  /// Çoklu sağlayıcı: openai | anthropic | gemini | deepseek | openrouter |
+  /// groq | mistral | ollama | openai-compatible
+  llmProvider    String   @default("openai")
+  providerUrl    String   @default("https://api.openai.com/v1")
+  apiKey         String   @default("")
+  modelName      String   @default("gpt-4o-mini")
+  promptTemplate String   @default("")
+  /// İŞ 4.5 — Atıf eşiği. Otomatik haftalık denetim yanlış oranı %5'i
+  /// geçerse 0.78'e yükseltir (tek yönlü).
+  citationThreshold Float @default(0.72)
+  updatedAt      DateTime @updatedAt
+}
+
+/// Silent moderation log: stories removed by the owner (copyright / false
+/// news). The story itself is deleted from the public feed.
+model RemovedStory {
+  id        String   @id @default(cuid())
+  newsId    String
+  title     String
+  summary   String
+  reason    String
+  removedAt DateTime @default(now())
+}
+
+// ─── YZ Podcast Stüdyosu ("Potkes") ──────────────────────────────────────────
+
+/// Owner'ın konu/mod seçip YZ ile ürettiği konuşma senaryolu podcast bölümü.
+/// processing → draft → audio_processing → ready → published; owner sesi
+/// OYNATMADAN (playedAt) yayımlayamaz. Her konuşmacının sesi script
+/// JSON'ına gömülü voiceKey ile kalıcı olarak sabitlenir.
+model PodcastEpisode {
+  id               String    @id @default(cuid())
+  title            String?
+  mode             String // "hourly" | "daily" | "weekly" | "custom"
+  category         String? // daily/weekly için (null = tüm kategoriler)
+  topic            String? // custom mod konusu / ek talimat
+  newsIds          String? // JSON: string[] — tek tık modunda seçilen haber id'leri
+  guests           String? // JSON: [{name, role}] — konuk uzmanlar
+  script           String? // JSON: { speakers: [{name, role, voiceKey}], turns: [{speaker, text}] }
+  status           String    @default("processing") // processing | draft | audio_processing | ready | failed | published
+  audio            Bytes? // birleştirilmiş mp3
+  audioDurationSec Int?
+  playedAt         DateTime? // owner dinledi mi (yayınlama kilidi)
+  publishedAt      DateTime?
+  isAuto           Boolean   @default(false) // radyo cron'u üretti mi (otomatik yayın + süreli saklama)
+  error            String?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+}
+
+// ─── PWA Web Push (VAPID) abonelikleri ───────────────────────────────────────
+
+/// Tarayıcı push aboneliği (PushSubscription). cihaz bazlıdır — giriş şart
+/// değildir; oturum varsa userId ile ilişkilendirilir. categories, lib/categories
+/// değerlerinin (veya "all") JSON dizisidir: ["Teknoloji"] / ["all"].
+model PushSubscription {
+  id         String   @id @default(cuid())
+  endpoint   String   @unique
+  p256dh     String
+  auth       String
+  userId     String?
+  categories String   @default("[]") // JSON dizi: ["Teknoloji"] veya ["all"]
+  locale     String   @default("tr")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([userId])
+}
+
+// ─── Video Haberler (YouTube → owner onay akışı) ─────────────────────────────
+
+/// Owner'ın gönderdiği YouTube linkinden üretilen haber. processing → ready →
+/// published; owner videoyu OYNATMADAN (playedAt) yayımlayamaz.
+model VideoNews {
+  id           String    @id @default(cuid())
+  youtubeId    String    @unique
+  url          String
+  videoTitle   String?
+  channel      String?
+  thumbnailUrl String?
+  transcript   String?
+  title        String? // üretilen haber başlığı
+  summary      String? // üretilen özet
+  content      String? // üretilen markdown içerik
+  category     String?
+  readTime     Int?
+  status       String    @default("processing") // processing | ready | failed | published
+  playedAt     DateTime? // owner videoyu oynattı mı (yayınlama kilidi)
+  publishedAt  DateTime?
+  newsItemId   String? // yayınlanınca oluşan NewsItem id
+  error        String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+// ─── Portre modülü (Ek Bölüm 9) ─────────────────────────────────────────────
+// Dış feed'den (kantan.news) gelen hikâyeler puanlanır; eşiği geçenler
+// kaynaklı araştırmayla "Portre" sayfasına dönüşür. Kişisel veri YOKTUR:
+// yalnızca kamuya açık kaynak derlemesi ve toplu okunma sayacı tutulur.
+
+model PortraitCandidate {
+  id             String    @id @default(cuid())
+  /// Tekilleştirme anahtarı: "<source>:<external id>" veya URL karması.
+  sourceKey      String    @unique
+  sourceName     String    @default("kantan.news")
+  sourceUrl      String
+  originalUrl    String?
+  title          String
+  summary        String?
+  category       String?
+  tags           String    @default("")
+  imageUrl       String?
+  imageCredit    String?
+  publishedAt    DateTime?
+  /// 0-100 (0-10 puanın x10 hâli)
+  score          Int       @default(0)
+  scoreBreakdown String    @default("{}")
+  scoreReason    String?
+  /// Puanlamada tespit edilen konu türü/adı (yeniden denemelerde kullanılır).
+  subjectType    String?
+  subjectName    String?
+  /// new | skipped | queued | researching | draft | published | review | failed
+  status         String    @default("new")
+  failureReason  String?
+  portraitId     String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@index([status, score])
+  @@index([publishedAt])
+}
+
+model Portrait {
+  id                String    @id @default(cuid())
+  /// Kanonik slug: /portre/<slug> (en fazla 6 kelime).
+  slug              String    @unique
+  /// Eski slug'lar (301 yönlendirme için): JSON dizi.
+  slugHistory       String    @default("[]")
+  title             String
+  /// "Tek cümlede" özet (en fazla 25 kelime)
+  subtitle          String?
+  category          String
+  /// kisi | kurum | olay
+  subjectType       String    @default("olay")
+  subjectName       String?
+  coverImageUrl     String?
+  coverImageCaption String?
+  coverImageCredit  String?
+  /// JSON: [{ text, sourceIndex }]
+  whyNow            String    @default("[]")
+  /// JSON: [{ date, text, sourceIndex }]
+  timeline          String    @default("[]")
+  /// JSON: [{ text, sourceIndex }]
+  keyFacts          String    @default("[]")
+  /// JSON: { text, speaker, date, sourceIndex } | null
+  quote             String?
+  /// JSON: [{ question, answer, sourceIndex }]
+  faqs              String    @default("[]")
+  /// Kaynaklar çelişiyorsa iki tarafı da özetleyen not (9.3).
+  conflictNote      String?
+  sourceCount       Int       @default(0)
+  readingMinutes    Int       @default(5)
+  locale            String    @default("tr")
+  /// draft | published | review | removed
+  status            String    @default("draft")
+  reviewNotes       String?
+  originStoryUrl    String?
+  originSource      String    @default("kantan.news")
+  feedScore         Int?
+  publishedAt       DateTime?
+  updateNote        String?
+  removedAt         DateTime?
+  removalReason     String?
+  /// Toplu (kişi bazlı olmayan) okunma sayacı.
+  viewCount         Int       @default(0)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  sources PortraitSource[]
+
+  @@index([status, publishedAt])
+  @@index([category])
+  @@index([subjectType])
+}
+
+model PortraitSource {
+  id          String    @id @default(cuid())
+  portraitId  String
+  portrait    Portrait  @relation(fields: [portraitId], references: [id], onDelete: Cascade)
+  name        String
+  title       String
+  url         String
+  publishedAt DateTime?
+  accessedAt  DateTime  @default(now())
+  /// official | news | academic | data
+  kind        String    @default("news")
+  isPrimary   Boolean   @default(false)
+  domain      String    @default("")
+
+  @@index([portraitId])
+}
+
+/// Her otomasyon çalıştırmasının özeti (feed okunamadı vb. durumlar).
+model PortraitRun {
+  id         String    @id @default(cuid())
+  startedAt  DateTime  @default(now())
+  finishedAt DateTime?
+  /// ok | feed_error | empty_feed | error
+  status     String    @default("ok")
+  fetched    Int       @default(0)
+  fresh      Int       @default(0)
+  scored     Int       @default(0)
+  queued     Int       @default(0)
+  published  Int       @default(0)
+  review     Int       @default(0)
+  failed     Int       @default(0)
+  note       String?
+
+  @@index([startedAt])
+}
+
+// ─── Münazara (Ek Bölüm 11) ──────────────────────────────────────────────────
+// Kamuya açık kaynaklardan derlenen münazara dosyaları. Kullanıcı verisi
+// YOKTUR: oy, entry, form, kişisel profil tutulmaz. Okunma sayısı yalnızca
+// toplu (anonim) sayaçtır.
+
+/// Tek bir münazara konusu (motion) ve dosyası.
+model DebateTopic {
+  id              String    @id @default(cuid())
+  /// Kanonik adres: /munazara/<slug>
+  slug            String    @unique
+  title           String
+  /// lise | universite | karma
+  level           String    @default("karma")
+  category        String    @default("Gündem")
+
+  /// "Bu meclis ... inanır" biçiminde tek cümle.
+  motionText      String
+  /// politika | deger | olgu
+  motionType      String    @default("politika")
+  /// tr | global
+  motionScope     String    @default("tr")
+
+  difficulty      Int       @default(3)
+  controversy     Int       @default(3)
+  infoNeed        Int       @default(3)
+  recencyDays     Int       @default(3)
+
+  /// JSON: [{ text, sourceIndex }]
+  whyNow          String    @default("[]")
+  /// JSON: [{ text, sourceIndex }]
+  governmentThesis String   @default("[]")
+  /// JSON: [{ text, sourceIndex }]
+  oppositionThesis String   @default("[]")
+  /// JSON: [{ title, government, opposition, rebuttal }]
+  keyClash        String    @default("[]")
+  /// JSON: { government: string[], opposition: string[] }
+  burdens         String    @default("{}")
+  /// JSON: [{ term, definition }]
+  glossary        String    @default("[]")
+  /// JSON: [{ question, answer }]
+  faqs            String    @default("[]")
+  /// Kaynaklar çelişiyorsa iki tarafı özetleyen not.
+  conflictNote    String?
+  /// Seviyeye özel format notu (24 dk / 32 dk).
+  levelNote       String?
+
+  /// 0-100 Münazara Uygunluk Skoru (MUS).
+  musScore        Int       @default(0)
+  /// JSON: bileşenler + ağırlıklar + tek satır gerekçe.
+  musBreakdown    String    @default("{}")
+  musReason       String?
+
+  /// draft | review | published | removed
+  status          String    @default("published")
+  /// Editör sabitlemesi (0-5): akış sıralamasında %10 ağırlık.
+  editorPin       Int       @default(0)
+
+  readingMinutes  Int       @default(7)
+  sourceCount     Int       @default(0)
+  /// Toplu (kişi bazlı olmayan) okunma sayacı.
+  viewCount       Int       @default(0)
+
+  publishedAt     DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  createdAt       DateTime  @default(now())
+
+  sources DebateSource[]
+
+  @@index([status, publishedAt])
+  @@index([level, status, publishedAt])
+  @@index([category, status, publishedAt])
+}
+
+/// Münazara dosyasının kamuya açık kaynağı.
+model DebateSource {
+  id          String    @id @default(cuid())
+  debateId    String
+  debate      DebateTopic @relation(fields: [debateId], references: [id], onDelete: Cascade)
+  name        String
+  title       String
+  url         String
+  publishedAt DateTime?
+  accessedAt  DateTime  @default(now())
+  /// Bu kaynağın hangi argümanı desteklediği (tek cümle).
+  supports    String    @default("")
+  domain      String    @default("")
+  isPrimary   Boolean   @default(false)
+
+  @@index([debateId])
+}
+
+/// Doğrulanmış (veya başarısız) münazara RSS kaynağı.
+model DebateFeed {
+  id          String    @id @default(cuid())
+  name        String
+  url         String    @unique
+  /// ok | failed | disabled
+  status      String    @default("ok")
+  itemCount   Int       @default(0)
+  lastItemAt  DateTime?
+  checkedAt   DateTime  @default(now())
+  note        String?
+
+  @@index([status])
+}
+
+/// RSS'ten gelen aday içerik + MUS değerlendirmesi (ham içerik saklanmaz).
+model DebateCandidate {
+  id          String    @id @default(cuid())
+  /// Kaynak feed + itemGuid/link karması (tekilleştirme).
+  sourceKey   String    @unique
+  feedUrl     String
+  title       String
+  url         String
+  summary     String    @default("")
+  sourceName  String    @default("")
+  publishedAt DateTime?
+  /// 0-100
+  musScore    Int       @default(0)
+  /// JSON: bileşenler
+  musBreakdown String   @default("{}")
+  /// Tek satır gerekçe
+  musReason   String?
+  /// Önerilen motion: "Bu meclis ... inanır"
+  motionText  String?
+  /// new | scored | queued | review | published | skipped
+  status      String    @default("new")
+  createdAt   DateTime  @default(now())
+
+  @@index([status, musScore])
+  @@index([feedUrl])
+}
+
+/// İŞ 4 — Atıf denetim izi. Her kurulan atıf buraya yazılır; editör panelinden
+/// tek tıkla kaldırılır veya çift kara listeye alınır.
+model Citation {
+  id        String   @id @default(cuid())
+  fromKind  String // "haber" | "portre"
+  fromId    String
+  toKind    String // "haber" | "portre"
+  toId      String
+  score     Float
+  /// Ortak varlıklar (JSON dizi) — kişi adı içerebilir, 90 gün sonra silinir.
+  entities  String   @default("[]")
+  /// Gövdeye işaretlenen ifade.
+  anchor    String?
+  /// "auto" | "manual"
+  rule      String   @default("auto")
+  /// Otomatik denetim sonucu: null = denetlenmedi, 1 = doğru, 0 = yanlış.
+  reviewed  Int?
+  createdAt DateTime @default(now())
+
+  @@unique([fromKind, fromId, toKind, toId])
+  @@index([createdAt])
+  @@index([reviewed])
+}
+
+/// İŞ 4.5 — Kara liste: aynı kaynak-hedef çifti bir daha eşleşmez.
+model CitationBlacklist {
+  id        String   @id @default(cuid())
+  fromKind  String
+  fromId    String
+  toKind    String
+  toId      String
+  reason    String?
+  createdAt DateTime @default(now())
+
+  @@unique([fromKind, fromId, toKind, toId])
+}
