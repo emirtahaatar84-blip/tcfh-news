@@ -19,6 +19,8 @@ export type FeedNewsItem = {
   sourcesCount: number;
   sources: string[];
   sourcesMeta: SourceMeta[];
+  /** Otomatik sınıflandırma etiketleri: ["@teknoloji","@nvidia"]. */
+  tags: string[];
   imageUrl: string | null;
   imageCredit: string | null;
   isVideo: boolean;
@@ -91,6 +93,7 @@ export function serializeNewsItem(item: NewsItem): FeedNewsItem {
     sourcesCount: item.sourcesCount,
     sources: parseJsonArray(item.sourcesList),
     sourcesMeta: parseSourcesMeta(item.sourcesMeta, item.sourcesList),
+    tags: parseJsonArray(item.tags),
     imageUrl: item.imageUrl ?? null,
     imageCredit: item.imageCredit ?? null,
     isVideo: item.isVideo,

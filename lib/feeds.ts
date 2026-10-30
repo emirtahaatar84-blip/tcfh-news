@@ -87,10 +87,61 @@ ${items}
 </rss>`;
 }
 
-export function xmlResponse(body: string): Response {
+/**
+ * Atom 1.0 akışı (RFC 4287). RSS'in yanında sunulur; bazı okuyucular ve
+ * agregatörler (Feedly, Inoreader, NewsBlur) Atom'u tercih eder.
+ */
+export function buildAtomXml(options: {
+  title: string;
+  description: string;
+  link: string;
+  items: FeedItemRow[];
+}): string {
+  const base = siteBase();
+  const updated = new Date().toISOString();
+
+  const entries = options.items
+    .map((item) => {
+      const url = `${base}/tr/haber/${item.slug ?? item.id}`;
+      return `  <entry>
+    <title>${escapeXml(item.title)}</title>
+    <link href="${escapeXml(url)}" />
+    <id>${escapeXml(url)}</id>
+    <updated>${item.createdAt.toISOString()}</updated>
+    <published>${item.createdAt.toISOString()}</published>
+    <summary>${escapeXml(item.summary)}</summary>
+    <category term="${escapeXml(item.category)}" />
+  </entry>`;
+    })
+    .join("\n");
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="tr">
+  <title>${escapeXml(options.title)}</title>
+  <subtitle>${escapeXml(options.description)}</subtitle>
+  <link href="${escapeXml(options.link)}" rel="self" type="application/atom+xml" />
+  <link href="${escapeXml(base)}" rel="alternate" type="text/html" />
+  <id>${escapeXml(options.link)}</id>
+  <updated>${updated}</updated>
+${entries}
+</feed>`;
+}
+
+/**
+ * XML yanıtı. `contentType` verilmezse gövdeden tahmin edilir
+ * (<feed> → Atom, <rss> → RSS) — böylece tek yardımcı ikisine de hizmet eder.
+ */
+export function xmlResponse(
+  body: string,
+  contentType = "application/rss+xml; charset=utf-8",
+): Response {
+  const type = contentType.includes("atom") || body.includes("<feed xmlns=")
+    ? "application/atom+xml; charset=utf-8"
+    : "application/rss+xml; charset=utf-8";
+
   return new Response(body, {
     headers: {
-      "Content-Type": "application/rss+xml; charset=utf-8",
+      "Content-Type": type,
       "Cache-Control": "public, max-age=300, s-maxage=300",
     },
   });

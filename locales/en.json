@@ -61,7 +61,8 @@
     "listenLabel": "{minutes} min listen",
     "actions": "Actions",
     "singleSource": "Single source",
-    "singleSourceHint": "This story relies on a single source; not independently verified."
+    "singleSourceHint": "This story relies on a single source; not independently verified.",
+    "sourcesLabel": "Sources"
   },
   "sidebar": {
     "nav": {
@@ -871,7 +872,9 @@
     "fontSizeDecrease": "Decrease text size",
     "fontSizeIncrease": "Increase text size",
     "fontSizeLevel": "Step {level} / {total}",
-    "densityAutoHint": "By viewport: Comfortable on mobile, Balanced on desktop."
+    "densityAutoHint": "By viewport: Comfortable on mobile, Balanced on desktop.",
+    "dyslexicFont": "Dyslexia-friendly typeface",
+    "dyslexicFontHint": "Uses OpenDyslexic, whose letterforms are easier to distinguish. Stored on this device only; served from our own server (no third party)."
   },
   "explore": {
     "subtitle": "Browse categories and discover what is happening.",

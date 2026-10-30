@@ -50,6 +50,8 @@ type Labels = {
   lineWide: string;
   readingMode: string;
   readingModeHint: string;
+  dyslexicFont: string;
+  dyslexicFontHint: string;
   readMarks: string;
   readMarksHint: string;
   autoRead: string;
@@ -84,6 +86,7 @@ export function PreferencesView({ lang, labels }: { lang: Locale; labels: Labels
     setReadingMode,
     setReadMarks,
     setAutoRead,
+    setFont,
   } = useDevicePrefs();
 
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -251,6 +254,25 @@ export function PreferencesView({ lang, labels }: { lang: Locale; labels: Labels
               </span>
               <span className="block text-label text-zinc-500">
                 {labels.readingModeHint}
+              </span>
+            </span>
+          </label>
+
+          <label className="flex cursor-pointer items-start gap-space-3 border-t border-[#22252a] pt-spot-meta">
+            <input
+              type="checkbox"
+              checked={prefs.font === "dyslexic"}
+              onChange={(event) =>
+                setFont(event.target.checked ? "dyslexic" : "default")
+              }
+              className="mt-title-spot h-4 w-4 accent-blue-600"
+            />
+            <span>
+              <span className="block t-meta font-semibold text-zinc-200">
+                {labels.dyslexicFont}
+              </span>
+              <span className="block text-label text-zinc-500">
+                {labels.dyslexicFontHint}
               </span>
             </span>
           </label>

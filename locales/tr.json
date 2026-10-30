@@ -61,7 +61,8 @@
     "listenLabel": "{minutes} dk dinleme",
     "actions": "İşlemler",
     "singleSource": "Tek kaynak",
-    "singleSourceHint": "Bu haber tek kaynağa dayanıyor; bağımsız kaynakla doğrulanmadı."
+    "singleSourceHint": "Bu haber tek kaynağa dayanıyor; bağımsız kaynakla doğrulanmadı.",
+    "sourcesLabel": "Kaynak"
   },
   "sidebar": {
     "nav": {
@@ -871,7 +872,9 @@
     "fontSizeDecrease": "Yazıyı küçült",
     "fontSizeIncrease": "Yazıyı büyüt",
     "fontSizeLevel": "Kademe {level} / {total}",
-    "densityAutoHint": "Ekran genişliğine göre: mobil Geniş, masaüstü Dengeli."
+    "densityAutoHint": "Ekran genişliğine göre: mobil Geniş, masaüstü Dengeli.",
+    "dyslexicFont": "Disleksi dostu yazı tipi",
+    "dyslexicFontHint": "Harfleri daha kolay ayırt edilen OpenDyslexic fontunu kullanır. Yalnızca bu cihazda saklanır, sunucudan indirilir (üçüncü taraf yok)."
   },
   "explore": {
     "subtitle": "Kategorilere göz atın, gündemi keşfedin.",

@@ -15,6 +15,7 @@ import {
   isStorageAvailable,
   setPreferences,
   type DensityPreference,
+  type FontPreference,
   type FontSizePreference,
   type LineHeightPreference,
   type Preferences,
@@ -33,6 +34,7 @@ type DevicePrefsContextValue = {
   setFontSize: (size: FontSizePreference) => void;
   setLineHeight: (height: LineHeightPreference) => void;
   setReadingMode: (enabled: boolean) => void;
+  setFont: (font: FontPreference) => void;
   setReadMarks: (enabled: boolean) => void;
   setAutoRead: (enabled: boolean) => void;
   setDensity: (density: DensityPreference) => void;
@@ -175,6 +177,7 @@ export function DevicePrefsProvider({ children }: { children: React.ReactNode })
       setFontSize: (fontSize) => update({ fontSize }),
       setLineHeight: (lineHeight) => update({ lineHeight }),
       setReadingMode: (readingMode) => update({ readingMode }),
+      setFont: (font) => update({ font }),
       setReadMarks: (readMarks) => update({ readMarks }),
       setAutoRead,
       setDensity: (density) => update({ density }),

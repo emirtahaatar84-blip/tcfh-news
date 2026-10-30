@@ -47,6 +47,9 @@ export type LineHeightPreference = "tight" | "normal" | "wide";
  * "auto" görünüm genişliğine göre çözer (< 768 Geniş, >= 768 Dengeli).
  * Kullanıcı üç moddan birini seçerse tercih bu cihazda saklanır.
  */
+/** Yazı tipi tercihi: sistem varsayılanı ya da disleksi dostu OpenDyslexic. */
+export type FontPreference = "default" | "dyslexic";
+
 export type DensityPreference =
   | "auto"
   | "compact"
@@ -58,6 +61,8 @@ export type Preferences = {
   theme: ThemePreference;
   fontSize: FontSizePreference;
   lineHeight: LineHeightPreference;
+  /** Disleksi dostu yazı tipi (OpenDyslexic). Varsayılan: sistem fonts. */
+  font: FontPreference;
   /** Sıkı / Dengeli / Geniş; "auto" görünüm genişliğine göre çözer. */
   density: DensityPreference;
   /** Sade okuma modu: yan paneller ve öneri kutuları gizlenir. */
@@ -114,6 +119,7 @@ export const DEFAULT_PREFERENCES: Preferences = {
   theme: "system",
   fontSize: "md",
   lineHeight: "normal",
+  font: "default",
   density: "auto",
   readingMode: false,
   readMarks: true,

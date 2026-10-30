@@ -46,6 +46,7 @@ type Props = {
     verified: string;
     singleSource: string;
     singleSourceHint: string;
+    sourcesLabel: string;
     videoBadge: string;
     save: string;
     saved: string;
@@ -102,6 +103,18 @@ export const NewsCard = memo(function NewsCard({
   const categoryLabel = categoryLabels[item.category] ?? item.category;
 
   // Dinleme süresi tahmini (~150 kelime/dk) — sesli okuma cihazda yapılır.
+  // "@teknoloji" gibi kategori etiketi zaten kategori satırında var; varlık
+  // etiketleri (@nvidia, @tbmm) bilgi taşır. En fazla 3 gösterilir.
+  const categoryTag = `@${slugForCategory(item.category)}`;
+  // Kaynak adları: tanınmayan/boş değerler ayıklanır.
+  const sourceNames = (item.sources ?? [])
+    .filter((name): name is string => typeof name === "string" && name.trim().length > 0)
+    .slice(0, 5);
+
+  const entityTags = (item.tags ?? []).filter(
+    (tag) => tag.startsWith("@") && tag !== categoryTag,
+  );
+
   const listenMinutes = Math.max(
     1,
     Math.round(
@@ -340,6 +353,17 @@ export const NewsCard = memo(function NewsCard({
         ) : null}
 
         <span className="text-label text-zinc-500">{categoryLabel}</span>
+        {/* Otomatik sınıflandırma etiketleri: ilk kategori etiketi kategoriyle
+            aynı olduğu için atlanır; kalanlar (varlık etiketleri) gösterilir. */}
+        {entityTags.slice(0, 3).map((tag) => (
+          <span
+            key={tag}
+            className="t-label rounded-full border border-[#22252a] bg-[#16181c] px-space-2 py-space-1 text-zinc-400"
+            title={tag}
+          >
+            {tag}
+          </span>
+        ))}
         <span className="text-label text-zinc-600" aria-hidden="true">·</span>
         <span className="text-label text-zinc-500">
           {item.readingMinutes} dk okuma
@@ -353,6 +377,23 @@ export const NewsCard = memo(function NewsCard({
           <TimeAgo date={item.createdAt} locale={locale} />
         </span>
       </div>
+
+      {/*
+        DOĞRULAMA ŞEFFAFLIĞI: kaynak adları görünür. Önceden yalnızca
+        `title` niteliğindeydi (dokunmatikte erişilemez). Artık metin olarak
+        okunur, ekran okuyucuya da açıktır.
+      */}
+      {sourceNames.length > 0 ? (
+        <p className="mt-space-2 text-label text-zinc-500">
+          <span className="text-zinc-600">{cardLabels.sourcesLabel}: </span>
+          <span className="text-zinc-400">
+            {sourceNames.slice(0, 3).join(", ")}
+            {sourceNames.length > 3
+              ? ` +${sourceNames.length - 3}`
+              : ""}
+          </span>
+        </p>
+      ) : null}
 
       {item.imageUrl ? (
         <div className="relative mt-space-4 block overflow-hidden rounded-2xl border border-[#22252a] bg-[#0e0f12]">

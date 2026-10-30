@@ -21,6 +21,15 @@ function configuredDefaultLocale(): Locale {
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // IndexNow sahiplik dosyası: /{key}.txt — protokol KÖKTE ister.
+  // Gerçek işleyici /api/indexnow/[key] altında; burada şeffaf eşlenir.
+  const indexNowKey = process.env.INDEXNOW_KEY?.trim();
+  if (indexNowKey && pathname === `/${indexNowKey}.txt`) {
+    const url = request.nextUrl.clone();
+    url.pathname = `/api/indexnow/${indexNowKey}`;
+    return NextResponse.rewrite(url);
+  }
+
   // API rotaları kendi yetkilerini yönetir.
   if (pathname.startsWith("/api/")) {
     return NextResponse.next();

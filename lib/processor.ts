@@ -7,6 +7,7 @@ import { queueNewsImage } from "@/lib/imagegen";
 import { prisma } from "@/lib/prisma";
 import { uniqueNewsSlug } from "@/lib/unique-slug";
 import { maybeAutoPush } from "@/lib/push";
+import { submitIndexNow } from "@/lib/indexnow";
 import { reviewStory, type ReviewVerdict } from "@/lib/reviewer";
 import { getSettings, DEFAULT_PROMPT_TEMPLATE } from "@/lib/settings";
 import {
@@ -984,6 +985,17 @@ async function runSynthesis(
           );
         } catch {
           // Görsel üretim hatası haber yayınını asla etkilemesin.
+        }
+
+        // YAYILMA: IndexNow bildirimi — arama motorları haberi dakikalar
+        // içinde dizine alsın. Fire-and-forget; yayını asla bloklamaz.
+        try {
+          void submitIndexNow([
+            `/tr/haber/${publishedItem.slug}`,
+            `/en/haber/${publishedItem.slug}`,
+          ]);
+        } catch {
+          // Bildirim hatası yayını etkilemesin.
         }
 
         // PWA otomatik bildirim: fire-and-forget — döngüyü yavaşlatmasın.

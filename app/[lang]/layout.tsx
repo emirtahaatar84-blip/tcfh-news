@@ -99,6 +99,22 @@ export default async function LocaleLayout({
 
   return (
     <MediaProvider>
+      {/*
+        RSS/Atom auto-discovery: tarayıcı ve okuyucular feed'i otomatik bulur.
+        Yayılma için kritik — ziyaretçinin feed adresini bilmesi gerekmez.
+      */}
+      <link
+        rel="alternate"
+        type="application/rss+xml"
+        title={`${settings.siteName} — RSS`}
+        href="/rss.xml"
+      />
+      <link
+        rel="alternate"
+        type="application/atom+xml"
+        title={`${settings.siteName} — Atom`}
+        href="/atom.xml"
+      />
       <div className="flex min-h-screen flex-col bg-[#0e0f12]">
         <a href="#main-content" className="skip-link">
           {dict.accessibility.skipToContent}
