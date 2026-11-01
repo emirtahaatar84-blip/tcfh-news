@@ -19,6 +19,7 @@ export const metadata: Metadata = {
     google: "vdfXbd6iFibWAyvtMZfDdu4crjmatIaPfFG7EXLjZTk",
   },
   manifest: "/manifest.webmanifest",
+
   icons: {
     icon: "/icons/icon-192.png",
     apple: "/icons/icon-192.png",
@@ -44,7 +45,7 @@ export const viewport: Viewport = {
  * <html data-theme> doğru değere ayarlanır. localStorage okunamazsa
  * sistem tercihine düşer. Hiçbir veri dışarı gönderilmez.
  */
-const THEME_BOOTSTRAP = `(function(){try{var raw=localStorage.getItem("eth.v1.prefs");var p=raw?JSON.parse(raw):null;var t=(p&&p.theme)||"system";var d=t==="system"?(window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"):t;var r=document.documentElement;r.dataset.theme=d;r.style.colorScheme=d;var pref=(p&&p.density)||"auto";var auto=window.innerWidth<768?"comfortable":(window.innerWidth<1180?"balanced":"balanced");r.dataset.density=(pref==="auto"||!pref)?auto:pref;if(p){r.dataset.fontSize=p.fontSize||"md";r.dataset.lineHeight=p.lineHeight||"normal";r.dataset.readingMode=p.readingMode?"on":"off";r.dataset.font=p.font==="dyslexic"?"dyslexic":"default";}}catch(e){document.documentElement.dataset.theme="dark";document.documentElement.dataset.density="comfortable";document.documentElement.dataset.font="default";}})();`;
+const THEME_BOOTSTRAP = `(function(){try{var raw=localStorage.getItem("eth.v1.prefs");var p=raw?JSON.parse(raw):null;var t=(p&&p.theme)||"system";var d=t==="system"?(window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"):t;var r=document.documentElement;r.dataset.theme=d;r.style.colorScheme=d;var pref=(p&&p.density)||"auto";var auto=window.innerWidth<768?"comfortable":(window.innerWidth<1180?"balanced":"balanced");r.dataset.density=(pref==="auto"||!pref)?auto:pref;if(p){r.dataset.fontSize=p.fontSize||"md";r.dataset.lineHeight=p.lineHeight||"normal";r.dataset.readingMode=p.readingMode?"on":"off";}}catch(e){document.documentElement.dataset.theme="dark";document.documentElement.dataset.density="comfortable";}})();`;
 
 export default async function RootLayout({
   children,

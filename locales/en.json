@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Micro News",
-    "description": "A neutral news feed synthesized and verified by AI across 3+ independent sources.",
+    "description": "A news feed compared across multiple sources and summarized with AI",
     "keywords": "news, summary, synthesis, ai, rss, verification"
   },
   "header": {
@@ -62,7 +62,7 @@
     "actions": "Actions",
     "singleSource": "Single source",
     "singleSourceHint": "This story relies on a single source; not independently verified.",
-    "sourcesLabel": "Sources"
+    "synthesizedNote": "This story was summarized with AI after analyzing {count} independent sources ({sources})."
   },
   "sidebar": {
     "nav": {
@@ -117,7 +117,7 @@
     "withSource": "Include source link",
     "withBadge": "Include verification badge",
     "tones": {
-      "tarafsiz": "Neutral",
+      "tarafsiz": "Multi-source",
       "sicak": "Warm",
       "ciddi": "Serious"
     },
@@ -206,7 +206,7 @@
     "audioError": "Audio summary failed, try again",
     "play": "Play audio summary",
     "pause": "Pause",
-    "synthesizedNote": "This story was compiled by neutral AI after analyzing {count} independent sources ({sources}).",
+    "synthesizedNote": "This story was summarized with AI after analyzing {count} independent sources ({sources}).",
     "related": "Related News",
     "videoExternal": "This video is hosted on a third party (YouTube). Clicking will send data to YouTube."
   },
@@ -220,7 +220,12 @@
     "minutes": "min",
     "speakers": "Speakers",
     "play": "Listen",
-    "pause": "Pause"
+    "pause": "Pause",
+    "digestsTitle": "Daily digest — audio bulletin",
+    "speed": "Speed",
+    "audioPending": "Audio is not ready yet.",
+    "telegramCta": "Follow on Telegram",
+    "listenToday": "Listen"
   },
   "comingSoon": {
     "title": "Coming soon",
@@ -362,7 +367,7 @@
         {
           "heading": "How It Works",
           "body": [
-            "Our system scans nearly 30 domestic and international news sources within minutes. Sources covering the same event are automatically merged; the story is rewritten in an original and neutral tone with AI assistance.",
+            "Our system scans nearly 30 domestic and international news sources within minutes. Sources covering the same event are automatically merged; the story is rewritten in an original and tone with AI assistance.",
             "Every published story passes a separate AI-supported quality review both before and after publication. Content found inadequate or inaccurate is removed from the feed."
           ]
         },
@@ -370,7 +375,7 @@
           "heading": "Our Editorial Principles",
           "body": [
             "Originality: No story is copied from any source; all content is synthesized in our own words.",
-            "Neutrality: Stories only convey commonly verified information, without taking sides.",
+            "Multi-source: Stories only convey information checked across several sources.",
             "Copyright care: The copyrights of source publishers are respected; takedown requests can be sent via our contact address."
           ]
         },
@@ -1035,7 +1040,9 @@
     "speechDeviceOnly": "Read-aloud runs on your device; your voice and text requests are never sent to any server.",
     "resumeTitle": "Resume where you left off",
     "resumeBody": "Continue from the sentence you stopped at.",
-    "dismiss": "Dismiss"
+    "dismiss": "Dismiss",
+    "singleSource": "Single source",
+    "singleSourceHint": "This story relies on a single source; not independently verified."
   },
   "media": {
     "speechTitle": "Read aloud",
@@ -1207,5 +1214,56 @@
     "profile": "Profile",
     "profileHint": "Preferences and accessibility",
     "all": "All"
+  },
+  "trust": {
+    "aiGenerated": "Summarized with AI",
+    "lastUpdated": "Last updated: {date}",
+    "report": {
+      "trigger": "Report an error",
+      "title": "Something wrong with this story?",
+      "reason": "Reason",
+      "note": "Short note (optional)",
+      "notePlaceholder": "What is wrong? (max 300 characters)",
+      "submit": "Send",
+      "cancel": "Cancel",
+      "success": "Thank you, your report was received.",
+      "error": "Could not send. Please try again.",
+      "rateLimited": "Too many reports. Please try again later."
+    }
+  },
+  "compare": {
+    "toggle": "Compare sources",
+    "title": "What do the sources say?",
+    "loading": "Loading sources…",
+    "empty": "No comparable sources for this story.",
+    "error": "Could not load sources.",
+    "original": "Open original",
+    "source": "Source",
+    "tagsTitle": "Tags"
+  },
+  "timeline": {
+    "heading": "Timeline",
+    "digestTitle": "What happened so far",
+    "digestUpdated": "Summary updated: {date}",
+    "empty": "No stories on this topic yet."
+  },
+  "interests": {
+    "title": "My interests",
+    "hint": "Your selection is stored only on this device and never sent to the server. With nothing selected, all stories are shown.",
+    "reset": "Show all",
+    "empty": "No selection — showing all categories.",
+    "categories": {
+      "Gündem": "Agenda",
+      "Teknoloji": "Technology",
+      "Yapay Zekâ": "AI",
+      "Ekonomi": "Economy",
+      "Siyaset": "Politics",
+      "Spor": "Sports",
+      "Bilim": "Science",
+      "Dünya": "World",
+      "Sağlık": "Health",
+      "Kültür": "Culture",
+      "Diğer": "Other"
+    }
   }
 }

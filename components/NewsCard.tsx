@@ -46,7 +46,6 @@ type Props = {
     verified: string;
     singleSource: string;
     singleSourceHint: string;
-    sourcesLabel: string;
     videoBadge: string;
     save: string;
     saved: string;
@@ -103,14 +102,14 @@ export const NewsCard = memo(function NewsCard({
   const categoryLabel = categoryLabels[item.category] ?? item.category;
 
   // Dinleme süresi tahmini (~150 kelime/dk) — sesli okuma cihazda yapılır.
-  // "@teknoloji" gibi kategori etiketi zaten kategori satırında var; varlık
-  // etiketleri (@nvidia, @tbmm) bilgi taşır. En fazla 3 gösterilir.
-  const categoryTag = `@${slugForCategory(item.category)}`;
-  // Kaynak adları: tanınmayan/boş değerler ayıklanır.
-  const sourceNames = (item.sources ?? [])
-    .filter((name): name is string => typeof name === "string" && name.trim().length > 0)
-    .slice(0, 5);
+  // FAZ 1.4 — rozet DOĞRULANMIŞ kaynak sayısına bağlı. Eski kayıtlarda
+  // verifiedSourceCount 0 olabildiği için ham sayıya geri düşülür.
+  const verifiedSources =
+    item.verifiedSourceCount > 0 ? item.verifiedSourceCount : item.sourcesCount;
 
+  // FAZ 2.2 — kartta konu etiketleri. Kategori etiketi (@ekonomi) kategori
+  // satırında zaten var; yalnızca varlık etiketleri (@tcmb, @faiz) gösterilir.
+  const categoryTag = `@${slugForCategory(item.category)}`;
   const entityTags = (item.tags ?? []).filter(
     (tag) => tag.startsWith("@") && tag !== categoryTag,
   );
@@ -154,6 +153,7 @@ export const NewsCard = memo(function NewsCard({
 
     const el = cardRef.current;
     if (!el || typeof IntersectionObserver === "undefined") return;
+
 
     let timer: ReturnType<typeof setTimeout> | null = null;
     let cancelled = false;
@@ -326,13 +326,13 @@ export const NewsCard = memo(function NewsCard({
             <PlayIcon className="h-3 w-3" />
             {cardLabels.videoBadge}
           </span>
-        ) : item.sourcesCount > 1 ? (
+        ) : verifiedSources > 1 ? (
           <span
             className="t-label inline-flex items-center gap-space-1 rounded-full border border-emerald-500/25 bg-emerald-500/10 px-space-2 py-space-1 font-semibold text-emerald-400"
             title={item.sources.join(", ")}
           >
             <CheckIcon className="h-3 w-3" />
-            {cardLabels.verified.replace("{count}", String(item.sourcesCount))}
+            {cardLabels.verified.replace("{count}", String(verifiedSources))}
           </span>
         ) : (
           // TEK KAYNAK: doğrulanmadı. Sessiz geçmek yanıltıcıydı — kullanıcı
@@ -352,18 +352,19 @@ export const NewsCard = memo(function NewsCard({
           </span>
         ) : null}
 
-        <span className="text-label text-zinc-500">{categoryLabel}</span>
-        {/* Otomatik sınıflandırma etiketleri: ilk kategori etiketi kategoriyle
-            aynı olduğu için atlanır; kalanlar (varlık etiketleri) gösterilir. */}
         {entityTags.slice(0, 3).map((tag) => (
-          <span
+          <Link
             key={tag}
-            className="t-label rounded-full border border-[#22252a] bg-[#16181c] px-space-2 py-space-1 text-zinc-400"
+            href={`/${locale}/etiket/${encodeURIComponent(tag.replace(/^@/, ""))}`}
+            onClick={stop}
+            className="relative z-20 t-label rounded-full border border-[#22252a] bg-[#16181c] px-space-2 py-space-1 font-semibold text-zinc-400 transition hover:border-[#31363e] hover:text-zinc-200"
             title={tag}
           >
             {tag}
-          </span>
+          </Link>
         ))}
+
+        <span className="text-label text-zinc-500">{categoryLabel}</span>
         <span className="text-label text-zinc-600" aria-hidden="true">·</span>
         <span className="text-label text-zinc-500">
           {item.readingMinutes} dk okuma
@@ -377,23 +378,6 @@ export const NewsCard = memo(function NewsCard({
           <TimeAgo date={item.createdAt} locale={locale} />
         </span>
       </div>
-
-      {/*
-        DOĞRULAMA ŞEFFAFLIĞI: kaynak adları görünür. Önceden yalnızca
-        `title` niteliğindeydi (dokunmatikte erişilemez). Artık metin olarak
-        okunur, ekran okuyucuya da açıktır.
-      */}
-      {sourceNames.length > 0 ? (
-        <p className="mt-space-2 text-label text-zinc-500">
-          <span className="text-zinc-600">{cardLabels.sourcesLabel}: </span>
-          <span className="text-zinc-400">
-            {sourceNames.slice(0, 3).join(", ")}
-            {sourceNames.length > 3
-              ? ` +${sourceNames.length - 3}`
-              : ""}
-          </span>
-        </p>
-      ) : null}
 
       {item.imageUrl ? (
         <div className="relative mt-space-4 block overflow-hidden rounded-2xl border border-[#22252a] bg-[#0e0f12]">

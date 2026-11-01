@@ -107,6 +107,48 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Tablo henüz yoksa statik girdilerle devam et.
   }
 
+  // FAZ 5.2 — etiket sayfaları (en çok kullanılan 100 etiket).
+  try {
+    const rows = await prisma.newsItem.findMany({
+      where: { removedAt: null, tags: { not: "[]" } },
+      select: { tags: true },
+      take: 2000,
+    });
+
+    const counts = new Map<string, number>();
+    for (const row of rows) {
+      for (const tag of JSON.parse(row.tags || "[]") as string[]) {
+        if (!tag.startsWith("@")) continue;
+        counts.set(tag, (counts.get(tag) ?? 0) + 1);
+      }
+    }
+
+    const popular = [...counts.entries()]
+      .filter(([, count]) => count >= 2)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 100);
+
+    for (const [tag] of popular) {
+      const slug = encodeURIComponent(tag.replace(/^@/, ""));
+      for (const locale of ["tr", "en"] as const) {
+        entries.push({
+          url: `${base}/${locale}/etiket/${slug}`,
+          lastModified,
+          changeFrequency: "daily",
+          priority: 0.5,
+          alternates: {
+            languages: {
+              "tr-TR": `${base}/tr/etiket/${slug}`,
+              en: `${base}/en/etiket/${slug}`,
+            },
+          },
+        });
+      }
+    }
+  } catch {
+    // Etiket verisi okunamazsa devam et.
+  }
+
   // Latest synthesized stories (both locales).
   try {
     const items = await prisma.newsItem.findMany({

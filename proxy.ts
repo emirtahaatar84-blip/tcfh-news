@@ -21,17 +21,21 @@ function configuredDefaultLocale(): Locale {
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // IndexNow sahiplik dosyası: /{key}.txt — protokol KÖKTE ister.
-  // Gerçek işleyici /api/indexnow/[key] altında; burada şeffaf eşlenir.
-  const indexNowKey = process.env.INDEXNOW_KEY?.trim();
-  if (indexNowKey && pathname === `/${indexNowKey}.txt`) {
-    const url = request.nextUrl.clone();
-    url.pathname = `/api/indexnow/${indexNowKey}`;
-    return NextResponse.rewrite(url);
-  }
-
   // API rotaları kendi yetkilerini yönetir.
   if (pathname.startsWith("/api/")) {
+    return NextResponse.next();
+  }
+
+  // FAZ 3.2 — RSS / Atom / sitemap / robots DİLE BAĞLI DEĞİLDİR.
+  // Önceden /rss/Ekonomi → /tr/rss/Ekonomi yönlendiriliyordu ve 404 veriyordu.
+  if (
+    pathname === "/rss.xml" ||
+    pathname === "/atom.xml" ||
+    pathname === "/sitemap.xml" ||
+    pathname === "/news-sitemap.xml" ||
+    pathname === "/robots.txt" ||
+    pathname.startsWith("/rss/")
+  ) {
     return NextResponse.next();
   }
 

@@ -88,8 +88,8 @@ ${items}
 }
 
 /**
- * Atom 1.0 akışı (RFC 4287). RSS'in yanında sunulur; bazı okuyucular ve
- * agregatörler (Feedly, Inoreader, NewsBlur) Atom'u tercih eder.
+ * FAZ 3.3 — Atom 1.0 akışı (RFC 4287). RSS'in yanında sunulur;
+ * Feedly/Inoreader gibi okuyucular Atom'u tercih eder.
  */
 export function buildAtomXml(options: {
   title: string;
@@ -98,7 +98,6 @@ export function buildAtomXml(options: {
   items: FeedItemRow[];
 }): string {
   const base = siteBase();
-  const updated = new Date().toISOString();
 
   const entries = options.items
     .map((item) => {
@@ -108,9 +107,7 @@ export function buildAtomXml(options: {
     <link href="${escapeXml(url)}" />
     <id>${escapeXml(url)}</id>
     <updated>${item.createdAt.toISOString()}</updated>
-    <published>${item.createdAt.toISOString()}</published>
     <summary>${escapeXml(item.summary)}</summary>
-    <category term="${escapeXml(item.category)}" />
   </entry>`;
     })
     .join("\n");
@@ -120,28 +117,19 @@ export function buildAtomXml(options: {
   <title>${escapeXml(options.title)}</title>
   <subtitle>${escapeXml(options.description)}</subtitle>
   <link href="${escapeXml(options.link)}" rel="self" type="application/atom+xml" />
-  <link href="${escapeXml(base)}" rel="alternate" type="text/html" />
   <id>${escapeXml(options.link)}</id>
-  <updated>${updated}</updated>
+  <updated>${new Date().toISOString()}</updated>
 ${entries}
 </feed>`;
 }
 
-/**
- * XML yanıtı. `contentType` verilmezse gövdeden tahmin edilir
- * (<feed> → Atom, <rss> → RSS) — böylece tek yardımcı ikisine de hizmet eder.
- */
 export function xmlResponse(
   body: string,
   contentType = "application/rss+xml; charset=utf-8",
 ): Response {
-  const type = contentType.includes("atom") || body.includes("<feed xmlns=")
-    ? "application/atom+xml; charset=utf-8"
-    : "application/rss+xml; charset=utf-8";
-
   return new Response(body, {
     headers: {
-      "Content-Type": type,
+      "Content-Type": contentType,
       "Cache-Control": "public, max-age=300, s-maxage=300",
     },
   });

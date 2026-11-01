@@ -54,7 +54,7 @@ const config: Config = {
       },
 
       colors: {
-        // news.emirtahaatar.com.tr design tokens (Kantan.news / X style):
+        // TCFH News design tokens (Kantan.news / X style):
         // near-black base, dark gray panels and subtle gray borders.
         background: "#0e0f12",
         surface: "#16181c",

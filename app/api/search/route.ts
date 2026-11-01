@@ -32,6 +32,9 @@ export async function GET(request: NextRequest) {
         { title: { contains: query } },
         { summary: { contains: query } },
         { sourcesList: { contains: query } },
+        // FAZ 2.4 — etiketlerde de ara: "@nvidia" veya "nvidia" ile eşleşir.
+        { tags: { contains: query } },
+        { tags: { contains: query.replace(/^@/, "") } },
       ],
     },
     orderBy: [{ createdAt: "desc" }, { id: "desc" }],

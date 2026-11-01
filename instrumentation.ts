@@ -322,6 +322,75 @@ export async function register() {
     console.log(`[instrumentation] citation audit armed (weekly, next ${weekly().toISOString()})`);
   }
 
+  // ── FAZ 4 — Günlük özet (08:00 Europe/Istanbul) ─────────────────────────
+  let digestPlan: string | null = null;
+
+  if (process.env.ENABLE_DIGEST_CRON !== "false") {
+    const { nextOccurrence } = await import("./lib/hq/schedule");
+    const { SCHEDULE } = await import("./lib/hq/config");
+
+    const digestTick = async () => {
+      try {
+        const { generateDailyDigest } = await import("./lib/digest");
+        const { generateDigestAudio, purgeOldDigestAudio } = await import("./lib/digest-audio");
+        const { broadcastDailyDigest } = await import("./lib/telegram");
+
+        const digest = await generateDailyDigest();
+        const audio = await generateDigestAudio(digest.id);
+        const broadcast = await broadcastDailyDigest({
+          id: digest.id,
+          title: digest.title,
+          body: digest.body,
+        });
+        const purged = await purgeOldDigestAudio();
+
+        console.log(
+          `[cron] digest ${digest.date}: yeni=${digest.created} haber=${digest.newsIds.length} ` +
+            `ses=${audio.ok ? "ok" : audio.reason} telegram=${broadcast.skipped ? "kapalı" : `${broadcast.sent} gönderildi`} ` +
+            `temizlenen=${purged}`,
+        );
+      } catch (error) {
+        console.error("[cron] digest failed:", error);
+      }
+    };
+
+    const armDigest = () => {
+      const next = nextOccurrence("08:00", SCHEDULE.timezone);
+      const timer = setTimeout(() => {
+        void digestTick().finally(() => armDigest());
+      }, Math.max(0, next.getTime() - Date.now()));
+      timer.unref?.();
+      return next;
+    };
+
+    digestPlan = armDigest().toISOString();
+  }
+
+  // ── FAZ 5.3 — Üretim durdu denetimi (saatlik, Telegram uyarısı) ─────────
+  if (process.env.ENABLE_PIPELINE_ALERT !== "false") {
+    const alertTick = async () => {
+      try {
+        const { checkPipelineHealth } = await import("./lib/pipeline-alert");
+        const health = await checkPipelineHealth();
+        if (health.stale) {
+          console.warn(
+            `[alert] üretim durdu: ${health.hoursSincePublish ?? "?"} saat | ` +
+              `telegram=${health.alerted ? "gönderildi" : "atlandı"} ${health.reason ?? ""}`,
+          );
+        }
+      } catch (error) {
+        console.error("[alert] denetim hatası:", error);
+      }
+    };
+
+    const first = setTimeout(() => {
+      void alertTick();
+      const interval = setInterval(alertTick, 60 * 60 * 1000);
+      interval.unref?.();
+    }, 5 * 60 * 1000);
+    first.unref?.();
+  }
+
   const nextRadio = new Date(Date.now() + RADIO_WARMUP_DELAY_MS);
   console.log(
     `[instrumentation] news fetch cron armed (every 10 min, first run at ${nextFetch.toISOString()}); ` +
@@ -335,5 +404,8 @@ export async function register() {
   }
   if (portraitArmed) {
     console.log(`[instrumentation] portrait cron armed — ${portraitPlan.join(" | ")}`);
+  }
+  if (digestPlan) {
+    console.log(`[instrumentation] daily digest cron armed (08:00 Europe/Istanbul, next ${digestPlan})`);
   }
 }

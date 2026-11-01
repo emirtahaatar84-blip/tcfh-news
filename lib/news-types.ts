@@ -17,9 +17,11 @@ export type FeedNewsItem = {
   detailedContent: string | null;
   category: string;
   sourcesCount: number;
+  /** FAZ 1 — medya grubu tekilleştirilmiş doğrulanmış kaynak sayısı. */
+  verifiedSourceCount: number;
   sources: string[];
   sourcesMeta: SourceMeta[];
-  /** Otomatik sınıflandırma etiketleri: ["@teknoloji","@nvidia"]. */
+  /** FAZ 2 — otomatik sınıflandırma etiketleri: ["@ekonomi","@tcmb"]. */
   tags: string[];
   imageUrl: string | null;
   imageCredit: string | null;
@@ -91,6 +93,7 @@ export function serializeNewsItem(item: NewsItem): FeedNewsItem {
     detailedContent: null,
     category: item.category,
     sourcesCount: item.sourcesCount,
+    verifiedSourceCount: item.verifiedSourceCount,
     sources: parseJsonArray(item.sourcesList),
     sourcesMeta: parseSourcesMeta(item.sourcesMeta, item.sourcesList),
     tags: parseJsonArray(item.tags),

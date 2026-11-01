@@ -8,6 +8,8 @@ import { getDictionary } from "@/lib/i18n";
 import type { Dictionary } from "@/lib/i18n";
 import { isLocale, type Locale } from "@/lib/i18n-config";
 import { prisma } from "@/lib/prisma";
+import { listDigests } from "@/lib/digest";
+import { DigestPlayer } from "@/components/media/DigestPlayer";
 import {
   serializePublicPodcastEpisode,
   type PublicPodcastEpisodeDto,
@@ -48,6 +50,9 @@ export default async function PodcastPage({ params }: PageProps) {
 
   const episodes = rows.map(serializePublicPodcastEpisode);
 
+  // FAZ 4.3 — günün özeti sesli bültenleri (son 14 gün).
+  const digests = await listDigests(14);
+
   return (
     <div className="mx-auto w-full max-w-3xl px-space-4 py-space-6 sm:px-space-5">
       <header>
@@ -59,6 +64,48 @@ export default async function PodcastPage({ params }: PageProps) {
           {dict.podcast.subtitle}
         </p>
       </header>
+
+      {digests.length > 0 ? (
+        <section aria-labelledby="digests-title" className="mt-space-6">
+          <h2 id="digests-title" className="section-title mb-space-3">
+            {dict.podcast.digestsTitle ?? "Günün özeti — sesli bülten"}
+          </h2>
+          <div className="block-stack">
+            {digests.map((digest) => (
+              <article
+                key={digest.id}
+                className="rounded-2xl border border-[#22252a] bg-[#16181c] p-space-4"
+              >
+                <p className="t-label text-zinc-500">{digest.date}</p>
+                <h3 className="mt-space-1 text-base font-bold text-zinc-50">
+                  {digest.title}
+                </h3>
+                <p className="mt-space-2 line-clamp-3 text-[13px] leading-relaxed text-zinc-400">
+                  {digest.body}
+                </p>
+
+                {digest.audioUrl ? (
+                  <div className="mt-space-3">
+                    <DigestPlayer
+                      src={digest.audioUrl}
+                      title={digest.title}
+                      labels={{
+                        play: dict.podcast.play ?? "Oynat",
+                        pause: dict.podcast.pause ?? "Duraklat",
+                        speed: dict.podcast.speed ?? "Hız",
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <p className="mt-space-2 text-[11px] text-zinc-600">
+                    {dict.podcast.audioPending ?? "Ses dosyası henüz hazırlanmadı."}
+                  </p>
+                )}
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       {episodes.length === 0 ? (
         <div className="mt-space-5 rounded-2xl border border-dashed border-[#22252a] px-space-4 py-space-7 text-center">

@@ -61,7 +61,7 @@ export type Preferences = {
   theme: ThemePreference;
   fontSize: FontSizePreference;
   lineHeight: LineHeightPreference;
-  /** Disleksi dostu yazı tipi (OpenDyslexic). Varsayılan: sistem fonts. */
+  /** Disleksi dostu yazı tipi (OpenDyslexic). */
   font: FontPreference;
   /** Sıkı / Dengeli / Geniş; "auto" görünüm genişliğine göre çözer. */
   density: DensityPreference;
@@ -77,6 +77,11 @@ export type Preferences = {
   speechRate: number;
   /** Seçili ses (SpeechSynthesisVoice.voiceURI) — yalnızca cihazda. */
   speechVoice: string | null;
+  /**
+   * FAZ 3.3 — Kişisel ilgi alanları: seçili kategoriler (boş = tümü).
+   * YALNIZCA cihazda (localStorage). Sunucuda kullanıcı verisi tutulmaz.
+   */
+  interests: string[];
 };
 
 export type Bookmark = {
@@ -127,6 +132,7 @@ export const DEFAULT_PREFERENCES: Preferences = {
   city: null,
   speechRate: 1,
   speechVoice: null,
+  interests: [],
 };
 
 // ─── Düşük seviye okuma/yazma ───────────────────────────────────────────────

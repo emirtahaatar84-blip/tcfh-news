@@ -138,6 +138,12 @@ model NewsItem {
   @@index([category, createdAt])
   @@index([removedAt])
   @@index([auditedAt])
+  aiGenerated         Boolean   @default(true)
+  verifiedSourceCount Int       @default(0)
+  contentHash         String?
+  factCheckStatus     String?
+  factCheckNotes      String?
+  updatedAt           DateTime  @updatedAt
 }
 
 // ─── X Stüdyo (X/Twitter post üretim atölyesi) ────────────────────────────────
@@ -593,4 +599,71 @@ model CitationBlacklist {
   createdAt DateTime @default(now())
 
   @@unique([fromKind, fromId, toKind, toId])
+}
+
+model NewsReport {
+  id        String   @id @default(cuid())
+  newsId    String
+  /// Seçenek listesinden: yanlis_bilgi | kaynak_yok | telif | nefret |
+  /// reklam | diger
+  reason    String
+  /// İsteğe bağlı kısa not (en fazla 300 karakter).
+  note      String?
+  /// Tuzlanmış IP özeti (düz IP tutulmaz).
+  ipHash    String?
+  /// Kapalı: new | reviewed | dismissed
+  status    String   @default("new")
+  createdAt DateTime @default(now())
+
+  @@index([newsId])
+  @@index([createdAt])
+  @@index([ipHash, createdAt])
+}
+
+model DailyDigest {
+  id          String    @id @default(cuid())
+  /// YYYY-MM-DD (Europe/Istanbul) — günde tek kayıt.
+  date        String    @unique
+  title       String
+  /// 3-5 cümlelik gövde metni (kendi cümlelerimizle).
+  body        String
+  /// JSON: [{ id, title, slug, category }] — özete giren haberler.
+  newsIds     String    @default("[]")
+  /// Sesli bülten dosya yolu (media/digest/*.mp3), yoksa null.
+  audioUrl    String?
+  audioSeconds Int?
+  status      String    @default("ready") // ready | audio_processing | audio_failed
+  /// Telegram'a gönderildi mi (aynı özet iki kez atılmaz).
+  sentAt      DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@index([date])
+  @@index([createdAt])
+}
+
+model TelegramSubscriber {
+  id        String   @id @default(cuid())
+  chatId    String   @unique
+  /// "tr" | "en" — bot komut dilini hatırlar.
+  locale    String   @default("tr")
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([active])
+}
+
+model TokenUsage {
+  id        String   @id @default(cuid())
+  /// YYYY-MM-DD (Europe/Istanbul)
+  date      String
+  model     String
+  promptTokens  Int  @default(0)
+  completionTokens Int @default(0)
+  /// Çağrı türü: "synthesis" | "review" | "audit" | "digest" | "other"
+  kind      String   @default("other")
+  createdAt DateTime @default(now())
+
+  @@index([date])
+  @@index([date, model])
 }

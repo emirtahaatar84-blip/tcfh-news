@@ -1,3 +1,6 @@
+import { createHash } from "crypto";
+import { runFactCheck } from "@/lib/fact-check";
+import { extractUsage, recordTokenUsage, canSpendTokens } from "@/lib/token-budget";
 import Parser from "rss-parser";
 import type { SystemSettings } from "@prisma/client";
 import { normalizeCategory, type Category } from "@/lib/categories";
@@ -7,7 +10,6 @@ import { queueNewsImage } from "@/lib/imagegen";
 import { prisma } from "@/lib/prisma";
 import { uniqueNewsSlug } from "@/lib/unique-slug";
 import { maybeAutoPush } from "@/lib/push";
-import { submitIndexNow } from "@/lib/indexnow";
 import { reviewStory, type ReviewVerdict } from "@/lib/reviewer";
 import { getSettings, DEFAULT_PROMPT_TEMPLATE } from "@/lib/settings";
 import {
@@ -660,6 +662,16 @@ async function synthesizeCluster(
   }
 
   const payload = (await response.json()) as unknown;
+
+  // FAZ 5.4 — token kullanımını kaydet (maliyet görünürlüğü + bütçe).
+  const usage = extractUsage(payload);
+  void recordTokenUsage({
+    model: settings.modelName,
+    promptTokens: usage.promptTokens,
+    completionTokens: usage.completionTokens,
+    kind: "synthesis",
+  });
+
   const raw = readMessageContent(payload);
   const parsed = JSON.parse(extractJsonObject(raw)) as {
     isValidStory?: unknown;
@@ -729,6 +741,64 @@ const globalForPending = globalThis as unknown as {
  * Kaynak kartı için meta veri üretir: her kaynak için ilk görülen
  * makale URL'si ve alınma saati. Aynı kaynaktan gelen tekrarlar atlanır.
  */
+
+/**
+ * FAZ 1.5 — Kümenin kaynak metinlerinden deterministik içerik parmak izi.
+ * Aynı ham içerikler tekrar geldiğinde (RSS gecikmesi, yeniden tarama)
+ * LLM çağrısı yapılmadan atlanır.
+ */
+function hashClusterContent(items: { sourceUrl: string; content: string }[]): string {
+  const payload = [...items]
+    .map((item) => `${item.sourceUrl}::${item.content.length}::${item.content.slice(0, 400)}`)
+    .sort()
+    .join("|");
+
+  return createHash("sha256").update(payload).digest("hex");
+}
+
+/**
+ * FAZ 1.4 — Bağımsız kaynak sayısı.
+ *
+ * `sourcesCount` ham kayıt sayısıdır: aynı medya grubuna ait iki yayın
+ * (ör. NTV + CNBC-e) tek ses sayılır. Rozetler bu değeri kullanır.
+ */
+function countIndependentSources(names: string[]): number {
+  const groups: [string, string[]][] = [
+    ["demiroren", ["hürriyet", "hurriyet", "milliyet", "cnn türk", "cnnturk", "posta"]],
+    ["dogus", ["ntv", "cnbc"]],
+    ["turkuvaz", ["sabah", "atv", "a haber", "a-haber"]],
+    ["anadolu", ["anadolu", "aa"]],
+    ["trt", ["trt"]],
+    ["bbc", ["bbc"]],
+    ["dunya", ["dünya", "dunya"]],
+  ];
+  const seen = new Set<string>();
+
+  for (const raw of names) {
+    const foldedName = normalizeCategoryKey(raw);
+    let group = foldedName;
+
+    for (const [key, members] of groups) {
+      if (members.some((member) => foldedName.includes(normalizeCategoryKey(member)))) {
+        group = key;
+        break;
+      }
+    }
+
+    seen.add(group);
+  }
+
+  return Math.max(1, seen.size);
+}
+
+function normalizeCategoryKey(value: string): string {
+  return value
+    .toLocaleLowerCase("tr-TR")
+    .replace(/[^a-z0-9şğıöçü ]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 function buildSourcesMeta(
   items: {
     sourceName: string;
@@ -825,6 +895,26 @@ async function runSynthesis(
     for (;;) {
       const entry = queue.shift();
       if (!entry) return;
+
+      // FAZ 5.4 — Günlük bütçe %100'e ulaştıysa yeni sentez yapılmaz.
+      const budget = await canSpendTokens();
+      if (budget.state === "blocked") {
+        result.errors.push(
+          `Günlük token bütçesi doldu (${budget.used}/${budget.budget}); üretim duraklatıldı.`,
+        );
+        auditLog("story.budget-blocked", {
+          used: budget.used,
+          budget: budget.budget,
+        });
+        return;
+      }
+      if (budget.state === "warn") {
+        auditLog("story.budget-warn", {
+          used: budget.used,
+          budget: budget.budget,
+          ratio: budget.ratio,
+        });
+      }
 
       const { cluster, sourceNames } = entry;
       const articles = cluster.items.slice(0, MAX_ARTICLES_PER_PROMPT);
@@ -935,6 +1025,63 @@ async function runSynthesis(
           continue;
         }
 
+        // ── FAZ 1.1 — DOĞRULAMA KAPISI ───────────────────────────────────
+        // Özetteki sayı/tarih/isimler kaynak metinlerle karşılaştırılır.
+        // Kaynakta olmayan bir olgu varsa haber YAYINA ALINMAZ.
+        const factCheck = runFactCheck({
+          title: answer.title,
+          summary: answer.summary,
+          body: answer.detailedContent,
+          sources: [
+            ...articles.map((article) => `${article.title} ${article.content}`),
+            historicalContext,
+          ],
+          // Kategori ve site adı kaynak metinde geçmese de olgudur.
+          ignore: [answer.category, "TCFH News"],
+        });
+
+        if (!factCheck.publishable) {
+          await prisma.rawFeedItem.updateMany({
+            where: { id: { in: rawIds } },
+            data: { processedAt: new Date() },
+          });
+          pendingStore().delete(clusterKey);
+          result.rejected += 1;
+          result.errors.push(
+            `${sourceNames.join(", ")}: doğrulama başarısız (${factCheck.summary})`,
+          );
+          auditLog("story.factcheck-failed", {
+            title: answer.title,
+            violations: factCheck.violations.slice(0, 5),
+            checked: factCheck.checked,
+          });
+          continue;
+        }
+
+        // ── FAZ 1.5 — ÖNBELLEK ───────────────────────────────────────────
+        // Aynı kaynak metinlerinden aynı haber ikinci kez sentezlenmesin.
+        const contentHash = hashClusterContent(cluster.items);
+
+        const duplicate = await prisma.newsItem.findFirst({
+          where: { contentHash, removedAt: null },
+          select: { id: true, slug: true },
+        });
+
+        if (duplicate) {
+          await prisma.rawFeedItem.updateMany({
+            where: { id: { in: rawIds } },
+            data: { processedAt: new Date() },
+          });
+          pendingStore().delete(clusterKey);
+          result.published += 0; // tekrar sayılmaz
+          auditLog("story.cache-hit", {
+            title: answer.title,
+            existingSlug: duplicate.slug,
+            contentHash: contentHash.slice(0, 12),
+          });
+          continue;
+        }
+
         // İŞ 3 — Kategori ve etiketler LLM'den değil sınıflandırıcıdan gelir.
         const classification = classifyArticle({
           title: answer.title,
@@ -967,6 +1114,12 @@ async function runSynthesis(
             readingMinutes: readingTimeMinutes(
               `${answer.title} ${answer.summary} ${answer.detailedContent ?? ""}`,
             ),
+            // ── FAZ 1: güven alanları ────────────────────────────────────
+            aiGenerated: true,
+            verifiedSourceCount: countIndependentSources(sourceNames),
+            contentHash,
+            factCheckStatus: factCheck.status,
+            factCheckNotes: factCheck.summary,
           },
         });
 
@@ -985,17 +1138,6 @@ async function runSynthesis(
           );
         } catch {
           // Görsel üretim hatası haber yayınını asla etkilemesin.
-        }
-
-        // YAYILMA: IndexNow bildirimi — arama motorları haberi dakikalar
-        // içinde dizine alsın. Fire-and-forget; yayını asla bloklamaz.
-        try {
-          void submitIndexNow([
-            `/tr/haber/${publishedItem.slug}`,
-            `/en/haber/${publishedItem.slug}`,
-          ]);
-        } catch {
-          // Bildirim hatası yayını etkilemesin.
         }
 
         // PWA otomatik bildirim: fire-and-forget — döngüyü yavaşlatmasın.

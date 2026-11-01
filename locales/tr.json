@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Mikro Haber",
-    "description": "3 bağımsız kaynakla doğrulanmış, yapay zekâ ile sentezlenmiş tarafsız haber akışı.",
+    "description": "Birden fazla kaynakla karşılaştırılan, yapay zekâ ile özetlenen haber akışı",
     "keywords": "haber, özet, sentez, yapay zekâ, rss, doğrulama, gündem"
   },
   "header": {
@@ -62,7 +62,7 @@
     "actions": "İşlemler",
     "singleSource": "Tek kaynak",
     "singleSourceHint": "Bu haber tek kaynağa dayanıyor; bağımsız kaynakla doğrulanmadı.",
-    "sourcesLabel": "Kaynak"
+    "synthesizedNote": "Bu haber {count} bağımsız kaynak ({sources}) analiz edilerek yapay zekâ ile özetlenmiştir."
   },
   "sidebar": {
     "nav": {
@@ -206,7 +206,7 @@
     "audioError": "Sesli özet üretilemedi, tekrar dene",
     "play": "Sesli özeti oynat",
     "pause": "Duraklat",
-    "synthesizedNote": "Bu haber {count} bağımsız kaynak ({sources}) analiz edilerek tarafsız yapay zeka tarafından derlenmiştir.",
+    "synthesizedNote": "Bu haber {count} bağımsız kaynak ({sources}) analiz edilerek yapay zekâ ile özetlenmiştir.",
     "related": "İlgili Haberler",
     "videoExternal": "Video üçüncü taraf sitede (YouTube). Tıkladığınızda YouTube'a veri iletilecektir."
   },
@@ -220,7 +220,12 @@
     "minutes": "dk",
     "speakers": "Konuşmacılar",
     "play": "Dinle",
-    "pause": "Duraklat"
+    "pause": "Duraklat",
+    "digestsTitle": "Günün özeti — sesli bülten",
+    "speed": "Hız",
+    "audioPending": "Ses dosyası henüz hazırlanmadı.",
+    "telegramCta": "Telegram'da takip et",
+    "listenToday": "Sesli dinle"
   },
   "comingSoon": {
     "title": "Yakında",
@@ -362,7 +367,7 @@
         {
           "heading": "Nasıl Çalışır?",
           "body": [
-            "Sistemimiz 30'a yakın yerli ve yabancı haber kaynağını dakikalar içinde tarar. Aynı olayı haberleştiren kaynaklar otomatik olarak birleştirilir; olay, yapay zeka desteğiyle özgün ve tarafsız bir dille yeniden yazılır.",
+            "Sistemimiz 30'a yakın yerli ve yabancı haber kaynağını dakikalar içinde tarar. Aynı olayı haberleştiren kaynaklar otomatik olarak birleştirilir; olay, yapay zeka desteğiyle özgün ve bağımsız bir dille yeniden yazılır.",
             "Yayınlanan her haber, yayına alınmadan önce ve sonrasında yapay zeka destekli ayrı bir kalite denetiminden geçer. Yetersiz veya hatalı bulunan içerikler yayından kaldırılır."
           ]
         },
@@ -1035,7 +1040,9 @@
     "speechDeviceOnly": "Sesli okuma cihazınızda yapılır; sesiniz veya metin talepleriniz hiçbir sunucuya gönderilmez.",
     "resumeTitle": "Kaldığın yerden devam et",
     "resumeBody": "Dinlemeye bıraktığın cümleden sürdürebilirsin.",
-    "dismiss": "Kapat"
+    "dismiss": "Kapat",
+    "singleSource": "Tek kaynak",
+    "singleSourceHint": "Bu haber tek kaynağa dayanıyor; bağımsız kaynakla doğrulanmadı."
   },
   "media": {
     "speechTitle": "Sesli okuma",
@@ -1207,5 +1214,56 @@
     "profile": "Profil",
     "profileHint": "Tercihler ve erişilebilirlik",
     "all": "Tümü"
+  },
+  "trust": {
+    "aiGenerated": "Yapay zekâ ile özetlendi",
+    "lastUpdated": "Son güncelleme: {date}",
+    "report": {
+      "trigger": "Hata bildir",
+      "title": "Bu haberde bir sorun mu var?",
+      "reason": "Neden",
+      "note": "Kısa not (isteğe bağlı)",
+      "notePlaceholder": "Ne yanlış? (en fazla 300 karakter)",
+      "submit": "Gönder",
+      "cancel": "Vazgeç",
+      "success": "Bildiriminiz alındı. Teşekkürler.",
+      "error": "Bildirim gönderilemedi. Tekrar deneyin.",
+      "rateLimited": "Çok fazla bildirim. Lütfen bir süre sonra tekrar deneyin."
+    }
+  },
+  "compare": {
+    "toggle": "Kaynakları karşılaştır",
+    "title": "Kaynaklar ne diyor?",
+    "loading": "Kaynaklar yükleniyor…",
+    "empty": "Bu haber için karşılaştırılabilir kaynak yok.",
+    "error": "Kaynaklar yüklenemedi.",
+    "original": "Orijinal habere git",
+    "source": "Kaynak",
+    "tagsTitle": "Etiketler"
+  },
+  "timeline": {
+    "heading": "Zaman çizelgesi",
+    "digestTitle": "Şu ana kadar ne oldu",
+    "digestUpdated": "Özet güncellendi: {date}",
+    "empty": "Bu konuda henüz haber yok."
+  },
+  "interests": {
+    "title": "İlgi alanlarım",
+    "hint": "Seçimleriniz yalnızca bu cihazda saklanır; sunucuya gönderilmez. Hiçbiri seçilmezse tüm haberler görünür.",
+    "reset": "Tümünü göster",
+    "empty": "Seçim yok — tüm kategoriler gösteriliyor.",
+    "categories": {
+      "Gündem": "Gündem",
+      "Teknoloji": "Teknoloji",
+      "Yapay Zekâ": "Yapay Zekâ",
+      "Ekonomi": "Ekonomi",
+      "Siyaset": "Siyaset",
+      "Spor": "Spor",
+      "Bilim": "Bilim",
+      "Dünya": "Dünya",
+      "Sağlık": "Sağlık",
+      "Kültür": "Kültür",
+      "Diğer": "Diğer"
+    }
   }
 }

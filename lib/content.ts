@@ -57,6 +57,12 @@ export type ContentItem = {
   coverImageCredit: string | null;
   publishedAt: string | null;
   updatedAt: string | null;
+  /** FAZ 1 — içerik yapay zekâ ile üretildi mi. */
+  aiGenerated: boolean;
+  /** FAZ 1 — bağımsız doğrulanmış kaynak sayısı (rozetler bunu kullanır). */
+  verifiedSourceCount: number;
+  /** FAZ 1 — haber kimliği ("Hata bildir" için). */
+  newsId: string;
   readingMinutes: number;
   sourceCount: number;
   subjectType: "kisi" | "kurum" | "olay" | null;
@@ -223,6 +229,10 @@ export async function getPortraitContent(
   return {
     kind: "portre",
     id: row.id,
+    // FAZ 1: portreler de AI üretimi; doğrulanmış kaynak = portre kaynakları.
+    aiGenerated: true,
+    verifiedSourceCount: row.sourceCount,
+    newsId: row.id,
     slug: row.slug,
     title: row.title,
     subtitle: row.subtitle,
@@ -331,6 +341,9 @@ export async function getNewsContent(
     updatedAt: row.auditedAt?.toISOString() ?? null,
     readingMinutes: row.readingMinutes || readingTimeMinutes(`${row.title} ${plainBody}`),
     sourceCount: row.sourcesCount,
+    aiGenerated: row.aiGenerated,
+    verifiedSourceCount: row.verifiedSourceCount,
+    newsId: row.id,
     subjectType: null,
     subjectName: null,
     whyNow,

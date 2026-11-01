@@ -10,6 +10,8 @@ import {
 import { CitationLink } from "@/components/citations/CitationLink";
 import { ContentBehaviors } from "@/components/content/ContentBehaviors";
 import { RemoveNewsButton } from "@/components/RemoveNewsButton";
+import { ReportButton } from "@/components/ReportButton";
+import { SourceComparison } from "@/components/content/SourceComparison";
 import { ListenControls } from "@/components/media/ListenControls";
 import { ReadingToolbar } from "@/components/ReadingToolbar";
 import { SaveButton } from "@/components/SaveButton";
@@ -52,6 +54,8 @@ export function ContentArticle({
   canModerate = false,
 }: Props) {
   const t = dict.content;
+  // FAZ 1 — güven etiketleri (yapay zekâ île özetlendi / son güncelleme / hata bildir).
+  const trust = dict.trust;
   const citationLabels = dict.citations;
   // Atıf hedefleri içerik başına yalnızca bir kez işaretlenir.
   const usedCitations = new Set<string>();
@@ -150,10 +154,19 @@ export function ContentArticle({
             </span>
           ) : null}
 
-          {content.sourceCount > 0 ? (
+          {/* FAZ 1.4 — rozet DOĞRULANMIŞ kaynak sayısını gösterir; ham kayıt
+              sayısı (sourceCount) medya grubu tekilleştirmesi içermez. */}
+          {content.verifiedSourceCount > 1 ? (
             <span className="inline-flex items-center gap-space-1 rounded-full border border-emerald-500/25 bg-emerald-500/10 px-space-3 py-space-1 t-label font-semibold text-emerald-400">
               <CheckIcon className="h-3 w-3" />
-              {t.verified.replace("{count}", String(content.sourceCount))}
+              {t.verified.replace("{count}", String(content.verifiedSourceCount))}
+            </span>
+          ) : content.verifiedSourceCount === 1 ? (
+            <span
+              className="inline-flex items-center gap-space-1 rounded-full border border-amber-500/25 bg-amber-500/10 px-space-3 py-space-1 t-label font-semibold text-amber-400"
+              title={t.singleSourceHint ?? ""}
+            >
+              {t.singleSource}
             </span>
           ) : null}
         </div>
@@ -162,6 +175,24 @@ export function ContentArticle({
         <h1 className="t-h1 mt-spot-meta text-zinc-50">
           {content.title}
         </h1>
+
+        {/* FAZ 1.1 — "Yapay zekâ ile özetlendi · Son güncelleme" */}
+        {content.aiGenerated ? (
+          <p className="mt-space-2 flex flex-wrap items-center gap-x-space-2 gap-y-space-1 text-[11px] text-zinc-500">
+            <span className="inline-flex items-center gap-space-1 rounded-full border border-violet-500/25 bg-violet-500/10 px-space-2 py-space-1 font-semibold text-violet-300">
+              <span aria-hidden="true">✦</span>
+              {trust.aiGenerated}
+            </span>
+            {content.updatedAt ? (
+              <time dateTime={content.updatedAt}>
+                {trust.lastUpdated.replace(
+                  "{date}",
+                  formatDateTime(content.updatedAt, lang),
+                )}
+              </time>
+            ) : null}
+          </p>
+        ) : null}
 
         {/* Meta */}
         <div className="mt-space-2 flex flex-wrap items-center gap-x-space-3 gap-y-space-1 text-[11px] text-zinc-500">
@@ -580,6 +611,19 @@ export function ContentArticle({
               ))}
             </ul>
           </section>
+        ) : null}
+
+        {/* FAZ 2.1 — Kaynakları karşılaştır (yalnızca haberlerde). */}
+        {content.kind === "haber" && content.newsId ? (
+          <SourceComparison newsId={content.newsId} labels={dict.compare} />
+        ) : null}
+
+        {/* FAZ 1.2 — Hata bildir. Yalnızca haberlerde (portrelerde değil:
+            portre düzeltmesi editör panelinden yapılır). */}
+        {content.kind === "haber" && content.newsId ? (
+          <div className="mt-space-6 border-t border-[#22252a] pt-space-4">
+            <ReportButton newsId={content.newsId} labels={trust.report} />
+          </div>
         ) : null}
       </div>
     </article>

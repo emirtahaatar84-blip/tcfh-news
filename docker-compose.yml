@@ -3,8 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: tcfh-news:latest
-    container_name: tcfh-news
+    image: micro-news:latest
+    container_name: micro-news
     restart: unless-stopped
     init: true
     ports:
@@ -18,7 +18,7 @@ services:
       ADMIN_USER: "${ADMIN_USER:-admin}"
       ADMIN_PASSWORD: "${ADMIN_PASSWORD:?ADMIN_PASSWORD must be set in .env}"
       DEFAULT_LOCALE: "${DEFAULT_LOCALE:-tr}"
-      SITE_URL: "${SITE_URL:-https://news.emirtahaatar.com.tr}"
+      SITE_URL: "${SITE_URL:-http://localhost:3000}"
       ENABLE_INTERNAL_CRON: "${ENABLE_INTERNAL_CRON:-true}"
       CRON_SECRET_KEY: "${CRON_SECRET_KEY:-}"
       # ── Google OAuth (Auth.js / NextAuth v5) ────────────────────────────
@@ -26,7 +26,7 @@ services:
       GOOGLE_CLIENT_ID: "${GOOGLE_CLIENT_ID:-}"
       GOOGLE_CLIENT_SECRET: "${GOOGLE_CLIENT_SECRET:-}"
       AUTH_SECRET: "${AUTH_SECRET:-}"
-      AUTH_URL: "${AUTH_URL:-https://emirtahaatar.com.tr}"
+      AUTH_URL: "${AUTH_URL:-http://localhost:3000}"
       # ── Portre hattı (İŞ 1) ─────────────────────────────────────────────
       # Sabit saatler lib/hq/config.ts → SCHEDULE (08:30 / 19:00 / 00:15 TSİ).
       # Gölge mod: AUTO_PUBLISH=true + SHADOW_START tarihi ile kademeli açılış.
@@ -43,7 +43,14 @@ services:
       ENABLE_CITATION_AUDIT: "${ENABLE_CITATION_AUDIT:-true}"
       # ── Web Push (PWA bildirimleri) ──────────────────────────────────────
       # Anahtar üretimi: npx web-push generate-vapid-keys
-      INDEXNOW_KEY: "${INDEXNOW_KEY:-}"
+      # FAZ 4: Telegram botu (günlük özet)
+      TELEGRAM_BOT_TOKEN: "${TELEGRAM_BOT_TOKEN:-}"
+      TELEGRAM_BOT_USERNAME: "${TELEGRAM_BOT_USERNAME:-}"
+      TELEGRAM_WEBHOOK_SECRET: "${TELEGRAM_WEBHOOK_SECRET:-}"
+      LLM_DAILY_TOKEN_BUDGET: "${LLM_DAILY_TOKEN_BUDGET:-0}"
+      TELEGRAM_ALERT_CHAT_ID: "${TELEGRAM_ALERT_CHAT_ID:-}"
+      ENABLE_PIPELINE_ALERT: "${ENABLE_PIPELINE_ALERT:-true}"
+      ENABLE_DIGEST_CRON: "${ENABLE_DIGEST_CRON:-true}"
       VAPID_PUBLIC_KEY: "${VAPID_PUBLIC_KEY:-}"
       VAPID_PRIVATE_KEY: "${VAPID_PRIVATE_KEY:-}"
       VAPID_SUBJECT: "${VAPID_SUBJECT:-mailto:admin@example.com}"
@@ -77,6 +84,6 @@ services:
 
 volumes:
   news_data:
-    name: tcfh_news_data
+    name: micro_news_data
   news_media:
-    name: tcfh_news_media
+    name: micro_news_media

@@ -104,11 +104,11 @@ describe("buildPushPayload", () => {
   it("url ve tag doğru kurulur", () => {
     const payload = buildPushPayload(
       { id: "abc123", title: "Test haberi", category: "Teknoloji" },
-      "emirtahaatar.com.tr",
+      "TCFH News",
     );
 
     expect(payload).toEqual({
-      title: "emirtahaatar.com.tr",
+      title: "TCFH News",
       body: "Test haberi",
       url: "/tr/news/abc123",
       tag: "Teknoloji",

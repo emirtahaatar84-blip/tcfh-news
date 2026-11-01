@@ -10,6 +10,8 @@ import {
 } from "react";
 import Link from "next/link";
 import { NewsCard } from "@/components/NewsCard";
+import { useDevicePrefs } from "@/components/DevicePrefsProvider";
+import { matchesInterests } from "@/components/feed/InterestFilter";
 import { NewsCardSkeleton } from "@/components/NewsCardSkeleton";
 import { PortraitFeedCard } from "@/components/feed/PortraitFeedCard";
 import { AlertTriangleIcon, InboxIcon } from "@/components/icons";
@@ -99,6 +101,10 @@ export function Feed({
   portraits,
   labels,
 }: Props) {
+  // FAZ 3.3 — cihazdaki ilgi alanları (localStorage). Sunucuya gitmez.
+  const { prefs } = useDevicePrefs();
+  const interests = prefs.interests ?? [];
+
   const [items, setItems] = useState<FeedNewsItem[]>(initialItems);
   const [page, setPage] = useState(initialPage);
   const [hasMore, setHasMore] = useState(initialHasMore);
@@ -140,6 +146,8 @@ export function Feed({
 
     const visible = items.filter((item) => {
       if (seen.has(item.id) || closedIds.has(item.id)) return false;
+      // FAZ 3.3 — kişisel ilgi alanı filtresi (yalnızca cihazdaki tercih).
+      if (!matchesInterests(item.category, interests)) return false;
       seen.add(item.id);
       return true;
     });
@@ -160,7 +168,8 @@ export function Feed({
     });
 
     return output;
-  }, [closedIds, items, portraits]);
+  }, [// eslint-disable-next-line react-hooks/exhaustive-deps
+    interests,closedIds, items, portraits]);
 
   entriesRef.current = entries;
   const total = entries.length;
@@ -624,11 +633,12 @@ export function Feed({
       ) : null}
 
       <div className="feed-stack">
+        {/* feed-item: FAZ 5 — ekran dışı kartların layout hesabı atlanır. */}
         {rendered.map((entry, index) => (
           <div
             key={entry.key}
             data-entry-key={entry.key}
-            className="animate-fade-in"
+            className="feed-item animate-fade-in"
             style={{ animationDelay: `${Math.min(index, 6) * 40}ms` }}
             onClickCapture={(event) => {
               // Akış kartlarından tam sayfa gezinme: geri tuşu aynı sayfa

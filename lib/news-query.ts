@@ -195,7 +195,7 @@ export function feedHref(lang: string, filters: FeedFilters): string {
 }
 
 /** Akış sayfası boyutu ve güvenli sayfa numarası çözümlemesi. */
-export const FEED_PAGE_SIZE = 20;
+export const FEED_PAGE_SIZE = 12;
 export const MAX_FEED_PAGE = 12;
 
 export function parseFeedPage(

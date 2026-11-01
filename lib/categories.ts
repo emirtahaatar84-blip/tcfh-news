@@ -184,15 +184,15 @@ export const CATEGORY_BADGE_CLASSES: Record<Category, string> = {
 /** Icon tile background + icon color per category. */
 export const CATEGORY_AVATAR_CLASSES: Record<Category, string> = {
   Gündem: "bg-[#22252a] text-zinc-300",
-  Teknoloji: "bg-[#22252a] text-yellow-500",
+  Teknoloji: "bg-[#22252a] text-yellow-300",
   "Yapay Zekâ": "bg-[#22252a] text-cyan-400",
-  Ekonomi: "bg-[#22252a] text-emerald-500",
-  Siyaset: "bg-[#22252a] text-red-500",
-  Spor: "bg-[#22252a] text-orange-500",
-  Bilim: "bg-[#22252a] text-blue-500",
-  Dünya: "bg-[#22252a] text-sky-500",
-  Sağlık: "bg-[#22252a] text-rose-500",
-  Kültür: "bg-[#22252a] text-violet-500",
+  Ekonomi: "bg-[#22252a] text-emerald-300",
+  Siyaset: "bg-[#22252a] text-red-300",
+  Spor: "bg-[#22252a] text-orange-300",
+  Bilim: "bg-[#22252a] text-blue-300",
+  Dünya: "bg-[#22252a] text-sky-300",
+  Sağlık: "bg-[#22252a] text-rose-300",
+  Kültür: "bg-[#22252a] text-violet-300",
   Diğer: "bg-[#22252a] text-zinc-400",
 };
 

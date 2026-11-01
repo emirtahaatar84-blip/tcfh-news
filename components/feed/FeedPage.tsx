@@ -1,6 +1,10 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { preload } from "react-dom";
 import { Feed } from "@/components/Feed";
+import { InterestFilter } from "@/components/feed/InterestFilter";
+import { telegramBotUrl } from "@/lib/telegram";
+import { listDigests } from "@/lib/digest";
 import { ThreeColumn } from "@/components/layout/ThreeColumn";
 import type { RailItem } from "@/components/layout/rail-types";
 import {
@@ -47,6 +51,9 @@ type Props = {
 export async function FeedView({ lang: rawLang, searchParams, basePath }: Props) {
   if (!isLocale(rawLang)) notFound();
   const lang: Locale = rawLang;
+  // FAZ 4 — Telegram linki (env'den) ve son sesli bülten var mı.
+  const telegramUrl = telegramBotUrl();
+  const latestDigest = (await listDigests(1))[0] ?? null;
 
   const category = categoryFromSlug(first(searchParams.kategori));
   const sort = first(searchParams.sirala) === "okunan" ? "okunan" : "yeni";
@@ -170,6 +177,36 @@ export async function FeedView({ lang: rawLang, searchParams, basePath }: Props)
           </a>
         </p>
       ) : null}
+
+      {/* FAZ 4 — Telegram aboneliği + günün özeti kısayolları. */}
+      <div className="mb-space-4 flex flex-wrap items-center gap-space-2">
+        {telegramUrl ? (
+          <a
+            href={telegramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-[var(--size-touch)] items-center gap-space-2 rounded-full border border-[#229ED9]/40 bg-[#229ED9]/10 px-space-4 text-meta font-semibold text-[#7fc9ea] transition hover:bg-[#229ED9]/20"
+          >
+            <span aria-hidden="true">✈</span>
+            {dict.podcast.telegramCta ?? "Telegram"}
+          </a>
+        ) : null}
+
+        {latestDigest ? (
+          <Link
+            href={`/${lang}/podcast`}
+            className="inline-flex min-h-[var(--size-touch)] items-center gap-space-2 rounded-full border border-[#22252a] px-space-4 text-meta font-semibold text-zinc-300 transition hover:border-[#31363e] hover:text-zinc-100"
+          >
+            <span aria-hidden="true">♪</span>
+            {dict.podcast.listenToday ?? "Sesli dinle"}
+          </Link>
+        ) : null}
+      </div>
+
+      {/* FAZ 3.3 — kişisel ilgi filtresi (localStorage; sunucuya gitmez). */}
+      <div className="mb-space-4">
+        <InterestFilter labels={dict.interests} />
+      </div>
 
       <Feed
         lang={lang}

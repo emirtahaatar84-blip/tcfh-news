@@ -34,10 +34,12 @@ type DevicePrefsContextValue = {
   setFontSize: (size: FontSizePreference) => void;
   setLineHeight: (height: LineHeightPreference) => void;
   setReadingMode: (enabled: boolean) => void;
-  setFont: (font: FontPreference) => void;
   setReadMarks: (enabled: boolean) => void;
   setAutoRead: (enabled: boolean) => void;
   setDensity: (density: DensityPreference) => void;
+  /** FAZ 3.3 — kişisel ilgi alanları (yalnızca localStorage, sunucuya gitmez). */
+  setInterests: (interests: string[]) => void;
+  setFont: (font: FontPreference) => void;
   /** Ekranda gerçekten uygulanan yoğunluk ("auto" çözümlenmiş hâli). */
   resolvedDensity: Density;
 };
@@ -178,6 +180,8 @@ export function DevicePrefsProvider({ children }: { children: React.ReactNode })
       setLineHeight: (lineHeight) => update({ lineHeight }),
       setReadingMode: (readingMode) => update({ readingMode }),
       setFont: (font) => update({ font }),
+      setInterests: (interests) =>
+        update({ interests: [...new Set(interests)].slice(0, 12) }),
       setReadMarks: (readMarks) => update({ readMarks }),
       setAutoRead,
       setDensity: (density) => update({ density }),

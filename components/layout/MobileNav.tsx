@@ -87,10 +87,9 @@ export function MobileNav({ lang, labels }: Props) {
               <Link
                 href={item.href}
                 aria-current={isActive ? "page" : undefined}
-                aria-label={"ariaLabel" in item ? item.ariaLabel : item.label}
                 title={"ariaLabel" in item ? item.ariaLabel : item.label}
                 className={`flex min-h-[var(--size-bottom-nav)] min-w-0 flex-col items-center justify-center gap-space-1 overflow-hidden px-space-0 text-label transition-colors ${
-                  isActive ? "text-blue-500" : "text-zinc-500 hover:text-zinc-300"
+                  isActive ? "text-blue-400" : "text-zinc-400 hover:text-zinc-200"
                 }`}
               >
                 <span className="relative">

@@ -9,6 +9,7 @@ import { getDictionary } from "@/lib/i18n";
 import { isLocale, type Locale } from "@/lib/i18n-config";
 import { formatDateTime } from "@/lib/datetime";
 import { prisma } from "@/lib/prisma";
+import { listTags } from "@/lib/source-compare";
 
 export const dynamic = "force-dynamic";
 
@@ -50,6 +51,9 @@ export default async function SearchPage({ params, searchParams }: PageProps) {
   const query = first(resolved.q);
   const categoryRaw = first(resolved.category);
   const category = isCategory(categoryRaw) ? categoryRaw : null;
+  // FAZ 2.4 — etiket filtresi: ?etiket=nvidia
+  const tagRaw = first(resolved.etiket).replace(/^@/, "");
+  const tag = /^[\p{L}\p{N}-]{2,40}$/u.test(tagRaw) ? tagRaw : null;
 
   const portraits = query
     ? await prisma.portrait.findMany({
@@ -74,10 +78,14 @@ export default async function SearchPage({ params, searchParams }: PageProps) {
         where: {
           removedAt: null,
           ...(category ? { category } : {}),
+          ...(tag ? { tags: { contains: `"@${tag}"` } } : {}),
           OR: [
             { title: { contains: query } },
             { summary: { contains: query } },
             { sourcesList: { contains: query } },
+            // FAZ 2.4 — etiketlerde de ara.
+            { tags: { contains: query } },
+            { tags: { contains: query.replace(/^@/, "") } },
           ],
         },
         orderBy: [{ createdAt: "desc" }, { id: "desc" }],
@@ -86,6 +94,9 @@ export default async function SearchPage({ params, searchParams }: PageProps) {
     : [];
 
   const total = portraits.length + news.length;
+
+  // FAZ 2.3 — etiket önerileri (en sık kullanılanlar).
+  const popularTags = await listTags(18);
 
   return (
     <div className="mx-auto max-w-3xl px-space-3 pb-space-7 pt-space-4 sm:px-space-5">
@@ -105,6 +116,40 @@ export default async function SearchPage({ params, searchParams }: PageProps) {
           clearLabel={dict.searchPage.clear}
         />
       </div>
+
+      {/* FAZ 2.3 — etiket önerileri; tıklayınca ?etiket= ile filtrelenir. */}
+      {popularTags.length > 0 ? (
+        <div className="mt-space-3">
+          <p className="mb-space-2 text-[11px] font-semibold text-zinc-500">
+            {dict.compare.tagsTitle}
+          </p>
+          <div className="flex flex-wrap gap-space-2">
+            {popularTags.map((item) => {
+              const slug = item.tag.replace(/^@/, "");
+              const active = tag === slug;
+              const href = active
+                ? `/${lang}/ara${query ? `?q=${encodeURIComponent(query)}` : ""}`
+                : `/${lang}/ara?q=${encodeURIComponent(query || slug)}&etiket=${encodeURIComponent(slug)}`;
+
+              return (
+                <Link
+                  key={item.tag}
+                  href={href}
+                  aria-pressed={active}
+                  className={`inline-flex min-h-[36px] items-center gap-space-1 rounded-full border px-space-3 text-label font-semibold transition ${
+                    active
+                      ? "border-blue-500/40 bg-blue-500/15 text-blue-300"
+                      : "border-[#22252a] bg-[#16181c] text-zinc-400 hover:border-[#31363e] hover:text-zinc-200"
+                  }`}
+                >
+                  {item.tag}
+                  <span className="text-zinc-600">{item.count}</span>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      ) : null}
 
       <div className="scrollbar-hide mt-space-3 flex gap-space-2 overflow-x-auto pb-space-1">
         <Link
@@ -218,7 +263,7 @@ export default async function SearchPage({ params, searchParams }: PageProps) {
           </h2>
           <ul className="mt-space-2 divide-y divide-[#22252a]/70">
             {news.map((item) => (
-              <li key={item.id}>
+              <li key={item.id} className="list-item-lazy">
                 <Link
                   href={`/${lang}/haber/${item.slug ?? item.id}`}
                   className="group flex flex-col py-space-3"
