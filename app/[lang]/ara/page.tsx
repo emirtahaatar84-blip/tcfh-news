@@ -9,6 +9,7 @@ import { getDictionary } from "@/lib/i18n";
 import { isLocale, type Locale } from "@/lib/i18n-config";
 import { formatDateTime } from "@/lib/datetime";
 import { prisma } from "@/lib/prisma";
+import { searchNews } from "@/lib/search-fts";
 import { listTags } from "@/lib/source-compare";
 
 export const dynamic = "force-dynamic";
@@ -73,27 +74,17 @@ export default async function SearchPage({ params, searchParams }: PageProps) {
       })
     : [];
 
-  const news = query
-    ? await prisma.newsItem.findMany({
-        where: {
-          removedAt: null,
-          ...(category ? { category } : {}),
-          ...(tag ? { tags: { contains: `"@${tag}"` } } : {}),
-          OR: [
-            { title: { contains: query } },
-            { summary: { contains: query } },
-            { sourcesList: { contains: query } },
-            // FAZ 2.4 — etiketlerde de ara.
-            { tags: { contains: query } },
-            { tags: { contains: query.replace(/^@/, "") } },
-          ],
-        },
-        orderBy: [{ createdAt: "desc" }, { id: "desc" }],
-        take: 12,
+  // Haberlerde FTS5 araması (bm25). Portre araması ayrı kalır.
+  const newsResult = query
+    ? await searchNews(query, {
+        category,
+        tag,
+        pageSize: 12,
       })
-    : [];
+    : { items: [], total: 0, took_ms: 0 };
+  const news = newsResult.items;
 
-  const total = portraits.length + news.length;
+  const total = portraits.length + newsResult.total;
 
   // FAZ 2.3 — etiket önerileri (en sık kullanılanlar).
   const popularTags = await listTags(18);

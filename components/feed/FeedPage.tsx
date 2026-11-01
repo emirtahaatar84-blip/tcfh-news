@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { preload } from "react-dom";
 import { Feed } from "@/components/Feed";
 import { InterestFilter } from "@/components/feed/InterestFilter";
+import { rankByImportance, computeImportance } from "@/lib/importance";
+import { dedupeByTopic } from "@/lib/dedupe";
 import { telegramBotUrl } from "@/lib/telegram";
 import { listDigests } from "@/lib/digest";
 import { ThreeColumn } from "@/components/layout/ThreeColumn";
@@ -79,11 +81,13 @@ export async function FeedView({ lang: rawLang, searchParams, basePath }: Props)
     getDictionary(lang),
     prisma.newsItem.findMany({
       where,
+      // "yeni" sıralaması artık UYGULAMA İÇİNDE yapılır (önem skoru).
+      // Bu yüzden aday havuzu geniş tutulur: 3× sayfa boyutu.
       orderBy:
         sort === "okunan"
           ? [{ viewCount: "desc" }, { createdAt: "desc" }, { id: "desc" }]
           : [{ createdAt: "desc" }, { id: "desc" }],
-      take: wanted + 1,
+      take: sort === "okunan" ? wanted + 1 : Math.min(120, wanted * 3),
     }),
     prisma.portrait.findMany({
       where: { status: "published", removedAt: null },
@@ -93,8 +97,67 @@ export async function FeedView({ lang: rawLang, searchParams, basePath }: Props)
     prisma.newsItem.count({ where }),
   ]);
 
-  const initialItems = rows.slice(0, wanted).map(serializeNewsItem);
-  const initialHasMore = rows.length > wanted;
+  // ── ÖNEM SIRALAMASI + TEKRAR BASTIRMA ────────────────────────────────
+  // Amaç: "her haberi" değil "gerekli haberleri" göstermek.
+  //   1. Her adaya 0-100 önem skoru ver (kaynak, kategori, Türkiye ilgisi,
+  //      tazelik, kalite).
+  //   2. Skora göre sırala.
+  //   3. Aynı konudan 24 saatte yalnızca birini bırak.
+  //   4. İlk `wanted` tanesini göster.
+  type Row = (typeof rows)[number];
+
+  const candidates = rows.map((row: Row) => ({
+    id: row.id,
+    row,
+    title: row.title,
+    summary: row.summary,
+    category: row.category,
+    sourcesCount: row.sourcesCount,
+    verifiedSourceCount: row.verifiedSourceCount,
+    createdAt: row.createdAt,
+    qualityScore: row.qualityScore,
+    factCheckStatus: row.factCheckStatus,
+  }));
+
+  const ordered =
+    sort === "okunan"
+      ? candidates.map((item, index) => ({ ...item, index, score: 0 }))
+      : rankByImportance(candidates).map((item, index) => ({
+          ...item,
+          index,
+          score: item.importance.score,
+        }));
+
+  const deduped =
+    sort === "okunan"
+      ? ordered
+      : (() => {
+          const result = dedupeByTopic(ordered, { scoreOf: (item) => item.score });
+          // Bastırılanların sırasını korumak için orijinal index'e göre diz.
+          return result.kept.sort((a, b) => a.index - b.index);
+        })();
+
+  // ÖNE ÇIKANLAR: yalnızca ana sayfa, filtresiz görünümde ilk 3 "top story".
+  const topStories =
+    !category && !query && sort !== "okunan"
+      ? ordered
+          .filter((entry) => {
+            const imp = (entry as { importance?: { isTopStory: boolean } }).importance;
+            return imp?.isTopStory === true;
+          })
+          .slice(0, 3)
+          .map((entry) => ({
+            id: entry.row.id,
+            slug: entry.row.slug ?? entry.row.id,
+            title: entry.row.title,
+            category: entry.row.category,
+            verifiedSourceCount: entry.row.verifiedSourceCount,
+          }))
+      : [];
+
+  const initialItems = deduped.slice(0, wanted).map((entry) => serializeNewsItem(entry.row));
+  const initialHasMore =
+    sort === "okunan" ? rows.length > wanted : deduped.length > wanted;
 
   const portraitCards = portraitRows.map(serializePortraitCard);
   const portraits = portraitCards.slice(0, 12);
@@ -176,6 +239,44 @@ export async function FeedView({ lang: rawLang, searchParams, basePath }: Props)
             {dict.filters.clearAll}
           </a>
         </p>
+      ) : null}
+
+      {/* ÖNE ÇIKANLAR — günün en yüksek önem skorlu haberleri.
+          Yalnızca ana sayfada ve filtresiz görünümde gösterilir. */}
+      {topStories.length > 0 ? (
+        <section aria-labelledby="top-stories" className="mb-space-5">
+          <h2 id="top-stories" className="section-title mb-space-3">
+            {lang === "en" ? "Top stories" : "Öne çıkanlar"}
+          </h2>
+          <ol className="grid gap-space-2 sm:grid-cols-3">
+            {topStories.map((story, index) => (
+              <li key={story.id}>
+                <Link
+                  href={`/${lang}/haber/${story.slug}`}
+                  className="group flex h-full flex-col gap-space-2 rounded-2xl border border-[#22252a] bg-[#16181c] p-space-3 transition hover:border-[#31363e]"
+                >
+                  <span className="flex items-center gap-space-2 text-[11px] font-bold text-blue-400">
+                    <span
+                      aria-hidden="true"
+                      className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-500/15"
+                    >
+                      {index + 1}
+                    </span>
+                    {story.category}
+                    {story.verifiedSourceCount > 1 ? (
+                      <span className="text-emerald-400">
+                        · {story.verifiedSourceCount} kaynak
+                      </span>
+                    ) : null}
+                  </span>
+                  <span className="line-clamp-3 text-[13px] font-semibold leading-snug text-zinc-200 group-hover:text-zinc-50">
+                    {story.title}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ol>
+        </section>
       ) : null}
 
       {/* FAZ 4 — Telegram aboneliği + günün özeti kısayolları. */}

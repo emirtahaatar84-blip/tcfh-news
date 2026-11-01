@@ -3,6 +3,31 @@
 Bu dosya [Keep a Changelog](https://keepachangelog.com/tr/1.1.0/) biçimini izler.
 Sürümleme politikası için [VERSIONING.md](VERSIONING.md).
 
+## [0.2.6] — 2026-11-02 · **alfa**
+
+Akış kalitesi: "her haberi" değil "gerekli haberler".
+
+### Eklendi
+- `lib/importance.ts` — Haber Önem Skoru (0-100): doğrulama %35, kategori
+  %20, Türkiye ilgisi %20, tazelik %15, kalite %10. Eşikler: ≥65 öne çıkan,
+  <30 düşük değerli.
+- `lib/dedupe.ts` — aynı konudan 24 saatte 1 haber; haberler silinmez,
+  yalnızca akış sıralamasında bastırılır. Türkçe gövdeleme ilk 4 karakter
+  (ek soyma ölçümde başarısız oldu: 0.38 vs 0.70).
+- `lib/search-fts.ts` — SQLite FTS5 + bm25 alaka sıralaması, yazım toleransı
+  (Levenshtein ≤2). Ölçüm: `faiz` 28 sonuç 9 ms, `enflasyonn` 2 sonuç.
+- "Öne çıkanlar" bölümü (ana sayfa, skor ≥65 ilk 3)
+- 19 yeni test (toplam 208)
+
+### Değişti
+- Akış sıralaması: tarih → önem skoru (eşitlikte tarih)
+- Arama: `LIKE` → FTS5 (FTS yoksa zarif `LIKE` yedeği)
+- `GET /api/search`: `kategori`, `gun`, `minKaynak`, `page`, `limit` parametreleri
+
+### Notlar
+- Yeni bağımlılık yok (FTS5 SQLite yerleşik)
+- Migration: `20261101200000_fts5_search` (contentless_delete modu)
+
 ## [0.2.5] — 2026-11-01 · **alfa**
 
 Beş fazlık güven ve altyapı çalışması. Bu sürümden sonra ürün **beta**'ya hazırlanır.
