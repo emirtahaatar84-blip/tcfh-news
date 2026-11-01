@@ -136,6 +136,21 @@ docs/               Mimari ve modül belgeleri
 
 `CONTRIBUTING.md` dosyasına bakın.
 
+## Yol haritası
+
+**Mevcut sürüm: `0.2.5` (alfa)** · Beta: `0.5.0`
+
+| Faz | Sürüm | Konu |
+|---|---|---|
+| 6 | 0.3.0 | Arama ve keşif (FTS5) |
+| 7 | 0.3.5 | PWA ve çevrimdışı |
+| 8 | 0.4.0 | SEO ve structured data |
+| 9 | 0.4.5 | Performans |
+| **10** | **0.5.0** | **BETA** — editör ve moderasyon |
+| 11–15 | 0.5.5 → 0.7.5 | Analitik, bülten, içerik, CI, kararlılık |
+
+Ayrıntı: [ROADMAP.md](ROADMAP.md) · Değişiklikler: [CHANGELOG.md](CHANGELOG.md)
+
 ## Lisans
 
 GNU Affero General Public License v3.0 or later — [LICENSE](LICENSE).
