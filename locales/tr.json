@@ -1,8 +1,8 @@
 {
   "meta": {
     "title": "Mikro Haber",
-    "description": "Birden fazla kaynakla karşılaştırılan, yapay zekâ ile özetlenen haber akışı",
-    "keywords": "haber, özet, sentez, yapay zekâ, rss, doğrulama, gündem"
+    "description": "Teknoloji ve yapay zekâ haberleri; dünya gündemi ve takip edilen kulüplerle birlikte, birden fazla kaynakla karşılaştırılarak yapay zekâ ile özetlenir.",
+    "keywords": "teknoloji haberleri, yapay zekâ, yapay zeka, çip, yazılım, OpenAI, Nvidia, Apple, Google, dünya gündemi, spor"
   },
   "header": {
     "admin": "Yönetim paneli",
@@ -252,7 +252,7 @@
         {
           "heading": "1. Veri Sorumlusu",
           "body": [
-            "Bu site bu site adresinde yayımlanan bağımsız bir haber sentez platformudur. Veri sorumlusu ile iletişim: iletisim@example.com."
+            "Bu site emirtahaatar.com.tr adresinde yayımlanan bağımsız bir haber sentez platformudur. Veri sorumlusu ile iletişim: emirtahaatar84@gmail.com."
           ]
         },
         {
@@ -296,7 +296,7 @@
           "heading": "7. KVKK Madde 11 Kapsamındaki Haklarınız",
           "body": [
             "Kişisel verinizin işlenip işlenmediğini öğrenme, işlenmişse bilgi talep etme, işlenme amacını öğrenme, eksik/yanlış işlenmişse düzeltilmesini isteme, silinmesini/yok edilmesini isteme ve kanuna aykırı işleme nedeniyle zararın giderilmesini talep etme haklarına sahipsiniz.",
-            "Sitede kişisel veri işlenmediği için bu hakların kullanımına konu veri bulunmamaktadır. Yine de başvurunuzu iletisim@example.com adresine iletebilirsiniz; talepler en geç 30 gün içinde yanıtlanır."
+            "Sitede kişisel veri işlenmediği için bu hakların kullanımına konu veri bulunmamaktadır. Yine de başvurunuzu emirtahaatar84@gmail.com adresine iletebilirsiniz; talepler en geç 30 gün içinde yanıtlanır."
           ]
         }
       ]
@@ -321,7 +321,7 @@
         {
           "heading": "3. Sorumluluk Sınırlaması",
           "body": [
-            "Doğrulama sürecine rağmen sentez içeriklerde hatalar oluşabilir. Kriti̇k bilgiler için olayın tarafı olan kaynakları doğrudan kontrol etmeniz önerilir. Sorularınız için: iletisim@example.com."
+            "Doğrulama sürecine rağmen sentez içeriklerde hatalar oluşabilir. Kriti̇k bilgiler için olayın tarafı olan kaynakları doğrudan kontrol etmeniz önerilir. Sorularınız için: emirtahaatar84@gmail.com."
           ]
         }
       ]
@@ -340,7 +340,7 @@
         {
           "heading": "2. Uyar-Kaldır Talebi",
           "body": [
-            "Telif hakkına sahip olduğunuz bir içeriğin izinsiz kullanıldığını düşünüyorsanız iletisim@example.com adresine şunları gönderin: (a) içeriğin sitedeki tam bağlantısı, (b) hak sahipliğinizi gösteren bilgi, (c) iletişim bilginiz.",
+            "Telif hakkına sahip olduğunuz bir içeriğin izinsiz kullanıldığını düşünüyorsanız emirtahaatar84@gmail.com adresine şunları gönderin: (a) içeriğin sitedeki tam bağlantısı, (b) hak sahipliğinizi gösteren bilgi, (c) iletişim bilginiz.",
             "Sitede kaldırma talebi için FORM BULUNMAZ; kişisel veri toplamamak amacıyla yalnızca e-posta kullanılır.",
             "Talepler en geç 72 saat içinde incelenir; haklı bulunan içerikler yayından kaldırılır."
           ]
@@ -360,7 +360,7 @@
         {
           "heading": "Platform Hakkında",
           "body": [
-            "bu site, yerli ve yabancı haber kaynaklarını sürekli izleyen bağımsız bir haber sentez platformudur. Amacımız, aynı olaya ilişkin dağınık bilgileri tek, anlaşılır ve özgün bir haberde birleştirmektir.",
+            "emirtahaatar.com.tr, yerli ve yabancı haber kaynaklarını sürekli izleyen bağımsız bir haber sentez platformudur. Amacımız, aynı olaya ilişkin dağınık bilgileri tek, anlaşılır ve özgün bir haberde birleştirmektir.",
             "Platform; gündem, teknoloji, bilim, spor, ekonomi ve daha birçok kategoride güncel haber akışı, sesli özetler ve yapay zeka destekli podcast bölümleri sunar."
           ]
         },
@@ -382,7 +382,7 @@
         {
           "heading": "İletişim",
           "body": [
-            "Görüş, düzeltme ve içerik kaldırma talepleriniz için: iletisim@example.com"
+            "Görüş, düzeltme ve içerik kaldırma talepleriniz için: emirtahaatar84@gmail.com"
           ]
         }
       ]
@@ -462,7 +462,7 @@
       "title": "Genel Ayarlar",
       "description": "Sitenin adı başlıkta ve tarayıcı sekmesinde görünür.",
       "siteName": "Site adı",
-      "siteNamePlaceholder": "Örn. bu site",
+      "siteNamePlaceholder": "Örn. emirtahaatar.com.tr",
       "save": "Kaydet",
       "saving": "Kaydediliyor…",
       "saved": "Ayarlar kaydedildi.",
@@ -879,7 +879,7 @@
     "fontSizeLevel": "Kademe {level} / {total}",
     "densityAutoHint": "Ekran genişliğine göre: mobil Geniş, masaüstü Dengeli.",
     "dyslexicFont": "Disleksi dostu yazı tipi",
-    "dyslexicFontHint": "Harfleri daha kolay ayırt edilen OpenDyslexic fontunu kullanır. Yalnızca bu cihazda saklanır, sunucudan indirilir (üçüncü taraf yok)."
+    "dyslexicFontHint": "Harfleri daha kolay ayırt edilen OpenDyslexic fontunu kullanır."
   },
   "explore": {
     "subtitle": "Kategorilere göz atın, gündemi keşfedin.",

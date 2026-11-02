@@ -6,6 +6,7 @@ import {
   CATEGORY_HANDLES,
   isCategory,
 } from "@/lib/categories";
+import { orderForNiche } from "@/lib/niche";
 import type { Locale } from "@/lib/i18n-config";
 
 type Props = {
@@ -44,7 +45,7 @@ export function CategoryTabs({
         @{ALL_CATEGORY_HANDLE}
       </Link>
 
-      {CATEGORIES.map((category) => {
+      {orderForNiche(CATEGORIES).map((category) => {
         const isActive = active === category;
         const href = `/${lang}?category=${encodeURIComponent(category)}`;
 

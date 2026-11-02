@@ -1,8 +1,8 @@
 {
   "meta": {
     "title": "Micro News",
-    "description": "A news feed compared across multiple sources and summarized with AI",
-    "keywords": "news, summary, synthesis, ai, rss, verification"
+    "description": "Technology and AI news, together with world affairs and followed clubs — compared across multiple sources and summarized with AI.",
+    "keywords": "technology news, artificial intelligence, AI, chips, software, OpenAI, Nvidia, Apple, Google, world affairs, sports"
   },
   "header": {
     "admin": "Admin panel",
@@ -252,7 +252,7 @@
         {
           "heading": "1. Data Controller",
           "body": [
-            "This site is an independent news synthesis platform published at bu site. Contact: iletisim@example.com."
+            "This site is an independent news synthesis platform published at emirtahaatar.com.tr. Contact: emirtahaatar84@gmail.com."
           ]
         },
         {
@@ -296,7 +296,7 @@
           "heading": "7. Your Rights Under Article 11 of KVKK",
           "body": [
             "You have the right to learn whether your personal data is processed, request information, learn the purpose, request correction or deletion, and claim compensation for unlawful processing.",
-            "Since no personal data is processed, there is no data subject to these requests. You may still contact iletisim@example.com; requests are answered within 30 days."
+            "Since no personal data is processed, there is no data subject to these requests. You may still contact emirtahaatar84@gmail.com; requests are answered within 30 days."
           ]
         }
       ]
@@ -321,7 +321,7 @@
         {
           "heading": "3. Limitation of Liability",
           "body": [
-            "Despite the verification process, synthesized content may contain errors. For critical information you are encouraged to check the primary sources directly. Questions: iletisim@example.com."
+            "Despite the verification process, synthesized content may contain errors. For critical information you are encouraged to check the primary sources directly. Questions: emirtahaatar84@gmail.com."
           ]
         }
       ]
@@ -340,7 +340,7 @@
         {
           "heading": "2. Takedown Requests",
           "body": [
-            "If you believe content infringes your copyright, e-mail iletisim@example.com with: (a) the exact URL on this site, (b) proof of ownership, (c) your contact details.",
+            "If you believe content infringes your copyright, e-mail emirtahaatar84@gmail.com with: (a) the exact URL on this site, (b) proof of ownership, (c) your contact details.",
             "There is NO takedown FORM on the site; to avoid collecting personal data, only e-mail is used.",
             "Requests are reviewed within 72 hours; valid requests result in removal."
           ]
@@ -360,7 +360,7 @@
         {
           "heading": "About the Platform",
           "body": [
-            "bu site is an independent news synthesis platform that continuously monitors domestic and international news sources. Our goal is to consolidate scattered information about the same event into a single, clear and original report.",
+            "emirtahaatar.com.tr is an independent news synthesis platform that continuously monitors domestic and international news sources. Our goal is to consolidate scattered information about the same event into a single, clear and original report.",
             "The platform offers up-to-date news feeds, audio summaries and AI-assisted podcast episodes across categories including world news, technology, science, sports and economy."
           ]
         },
@@ -382,7 +382,7 @@
         {
           "heading": "Contact",
           "body": [
-            "For feedback, corrections and content removal requests: iletisim@example.com"
+            "For feedback, corrections and content removal requests: emirtahaatar84@gmail.com"
           ]
         }
       ]
@@ -462,7 +462,7 @@
       "title": "General Settings",
       "description": "The site name appears in the header and browser tab.",
       "siteName": "Site name",
-      "siteNamePlaceholder": "e.g. bu site",
+      "siteNamePlaceholder": "e.g. emirtahaatar.com.tr",
       "save": "Save",
       "saving": "Saving…",
       "saved": "Settings saved.",
@@ -879,7 +879,7 @@
     "fontSizeLevel": "Step {level} / {total}",
     "densityAutoHint": "By viewport: Comfortable on mobile, Balanced on desktop.",
     "dyslexicFont": "Dyslexia-friendly typeface",
-    "dyslexicFontHint": "Uses OpenDyslexic, whose letterforms are easier to distinguish. Stored on this device only; served from our own server (no third party)."
+    "dyslexicFontHint": "Uses OpenDyslexic, whose letterforms are easier to distinguish."
   },
   "explore": {
     "subtitle": "Browse categories and discover what is happening.",

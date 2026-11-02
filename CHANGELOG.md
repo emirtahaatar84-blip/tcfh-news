@@ -3,6 +3,32 @@
 Bu dosya [Keep a Changelog](https://keepachangelog.com/tr/1.1.0/) biçimini izler.
 Sürümleme politikası için [VERSIONING.md](VERSIONING.md).
 
+## [0.3.0] — 2026-11-02 · **alfa**
+
+Site teknoloji & yapay zekâ nişine yönlendirildi.
+
+### Eklendi
+- `lib/niche.ts` — niş tanımı, TEK KAYNAK:
+  • Katmanlar: core (Teknoloji/Yapay Zekâ/Bilim), interest (Dünya/Ekonomi/
+    Siyaset), peripheral (Gündem/Sağlık/Kültür), off (Spor/Diğer)
+  • 40+ takip edilen teknoloji varlığı (OpenAI, Nvidia, Apple, TSMC, ASELSAN,
+    Togg…) — geçtiği her haber çekirdek sayılır
+  • 26 takip edilen spor kulübü (FB, GS, BJK, TS + Barça, Real Madrid,
+    Liverpool…) — "Spor" geri planda ama kulüp haberi ilgi çekiciye çıkar
+- Niş ağırlığı önem skoruna girdi: teknoloji haberi gündemden yüksek,
+  kulüp haberi sıradan spor haberinden yüksek
+- Ana sayfa hero: "Teknoloji ve yapay zekâ gelişmeleri, kaynakla doğrulanmış."
+- Kartlarda niş rozeti: ★ varlık (OpenAI, Nvidia…), ◆ kulüp (Fenerbahçe…)
+- Kategori sırası nişe göre: Teknoloji → Yapay Zekâ → Bilim → Dünya →
+  Ekonomi → Siyaset → Gündem → Sağlık → Kültür → Spor
+  (`CATEGORIES` sabiti DEĞİŞMEDİ — yalnızca görüntüleme)
+- Meta description + keywords nişe göre (tr/en)
+- 19 yeni test (toplam 243)
+
+### Ölçüm (canlı veri)
+- Eski akış ilk 12: 4× Ekonomi, 4× Teknoloji, karışık
+- Yeni akış ilk 12: 6 çekirdek (teknoloji/YZ) + 6 ilgi (ekonomi/dünya)
+
 ## [0.2.8] — 2026-11-02 · **alfa**
 
 Site operasyon görünürlüğü + iki üretim hatası.

@@ -1,4 +1,5 @@
 import { foldTurkish } from "@/lib/hq/normalize";
+import { matchNiche, type NicheMatch } from "@/lib/niche";
 
 /**
  * HABER ÖNEM SKORU (HÖS) — 0-100.
@@ -80,6 +81,8 @@ export type ImportanceBreakdown = {
 export type ImportanceResult = {
   /** 0-100, iki ondalık. */
   score: number;
+  /** Niş konumu: kategori katmanı, takip edilen kulüp/varlık. */
+  niche: NicheMatch;
   breakdown: ImportanceBreakdown;
   /** Her boyutun kısa gerekçesi (denetim için). */
   reasons: string[];
@@ -161,7 +164,16 @@ export function computeImportance(input: ImportanceInput): ImportanceResult {
   const verification = verificationScore(
     Math.max(input.verifiedSourceCount, 0),
   );
-  const category = CATEGORY_IMPORTANCE[input.category] ?? 0.35;
+
+  // NİŞ: kategori ağırlığı artık niş tanımından gelir.
+  // Teknoloji/YZ (core) tam ağırlık; spor kulübü geçen haber interest'e çıkar;
+  // saf magazin spor geri plana düşer.
+  const niche = matchNiche({
+    title: input.title,
+    summary: input.summary,
+    category: input.category,
+  });
+  const category = niche.weight;
   const relevance = relevanceScore(input.title, input.summary);
   const freshness = freshnessScore(input.createdAt, now);
   const quality = qualityScore(input.qualityScore, input.factCheckStatus);
@@ -186,7 +198,7 @@ export function computeImportance(input: ImportanceInput): ImportanceResult {
 
   const reasons: string[] = [
     `doğrulama ${input.verifiedSourceCount} kaynak → ${(verification * 100).toFixed(0)}`,
-    `kategori ${input.category} → ${(category * 100).toFixed(0)}`,
+    `niş ${niche.tier}${niche.entity ? ` · varlık:${niche.entity}` : ""}${niche.club ? ` · kulüp:${niche.club}` : ""} → ${(category * 100).toFixed(0)}`,
     `Türkiye ilgisi → ${(relevance * 100).toFixed(0)}`,
     `tazelik → ${(freshness * 100).toFixed(0)}`,
     `kalite → ${(quality * 100).toFixed(0)}`,
@@ -194,6 +206,7 @@ export function computeImportance(input: ImportanceInput): ImportanceResult {
 
   return {
     score,
+    niche,
     breakdown,
     reasons,
     isTopStory: score >= IMPORTANCE_THRESHOLDS.topStory,

@@ -20,6 +20,7 @@ import {
   handleForCategory,
   slugForCategory,
 } from "@/lib/categories";
+import { matchNiche } from "@/lib/niche";
 import type { Locale } from "@/lib/i18n-config";
 import {
   STORAGE_EVENT,
@@ -113,6 +114,19 @@ export const NewsCard = memo(function NewsCard({
   const entityTags = (item.tags ?? []).filter(
     (tag) => tag.startsWith("@") && tag !== categoryTag,
   );
+
+  // NİŞ: takip edilen teknoloji varlığı veya kulüp geçiyorsa rozet göster.
+  // Her teknoloji haberinde göstermek gürültü olur; yalnızca tanınan
+  // varlık/kulüp eşleşmesinde gösterilir.
+  const nicheMatch = matchNiche({
+    title: item.title,
+    summary: item.summary,
+    category: item.category,
+  });
+  const nicheBadge =
+    nicheMatch.entity ? `★ ${nicheMatch.entity}`
+    : nicheMatch.club ? `◆ ${nicheMatch.club}`
+    : null;
 
   const listenMinutes = Math.max(
     1,
@@ -349,6 +363,23 @@ export const NewsCard = memo(function NewsCard({
         {showReadState ? (
           <span className="t-label rounded-full border border-[#22252a] px-space-2 py-space-1 font-medium text-zinc-400">
             {cardLabels.readLabel}
+          </span>
+        ) : null}
+
+        {nicheBadge ? (
+          <span
+            className={`t-label inline-flex items-center rounded-full px-space-2 py-space-1 font-bold ${
+              nicheMatch.entity
+                ? "border border-blue-500/30 bg-blue-500/10 text-blue-300"
+                : "border border-violet-500/30 bg-violet-500/10 text-violet-300"
+            }`}
+            title={
+              nicheMatch.entity
+                ? `${nicheMatch.entity} takip ediliyor`
+                : `${nicheMatch.club} takip ediliyor`
+            }
+          >
+            {nicheBadge}
           </span>
         ) : null}
 

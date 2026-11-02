@@ -5,6 +5,7 @@ import { Feed } from "@/components/Feed";
 import { InterestFilter } from "@/components/feed/InterestFilter";
 import { rankByImportance, computeImportance } from "@/lib/importance";
 import { dedupeByTopic } from "@/lib/dedupe";
+import { NICHE_COPY } from "@/lib/niche";
 import { telegramBotUrl } from "@/lib/telegram";
 import { listDigests } from "@/lib/digest";
 import { ThreeColumn } from "@/components/layout/ThreeColumn";
@@ -137,6 +138,9 @@ export async function FeedView({ lang: rawLang, searchParams, basePath }: Props)
           return result.kept.sort((a, b) => a.index - b.index);
         })();
 
+  // NİŞ HERO: yalnızca ana sayfa, filtresiz, ilk sayfa.
+  const showHero = !category && !query && sort !== "okunan" && requestedPage === 1;
+
   // ÖNE ÇIKANLAR: yalnızca ana sayfa, filtresiz görünümde ilk 3 "top story".
   const topStories =
     !category && !query && sort !== "okunan"
@@ -239,6 +243,23 @@ export async function FeedView({ lang: rawLang, searchParams, basePath }: Props)
             {dict.filters.clearAll}
           </a>
         </p>
+      ) : null}
+
+      {/* NİŞ HERO — sitenin kimliği. Yalnızca ana sayfada, filtresiz. */}
+      {showHero ? (
+        <header className="mb-space-5">
+          <p className="text-[11px] font-bold uppercase tracking-widest text-blue-400">
+            {NICHE_COPY[lang].coreTitle}
+          </p>
+          <h1 className="t-h1 mt-space-1 text-zinc-50">
+            {NICHE_COPY[lang].tagline}
+          </h1>
+          <p className="mt-space-2 max-w-2xl text-xs leading-relaxed text-zinc-500">
+            {lang === "en"
+              ? "Also covering world affairs and followed clubs. Every story compared across sources."
+              : "Dünya gündemi ve takip edilen kulüpler de akışta. Her haber birden fazla kaynakla karşılaştırılır."}
+          </p>
+        </header>
       ) : null}
 
       {/* ÖNE ÇIKANLAR — günün en yüksek önem skorlu haberleri.

@@ -1,5 +1,6 @@
 "use client";
 
+import { orderForNiche } from "@/lib/niche";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -103,7 +104,7 @@ export function LeftRail({
               {labels.all}
             </Link>
           </li>
-          {FEED_NAV_CATEGORIES.map((category) => {
+          {orderForNiche(FEED_NAV_CATEGORIES).map((category) => {
             const slug = slugForCategory(category);
             const active = activeSlug === slug;
 
