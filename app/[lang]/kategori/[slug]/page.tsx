@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PortraitCard } from "@/components/PortraitCard";
-import { NewsCard } from "@/components/NewsCard";
+import { CategoryNewsList } from "@/components/feed/CategoryNewsList";
 import { badgeClassesFor, isCategory } from "@/lib/categories";
 import { getDictionary } from "@/lib/i18n";
 import { isLocale, type Locale } from "@/lib/i18n-config";
@@ -133,18 +133,16 @@ export default async function CategoryPage({ params }: PageProps) {
           >
             {dict.home.latestNews}
           </h2>
+          {/* Kategori haber listesi: NewsCard bir client bileşendir ve
+              `onClose` olay işleyicisi ister. Sunucu bileşeninden fonksiyon
+              geçirilemez ("Event handlers cannot be passed to Client
+              Component props") — bu yüzden client sarmalayıcı kullanılır. */}
           <div className="mt-space-2 flex flex-col gap-space-3">
-            {newsItems.map((item) => (
-              <NewsCard
-                key={item.id}
-                item={item}
-                locale={lang}
-                bookmarksMode={false}
-                cardLabels={dict.card}
-                categoryLabels={dict.categories}
-                onClose={() => undefined}
-              />
-            ))}
+            <CategoryNewsList
+              items={newsItems}
+              locale={lang}
+              dict={dict}
+            />
           </div>
         </section>
       ) : null}

@@ -11,9 +11,8 @@ import path from "node:path";
  * kalkar (özel nitelikli veri/ifşa riski yok).
  *
  * Üretim zinciri:
- *   1. Cloudflare Workers AI — flux-1-schnell (CF_AI_TOKEN + CF_AI_ACCOUNT_ID
- *      tanımlıysa; ücretsiz kotası var)
- *   2. Pollinations.ai — anahtarsız çalışır, her zaman denenir
+ *   1. Cloudflare Workers AI — flux-1-schnell (CF_AI_TOKEN + CF_AI_ACCOUNT_ID)
+ *   2. Pollinations.ai  — ücretsiz yedek
  *   3. Deterministik SVG — kategori renkleriyle yerel üretim (asla başarısız olmaz)
  *
  * Üretilen JPEG'ler media volume'ünde ({MEDIA_DIR}/{id}.jpg) saklanır ve
@@ -131,6 +130,12 @@ async function fromCloudflare(prompt: string): Promise<Buffer | null> {
 
 // ─── Sağlayıcı 2: Pollinations ───────────────────────────────────────────────
 
+/** Pollinations ücretsiz katmanı: IP başına 45 sn'de 1 görsel. */
+const POLLINATION_MIN_GAP_MS = 45_000;
+
+let pollinationsCooldownUntil = 0;
+let lastPollinationAt = 0;
+
 async function fromPollinations(
   prompt: string,
   seed: number,
@@ -139,11 +144,30 @@ async function fromPollinations(
     `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}` +
     `?width=${IMAGE_WIDTH}&height=${IMAGE_HEIGHT}&nologo=true&seed=${seed}`;
 
+  // Tempo: 45 sn'de 1 görsel. Bekleme gerekiyorsa bekle.
+  const wait = Math.max(
+    0,
+    Math.max(pollinationsCooldownUntil, lastPollinationAt + POLLINATION_MIN_GAP_MS) - Date.now(),
+  );
+  if (wait > 0) {
+    await new Promise((resolve) => setTimeout(resolve, Math.min(wait, POLLINATION_MIN_GAP_MS)));
+  }
+  lastPollinationAt = Date.now();
+
   try {
     const response = await fetch(url, {
       signal: AbortSignal.timeout(POLLINATIONS_TIMEOUT_MS),
       cache: "no-store",
     });
+
+    // HIZ LİMİTİ — sessizce yutulmaz.
+    if (response.status === 402 || response.status === 429) {
+      const body = await response.text().catch(() => "");
+      const match = body.match(/(\d+)\s*s/i);
+      const waitMs = match ? Number(match[1]) * 1000 : POLLINATION_MIN_GAP_MS;
+      pollinationsCooldownUntil = Date.now() + waitMs;
+      throw new Error(`POLLINATIONS_RATE_LIMIT (${Math.round(waitMs / 1000)} sn)`);
+    }
 
     if (!response.ok) return null;
 
@@ -152,7 +176,10 @@ async function fromPollinations(
 
     const buffer = Buffer.from(await response.arrayBuffer());
     return buffer.length > 1000 ? buffer : null;
-  } catch {
+  } catch (error) {
+    if (error instanceof Error && error.message.startsWith("POLLINATIONS_RATE_LIMIT")) {
+      throw error;
+    }
     return null;
   }
 }
@@ -270,11 +297,12 @@ async function generate(id: string, prompt: string): Promise<void> {
 
     let image = await fromCloudflare(prompt);
     if (!image) {
-      // Pollinations IP başına 45 sn'de 1 görsel veriyor. 402 alınca bu
-      // görsel için SVG'ye düşeriz; sonraki denemelerde tekrar denenir.
+      // Pollinations IP başına 45 sn'de 1 görsel veriyor; 402 alınırsa
+      // bu deneme atlanır ve SVG fallback servis edilir.
       try {
         image = await fromPollinations(prompt, baseSeed + attempt * 7919);
-      } catch {
+      } catch (error) {
+        console.warn(`[portrait-image] ${(error as Error).message} → SVG: ${id}`);
         image = null;
       }
     }

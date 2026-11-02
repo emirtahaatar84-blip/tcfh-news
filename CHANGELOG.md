@@ -3,6 +3,27 @@
 Bu dosya [Keep a Changelog](https://keepachangelog.com/tr/1.1.0/) biçimini izler.
 Sürümleme politikası için [VERSIONING.md](VERSIONING.md).
 
+## [0.2.8] — 2026-11-02 · **alfa**
+
+Site operasyon görünürlüğü + iki üretim hatası.
+
+### Düzeltildi
+- **Kategori sayfaları (tr/en) tamamen bozuktu.** `kategori/[slug]` sunucu
+  bileşeninden `NewsCard`'a `onClose` fonksiyonu geçiriyordu
+  ("Event handlers cannot be passed to Client Component props").
+  Saatte 12 hata, sayfa 500 dönüyordu. Çözüm: `CategoryNewsList` client
+  sarmalayıcı (TagNewsList ile aynı desen).
+- **Görseller sessizce SVG'ye düşüyordu.** Pollinations 402 (45 sn/IP)
+  hatası yutuluyordu; sebep loglarda görünmüyordu. Artık hız limiti
+  tanınıyor, cooldown bırakılıyor ve iki istek arası 45 sn tempolu.
+  Aynı koruma portre görsellerine de eklendi.
+
+### Eklendi
+- `scripts/site-status.sh` — tek komutla salt-okunur tam durum:
+  konteyner, sağlık, DB sayaçları, yayılma kanalları, son hatalar, sistem.
+- Ajan Ofisi paneline `site-operasyon` ajanı (salt okunur tanılama) ve
+  `testci` ajanına test/tip denetimi çalıştırma yetkisi.
+
 ## [0.2.7] — 2026-11-02 · **alfa**
 
 Haber yayılma motoru.

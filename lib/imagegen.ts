@@ -6,15 +6,9 @@ import path from "node:path";
  * hiç kullanılmaz; her haber için AI illüstrasyonu üretilir.
  *
  * Üretim zinciri (biri başarısız olursa sıradaki devreye girer):
- *   1. Cloudflare Workers AI — flux-1-schnell (CF_AI_TOKEN + CF_AI_ACCOUNT_ID
- *      tanımlıysa). Ücretsiz kotası var, hızlı ve kaliteli.
- *   2. Pollinations.ai — ANAHTARSIZ çalışır, her zaman denenir (ölçüldü:
- *      ~0.4 sn, 17 KB). Kullanıcı hiçbir ayar yapmadan görsel alsın diye.
- *   3. Deterministik SVG — kategori renkleriyle yerel üretim (asla başarısız olmaz).
- *
- * Not: Zincir, sağlayıcı tanımlıysa Cloudflare'i, değilse Pollinations'ı
- * birincil yapar — böylece hem kendi anahtarını getiren hem hiç anahtarı
- * olmayan kurulumlar çalışır.
+ *   1. Cloudflare Workers AI — flux-1-schnell (CF_AI_TOKEN + CF_AI_ACCOUNT_ID)
+ *   2. Pollinations.ai  — ücretsiz yedek (anonim katman zaman zaman 402 verir)
+ *   3. Deterministik SVG — kategori renkleriyle yerel üretim (asla başarısız olmaz)
  *
  * Üretilen JPEG'ler media volume'ünde ({MEDIA_DIR}/{id}.jpg) saklanır ve
  * /api/news/:id/image ucundan immutable cache ile servis edilir.
@@ -26,17 +20,6 @@ const IMAGE_HEIGHT = 360;
 const POLLINATIONS_TIMEOUT_MS = 45_000;
 const CLOUDFLARE_TIMEOUT_MS = 60_000;
 const CF_MODEL = "@cf/black-forest-labs/flux-1-schnell";
-
-/**
- * Pollinations hız limiti (IP başına 45 sn). Ücretsiz katmanda aynı IP'den
- * saniyede bir görsel istenirse 402 döner. Bu zaman kadar Pollinations
- * atlanır; kuyruktaki diğer görseller CF'ye veya SVG'ye düşer.
- */
-let pollinationsCooldownUntil = 0;
-
-export function pollinationsAvailable(): boolean {
-  return Date.now() >= pollinationsCooldownUntil;
-}
 
 const ID_PATTERN = /^[a-zA-Z0-9]{5,40}$/;
 
@@ -89,6 +72,33 @@ function escapeXml(value: string): string {
 
 // ─── Sağlayıcı 1: Pollinations ───────────────────────────────────────────────
 
+/**
+ * Pollinations ücretsiz katmanı IP başına **45 saniyede 1 görsel** veriyor.
+ * Sınır aşılırsa HTTP 402 (FREE_LIMIT) döner.
+ *
+ * NEDEN ÖNEMLİ: Bu hata önceden sessizce yutuluyordu; her görsel SVG'ye
+ * düşüyordu ve sebebi loglarda görünmüyordu. Artık:
+ *   • bekleme süresi okunur ve kaydedilir,
+ *   • bekleme penceresinde Pollinations hiç denenmez,
+ *   • iki istek arasında en az 45 sn boşluk bırakılır (tempolu kuyruk).
+ */
+const POLLINATION_MIN_GAP_MS = 45_000;
+
+let pollinationsCooldownUntil = 0;
+let lastPollinationAt = 0;
+
+export function pollinationsAvailable(): boolean {
+  return Date.now() >= pollinationsCooldownUntil;
+}
+
+/** Bir sonraki Pollinations isteğine kadar beklenmesi gereken süre (ms). */
+function pollinationsWaitMs(): number {
+  if (!pollinationsAvailable()) {
+    return Math.max(0, pollinationsCooldownUntil - Date.now());
+  }
+  return Math.max(0, lastPollinationAt + POLLINATION_MIN_GAP_MS - Date.now());
+}
+
 async function fromPollinations(
   prompt: string,
   seed: number,
@@ -97,20 +107,26 @@ async function fromPollinations(
     `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}` +
     `?width=${IMAGE_WIDTH}&height=${IMAGE_HEIGHT}&nologo=true&seed=${seed}`;
 
+  // Tempo: ücretsiz katman 45 sn'de 1 görsel. Bekleme gerekiyorsa bekle.
+  const wait = pollinationsWaitMs();
+  if (wait > 0) {
+    await new Promise((resolve) => setTimeout(resolve, Math.min(wait, POLLINATION_MIN_GAP_MS)));
+  }
+
+  lastPollinationAt = Date.now();
+
   try {
     const response = await fetch(url, {
       signal: AbortSignal.timeout(POLLINATIONS_TIMEOUT_MS),
       cache: "no-store",
     });
 
-    // HIZ LİMİTİ: Pollinations IP başına 45 sn'de 1 görsel veriyor (402/429).
-    // Bunu "sağlayıcı çalışmıyor" diye yutmak yanlıştı — görseller sessizce
-    // SVG'ye düşüyordu. Şimdi elleçleniyor: süre okunur, sonraki çağrılar
-    // bu pencere içinde atlanır.
+    // HIZ LİMİTİ — sessizce yutulmaz, cooldown bırakır ve loglanır.
     if (response.status === 402 || response.status === 429) {
       const body = await response.text().catch(() => "");
       const match = body.match(/(\d+)\s*s/i);
-      const waitMs = match ? Number(match[1]) * 1000 : 45_000;
+      const waitMs = match ? Number(match[1]) * 1000 : POLLINATION_MIN_GAP_MS;
+
       pollinationsCooldownUntil = Date.now() + waitMs;
       throw new Error(`POLLINATIONS_RATE_LIMIT (${Math.round(waitMs / 1000)} sn)`);
     }
@@ -123,7 +139,6 @@ async function fromPollinations(
     const buffer = Buffer.from(await response.arrayBuffer());
     return buffer.length > 1000 ? buffer : null;
   } catch (error) {
-    // Hız limiti yukarıda cooldown bıraktı; diğer hatalar sessizce null.
     if (error instanceof Error && error.message.startsWith("POLLINATIONS_RATE_LIMIT")) {
       throw error;
     }
@@ -253,20 +268,18 @@ async function generateNewsImage(
   const prompt = buildPrompt(title, category);
   const seed = stableSeed(id);
 
-  // Sırası TEK yerde belgelenir: Cloudflare (kimlik varsa) → Pollinations
-  // (anahtarsız; hız limiti yoksa denenir) → SVG fallback.
+  // Cloudflare ANA sağlayıcı: Pollinations anonim katmanı 402 (ödeme duvarı)
+  // döndürüyor; CF hızlı ve kullanıcının kendi hesabı. Pollinations, CF
+  // kotası tükenirse yedek olarak denenir.
   let image = await fromCloudflare(prompt);
 
-  if (!image && pollinationsAvailable()) {
+  if (!image) {
     try {
       image = await fromPollinations(prompt, seed);
     } catch (error) {
-      // Hız limiti: bu görseli SVG ile geç, sıradakiler de bekleme bitene
-      // kadar Pollinations'ı atlar. Sessizce yutulmaz, loglanır.
-      console.warn(`[imagegen] ${(error as Error).message} → SVG fallback: ${id}`);
+      // Hız limiti: SVG'ye düşeriz ama sebebi logda görünür.
+      console.warn(`[imagegen] ${(error as Error).message} → SVG: ${id}`);
     }
-  } else if (!image) {
-    console.warn(`[imagegen] Pollinations bekleme süresinde atlandı: ${id}`);
   }
 
   if (!image) {
