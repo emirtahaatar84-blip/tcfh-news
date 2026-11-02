@@ -3,6 +3,32 @@
 Bu dosya [Keep a Changelog](https://keepachangelog.com/tr/1.1.0/) biçimini izler.
 Sürümleme politikası için [VERSIONING.md](VERSIONING.md).
 
+## [0.2.7] — 2026-11-02 · **alfa**
+
+Haber yayılma motoru.
+
+### Eklendi
+- `lib/distribution/engine.ts` — kanal planlaması: her haber hangi kanala,
+  neden. Push yalnızca doğrulanmış+öncelikli kategori + taze haberlerde.
+- `lib/distribution/orchestrator.ts` — tek giriş noktası; idempotent,
+  üstel geri çekilmeli (0/2/8/30 dk, 4 deneme), tamamen izlenebilir.
+- `lib/distribution/channels/indexnow.ts` — Bing/Yandex/Seznam/Naver'a
+  anında URL bildirimi (önce YOKTU).
+- `lib/distribution/channels/push.ts` — mevcut push altyapısının kanal
+  sarmalayıcısı.
+- `DistributionLog` modeli — her deneme: durum, süre, hata, retry zamanı.
+- `GET/POST /api/admin/distribution` — kanal özeti + elle retry.
+- `/{INDEXNOW_KEY}.txt` sahiplik dosyası (instrumentation public/'e yazar).
+- 16 yeni test (toplam 224).
+
+### Değişti
+- `processor.ts`: dağınık `maybeAutoPush` → merkezi `distributeStory`.
+- 10 dakikalık retry zamanlayıcısı.
+
+### Ölçüm
+- IndexNow: HTTP 200, 2 URL/haber, 500-700 ms
+- Retry: 3/3 başarılı
+
 ## [0.2.6] — 2026-11-02 · **alfa**
 
 Akış kalitesi: "her haberi" değil "gerekli haberler".

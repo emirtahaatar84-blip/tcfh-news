@@ -9,7 +9,7 @@ import { detectCity } from "@/lib/geo";
 import { queueNewsImage } from "@/lib/imagegen";
 import { prisma } from "@/lib/prisma";
 import { uniqueNewsSlug } from "@/lib/unique-slug";
-import { maybeAutoPush } from "@/lib/push";
+import { distributeStory } from "@/lib/distribution/orchestrator";
 import { reviewStory, type ReviewVerdict } from "@/lib/reviewer";
 import { getSettings, DEFAULT_PROMPT_TEMPLATE } from "@/lib/settings";
 import {
@@ -63,7 +63,7 @@ const parser = new Parser({
   timeout: 20_000,
   headers: {
     "User-Agent":
-      `MicroNewsBot/1.0 (+${process.env.SITE_URL ?? "http://localhost:3000"}; RSS aggregator)`,
+      "MicroNewsBot/1.0 (+https://emirtahaatar.com.tr; RSS aggregator; contact: emirtahaatar84@gmail.com)",
     Accept:
       "application/rss+xml, application/atom+xml, application/xml, text/xml;q=0.9, */*;q=0.8",
   },
@@ -1140,17 +1140,15 @@ async function runSynthesis(
           // Görsel üretim hatası haber yayınını asla etkilemesin.
         }
 
-        // PWA otomatik bildirim: fire-and-forget — döngüyü yavaşlatmasın.
-        // maybeAutoPush asla reject olmaz; yine de korumalı çağrılır.
+        // ── YAYILMA MOTORU ───────────────────────────────────────────────
+        // Push, IndexNow, sosyal taslak, RSS ve sitemap TEK yerden yönetilir.
+        // Her kanalın sonucu `DistributionLog`'a yazılır, başarısız olanlar
+        // üstel geri çekilmeyle yeniden denenir. Fire-and-forget: yayın
+        // akışını asla bloklamaz.
         try {
-          void maybeAutoPush({
-            id: publishedItem.id,
-            title: publishedItem.title,
-            category: publishedItem.category,
-            sourcesCount: publishedItem.sourcesCount,
-          });
+          void distributeStory(publishedItem.id);
         } catch {
-          // Bildirim hatası haber yayınını asla etkilemesin.
+          // Dağıtım hatası haber yayınını asla etkilemesin.
         }
 
         await prisma.rawFeedItem.updateMany({

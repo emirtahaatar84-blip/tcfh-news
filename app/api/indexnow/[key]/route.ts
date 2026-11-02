@@ -1,13 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { isIndexNowEnabled } from "@/lib/indexnow";
 
 export const dynamic = "force-dynamic";
 
 /**
- * GET /{key}.txt — IndexNow sahiplik doğrulama dosyası.
- *
- * Arama motoru bildirimi kabul etmeden önce bu adresten anahtarı okur.
- * Sadece doğru anahtar isteğine cevap verir; başka her şey 404.
+ * IndexNow sahiplik doğrulama dosyası.
+ * GET /{INDEXNOW_KEY}.txt → anahtarı döndürür (proxy kökte eşler).
  */
 export async function GET(
   _request: NextRequest,
@@ -16,7 +13,7 @@ export async function GET(
   const { key } = await context.params;
   const expected = process.env.INDEXNOW_KEY?.trim();
 
-  if (!expected || !isIndexNowEnabled() || key.replace(/\.txt$/, "") !== expected) {
+  if (!expected || key.replace(/\.txt$/, "") !== expected) {
     return new NextResponse("Not found.", { status: 404 });
   }
 

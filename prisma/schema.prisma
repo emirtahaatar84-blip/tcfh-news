@@ -667,3 +667,32 @@ model TokenUsage {
   @@index([date])
   @@index([date, model])
 }
+
+model DistributionLog {
+  id        String   @id @default(cuid())
+  newsId    String
+  /// push | indexnow | social | rss | sitemap
+  channel   String
+  /// pending | sent | skipped | failed
+  status    String   @default("pending")
+  /// Idempotency: aynı haber+kanal ikinci kez gönderilmez.
+  dedupeKey String   @unique
+  /// Kaçıncı deneme (0 tabanlı).
+  attempt   Int      @default(0)
+  /// Sonraki deneme zamanı (üstel geri çekilme).
+  nextRetryAt DateTime?
+  /// Kanal sonucu (JSON): gönderilen sayı, HTTP kodu vb.
+  detail    String?
+  /// Hata mesajı (en fazla 500 karakter).
+  error     String?
+  /// Gönderim süresi (ms).
+  durationMs Int?
+  sentAt    DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([newsId])
+  @@index([status, nextRetryAt])
+  @@index([channel, status])
+  @@index([createdAt])
+}

@@ -89,6 +89,31 @@ export async function register() {
     );
   }
 
+  // ── IndexNow sahiplik dosyası ──────────────────────────────────────────
+  // Arama motoru /{KEY}.txt dosyasını ister. Middleware matcher'ı dosya
+  // uzantılarını atladığı için dosya doğrudan public/'e yazılır; Next
+  // standalone public dizinini çalışma anında okur. (indexnow-key-file)
+  {
+    const key = process.env.INDEXNOW_KEY?.trim();
+
+    if (key && /^[a-zA-Z0-9-]{8,128}$/.test(key)) {
+      try {
+        const { mkdir, writeFile } = await import("node:fs/promises");
+        const path = await import("node:path");
+        const publicDir = path.join(process.cwd(), "public");
+
+        await mkdir(publicDir, { recursive: true });
+        await writeFile(path.join(publicDir, `${key}.txt`), key, "utf8");
+        console.log(`[instrumentation] IndexNow anahtar dosyası yazıldı: /${key}.txt`);
+      } catch (error) {
+        console.warn(
+          "[instrumentation] IndexNow anahtar dosyası yazılamadı:",
+          error instanceof Error ? error.message : error,
+        );
+      }
+    }
+  }
+
   if (process.env.ENABLE_INTERNAL_CRON === "false") return;
 
   const globalForCron = globalThis as unknown as {
@@ -388,6 +413,28 @@ export async function register() {
       const interval = setInterval(alertTick, 60 * 60 * 1000);
       interval.unref?.();
     }, 5 * 60 * 1000);
+    first.unref?.();
+  }
+
+  // ── YAYILMA MOTORU — başarısız kanalları yeniden dene (her 10 dk) ──────
+  if (process.env.ENABLE_DISTRIBUTION_RETRY !== "false") {
+    const retryTick = async () => {
+      try {
+        const { retryFailedDistributions } = await import("./lib/distribution/orchestrator");
+        const result = await retryFailedDistributions(20);
+        if (result.retried > 0) {
+          console.log(`[distribution] yeniden denenen=${result.retried} başarılı=${result.succeeded}`);
+        }
+      } catch (error) {
+        console.error("[distribution] retry hatası:", error);
+      }
+    };
+
+    const first = setTimeout(() => {
+      void retryTick();
+      const interval = setInterval(retryTick, 10 * 60 * 1000);
+      interval.unref?.();
+    }, 3 * 60 * 1000);
     first.unref?.();
   }
 

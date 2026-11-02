@@ -21,6 +21,14 @@ function configuredDefaultLocale(): Locale {
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // IndexNow sahiplik dosyası kökte istenir: /{KEY}.txt
+  const indexNowKey = process.env.INDEXNOW_KEY?.trim();
+  if (indexNowKey && pathname === `/${indexNowKey}.txt`) {
+    const url = request.nextUrl.clone();
+    url.pathname = `/api/indexnow/${indexNowKey}`;
+    return NextResponse.rewrite(url);
+  }
+
   // API rotaları kendi yetkilerini yönetir.
   if (pathname.startsWith("/api/")) {
     return NextResponse.next();
@@ -81,5 +89,7 @@ export async function proxy(request: NextRequest) {
 export const config = {
   matcher: [
     "/((?!api|_next/static|_next/image|favicon.ico|icon.svg|robots.txt|sitemap.xml|.*\\..*).*)",
+    // IndexNow sahiplik dosyası: /{KEY}.txt — uzantı filtresini atlar.
+    "/:key([a-zA-Z0-9-]{8,128}).txt",
   ],
 };
